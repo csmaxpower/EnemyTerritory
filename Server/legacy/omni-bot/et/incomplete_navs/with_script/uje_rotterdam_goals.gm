@@ -1,0 +1,433 @@
+global _MG = 
+{
+	AMMOCAB_north_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(1325.000, 3592.000, 713.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_uje2_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(232.000, 464.000, 1140.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_uje5_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-1976.000, 4864.000, 740.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_uje6_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-456.000, 4888.000, 708.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_uje8_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-4064.000, 1072.000, 708.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	BUILD_Allied_Generator = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-3168.000, 4344.000, 808.000),
+		TagName = "Allied Generator",
+		TeamAvailability = 4,
+	},
+	BUILD_Boat = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Mobile = 1,
+		Position = Vec3(-1680.000, 1710.000, 706.000),
+		TeamAvailability = 2,
+	},
+	BUILD_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(1924.000, 2864.000, 724.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	BUILD_Ship_Bridge = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(1528.000, 192.000, 952.000),
+		Stance = "prone",
+		TagName = "Ship Bridge",
+		TeamAvailability = 2,
+	},
+	BUILD_shipcrack = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(472.000, 2176.000, 712.000),
+		TeamAvailability = 4,
+	},
+	CAPPOINT_boat = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(-1631.024, 1715.728, 668.974),
+	},
+	CHECKPOINT_forward_spawn = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "CHECKPOINT",
+		Position = Vec3(2546.000, 3554.000, 728.000),
+	},
+	DEFEND_Allied_flag_0 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.192, -0.980, -0.051),
+			[1] = Vec3(-0.703, -0.709, -0.048),
+			[2] = Vec3(-0.934, -0.354, -0.049),
+			[3] = Vec3(-0.999, 0.035, -0.038),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(2625.736, 3946.641, 673.125),
+		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+		Stance = "crouch",
+	},
+	DEFEND_Allied_flag_1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.520, 0.847, -0.115),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(2652.825, 3090.125, 673.125),
+		Radius = 32,
+	},
+	DEFEND_Allied_flag_2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.862, 0.504, -0.059),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(1623.454, 3112.315, 673.125),
+		Radius = 32,
+	},
+	DEFEND_Allied_flag_3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.624, -0.776, -0.088),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(1633.422, 4027.852, 673.125),
+		Radius = 32,
+	},
+	DEFEND_Allied_flag_4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.897, -0.420, -0.138),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(2020.861, 4638.772, 897.125),
+		Radius = 32,
+	},
+	DEFEND_Allied_flag_5 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.975, -0.155, -0.160),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(2300.738, 4313.298, 897.125),
+		Radius = 32,
+	},
+	DEFEND_Allied_flag_6 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.277, -0.909, -0.311),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(1332.276, 4653.875, 769.125),
+		Radius = 32,
+		Weapons = 
+		{
+			[12] = 1,
+		},
+	},
+	ESCORT_boat = 
+	{
+		GoalType = "ESCORT",
+		MinRadius = 32,
+		Offsets = 
+		{
+			[0] = Vec3(69.392, -61.377, -74.205),
+			[1] = Vec3(-85.911, 24.873, -66.029),
+			[2] = Vec3(7.674, -281.249, -60.102),
+			[3] = Vec3(4.785, 264.706, -76.284),
+		},
+		Position = Vec3(-1754.927, 1403.978, 657.148),
+		Vehicle = "MOVER_boat",
+	},
+	EXPLODE_shipcrack = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "EXPLODE",
+		Position = Vec3(-183.001, 2183.999, 704.000),
+		TeamAvailability = 2,
+	},
+	FLAG_documents = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(448.000, 2048.000, 669.125),
+		TeamAvailability = 2,
+	},
+	HEALTHCAB_north_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(1329.000, 3464.000, 711.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_uje2_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(152.000, 464.000, 1140.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_uje5_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-1896.000, 4864.000, 740.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_uje6_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-456.000, 4808.000, 708.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_uje8_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-3984.000, 1072.000, 708.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	MOVER_allies_crain = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1639.188, 1368.000, 1264.001),
+		TeamAvailability = 6,
+	},
+	MOVER_boat = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1688.500, 1711.530, 697.998),
+		TeamAvailability = 2,
+	},
+	MOVER_boat_deck = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1688.500, 1709.500, 697.875),
+		TeamAvailability = 6,
+	},
+	MOVER_lift = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-632.000, 4456.000, 948.000),
+		TeamAvailability = 6,
+	},
+	MOVER_neutral_compost_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1927.000, 2838.000, 724.000),
+		TeamAvailability = 6,
+	},
+	MOVER_neutral_compost_closed_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1925.500, 2837.500, 724.000),
+		TeamAvailability = 6,
+	},
+	MOVER_north_healthcabinet_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1303.000, 3455.000, 701.500),
+		TeamAvailability = 6,
+	},
+	MOVER_reardoor_left = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1440.000, 4608.000, 672.000),
+		TeamAvailability = 6,
+	},
+	MOVER_reardoor_right = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1248.000, 4608.000, 672.000),
+		TeamAvailability = 6,
+	},
+	MOVER_south_ammocabinet_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1322.000, 3592.000, 701.000),
+		TeamAvailability = 6,
+	},
+	MOVER_tankbay_commandpost_wires = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1955.500, 2816.000, 723.500),
+		TeamAvailability = 6,
+	},
+	MOVER_touw = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(192.348, 3572.563, 818.002),
+		TeamAvailability = 6,
+	},
+	PLANT_Allied_Generator = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(-3152.000, 4401.998, 800.000),
+		TagName = "Allied Generator",
+		TeamAvailability = 2,
+	},
+	PLANT_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(1926.999, 2834.500, 724.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	PLANT_Ship_Bridge = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1056.002, 456.000, 960.000),
+		TagName = "Ship Bridge",
+		TeamAvailability = 4,
+	},
+	PLANT_shipcrack = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Name = "PLANT_shipcrack",
+		Position = Vec3(-183.001, 2183.999, 704.000),
+		TagName = "shipcrack",
+		TeamAvailability = 2,
+		Version = 1,
+	},
+	RIDE_axis_boat = 
+	{
+		BoardPositions = 
+		{
+			[0] = Vec3(71.655, 27.198, -74.914),
+			[1] = Vec3(-68.238, 154.625, -74.950),
+		},
+		GoalType = "RIDE",
+		MinRadius = 32,
+		Position = Vec3(-1605.128, 1394.487, 657.148),
+		SeatRadius = 60,
+		Seats = 
+		{
+			[0] = Vec3(-1.527, -149.007, -10.166),
+			[1] = Vec3(3.110, -33.495, -9.260),
+		},
+		Stance = "stand",
+		Vehicle = "MOVER_boat",
+	},
+	SWITCH_elevator_1 = 
+	{
+		AimPosition = Vec3(-491.875, 4519.112, 706.169),
+		Facing = Vec3(0.000, 0.000, 0.000),
+		GoalType = "SWITCH",
+		Position = Vec3(-447.300, 4520.865, 673.125),
+		Radius = 32,
+	},
+	SWITCH_elevator_2 = 
+	{
+		AimPosition = Vec3(-711.875, 4454.355, 711.709),
+		Facing = Vec3(0.000, 0.000, 0.000),
+		GoalType = "SWITCH",
+		Position = Vec3(-652.177, 4451.434, 673.125),
+		Radius = 32,
+	},
+	SWITCH_elevator_3 = 
+	{
+		AimPosition = Vec3(-711.875, 4455.389, 969.408),
+		Facing = Vec3(0.000, 0.000, 0.000),
+		GoalType = "SWITCH",
+		Position = Vec3(-652.177, 4451.434, 929.125),
+		Radius = 32,
+	},
+	SWITCH_elevator_4 = 
+	{
+		AimPosition = Vec3(-743.624, 4548.125, 961.192),
+		Facing = Vec3(0.000, 0.000, 0.000),
+		GoalType = "SWITCH",
+		Position = Vec3(-740.495, 4605.040, 929.125),
+		Radius = 32,
+	},
+	Version = 1,
+};

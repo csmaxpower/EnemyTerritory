@@ -1,0 +1,33 @@
+global _MG = 
+{
+	CAPPOINT_allies_spawn = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(3327.479, 77.031, 193.352),
+		TeamAvailability = 4,
+	},
+	CAPPOINT_axis_spawn = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(-3053.889, 56.253, 193.125),
+		TagName = "cappoint axis_spawn",
+		TeamAvailability = 2,
+	},
+	FLAG_allied_flag1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(3336.000, 47.750, 197.125),
+		TeamAvailability = 2,
+	},
+	FLAG_axis_flag1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(-3047.750, 48.125, 197.125),
+		TeamAvailability = 4,
+	},
+	Version = 1,
+};

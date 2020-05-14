@@ -1,0 +1,214 @@
+global _MG = 
+{
+	AMMOCAB_first_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(1189.000, -1387.000, 179.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_second_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-1109.000, 1322.999, 179.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	ATTACK_TOP = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.020, 0.031, -0.999),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(0.715, 0.377, 2849.125),
+		Radius = 32,
+	},
+	ATTACK_lower = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.771, -0.355, -0.528),
+		},
+		GoalType = "Attack",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(-116.153, -112.631, 1953.125),
+		Radius = 32,
+	},
+	BUILD_Allied_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-818.000, -1162.000, -28.000),
+		TagName = "Allied Command Post",
+		TeamAvailability = 4,
+	},
+	BUILD_Allied_Construction = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(26.000, -928.000, 208.000),
+		TagName = "Allied Construction",
+		TeamAvailability = 4,
+	},
+	BUILD_Axis_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(844.005, 1290.000, -28.000),
+		TagName = "Axis Command Post",
+		TeamAvailability = 2,
+	},
+	BUILD_Axis_Construction = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(8.000, 872.000, 208.000),
+		TagName = "Axis Construction",
+		TeamAvailability = 2,
+	},
+	HEALTHCAB_first_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(1300.000, -1387.000, 179.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_second_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-1220.000, 1325.000, 179.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	MOVER_allied_cp_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-815.999, -1227.000, -28.000),
+		TeamAvailability = 6,
+	},
+	MOVER_allied_cp_closed = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-817.000, -1229.500, -28.000),
+		TeamAvailability = 6,
+	},
+	MOVER_allied_cp_damaged = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-809.000, -1192.999, -28.000),
+		TeamAvailability = 6,
+	},
+	MOVER_alliedconstruct_1_track = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(33.666, -930.000, 168.500),
+		TeamAvailability = 6,
+	},
+	MOVER_axis_cp_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(841.999, 1355.000, -28.000),
+		TeamAvailability = 6,
+	},
+	MOVER_axis_cp_closed = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(843.000, 1357.501, -28.000),
+		TeamAvailability = 6,
+	},
+	MOVER_axis_cp_damaged = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(835.000, 1321.000, -28.000),
+		TeamAvailability = 6,
+	},
+	MOVER_axisconstruct_1_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(6.334, 890.000, 168.500),
+		TeamAvailability = 6,
+	},
+	MOVER_first_ammocabinet_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1188.000, -1392.000, 166.001),
+		TeamAvailability = 6,
+	},
+	MOVER_first_healthcabinet_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1300.000, -1395.000, 164.999),
+		TeamAvailability = 6,
+	},
+	MOVER_second_ammocabinet_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1108.000, 1328.000, 165.999),
+		TeamAvailability = 6,
+	},
+	MOVER_second_healthcabinet_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1220.000, 1331.000, 165.000),
+		TeamAvailability = 6,
+	},
+	PLANT_Allied_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(-817.000, -1229.499, -28.000),
+		TagName = "Allied Command Post",
+		TeamAvailability = 2,
+	},
+	PLANT_Allied_Construction = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(5.999, -1194.000, 114.500),
+		TagName = "Allied Construction",
+		TeamAvailability = 2,
+	},
+	PLANT_Axis_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(843.000, 1357.499, -28.000),
+		TagName = "Axis Command Post",
+		TeamAvailability = 4,
+	},
+	PLANT_Axis_Construction = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(-17.000, 1153.000, 115.000),
+		TagName = "Axis Construction",
+		TeamAvailability = 4,
+	},
+	Version = 1,
+};

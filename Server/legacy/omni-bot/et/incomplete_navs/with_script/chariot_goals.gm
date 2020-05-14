@@ -1,0 +1,786 @@
+global _MG = 
+{
+	AMMOCAB_armoury_trigger_ammo = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(5696.000, 4224.000, 1088.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_armoury_trigger_ammo_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(6080.000, 4224.000, 1088.000),
+		Range = 1250,
+		TagName = "armoury_trigger_ammo",
+		TeamAvailability = 6,
+	},
+	BUILD_1st_Pumphouse_Door = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(4352.000, 2772.000, 1104.000),
+		TagName = "1st Pumphouse Door",
+		TeamAvailability = 2,
+	},
+	BUILD_2nd_Pumphouse_Door = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(4960.000, 2748.000, 1104.000),
+		TagName = "2nd Pumphouse Door",
+		TeamAvailability = 2,
+	},
+	CAPPOINT_fuel_dump = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(3381.990, 173.108, 192.125),
+		Radius = 35,
+	},
+	CAPPOINT_north_gate = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(8974.484, 1770.256, 992.125),
+		Radius = 35,
+	},
+	CAPPOINT_north_winding_gear = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(9035.976, 4116.057, 903.581),
+		Radius = 35,
+	},
+	CAPPOINT_old_lock = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(1501.743, 6241.735, 1024.135),
+		Radius = 15,
+	},
+	CAPPOINT_pump = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(4344.237, 3116.740, 640.125),
+		Radius = 35,
+	},
+	CAPPOINT_south_winding_gear = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(3260.177, 4108.666, 912.945),
+		Radius = 35,
+	},
+	CHECKPOINT_dockside_flag = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "CHECKPOINT",
+		Position = Vec3(-1024.000, 4608.000, 1088.000),
+	},
+	DEFEND_defend_Ngate = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.083, 0.995, -0.048),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(9115.612, 392.572, 1024.125),
+		Radius = 35,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.999, -0.044, -0.003),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(4925.407, 1053.785, 1024.125),
+		Radius = 100,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.999, -0.021, -0.044),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(6130.271, 952.825, 1024.125),
+		Radius = 100,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.995, 0.089, -0.039),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(3425.314, -153.519, 1024.125),
+		Radius = 100,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.066, 0.993, -0.093),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(2703.612, -731.989, 1024.125),
+		Radius = 100,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area5 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.490, 0.853, -0.178),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(4546.844, 57.721, 1024.125),
+		Radius = 35,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area6 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.065, -0.998, -0.017),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(2799.674, 3124.051, 1024.125),
+		Radius = 200,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area7 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.324, -0.946, 0.001),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(2605.983, 3946.391, 1024.125),
+		Radius = 100,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area8 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.482, -0.875, -0.048),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(2783.740, 6444.997, 1024.125),
+		Radius = 35,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_area9 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.500, -0.866, -0.017),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(1088.360, 6602.128, 1024.125),
+		Radius = 35,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_lock = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.995, 0.077, -0.071),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(893.587, 5702.763, 1024.125),
+		Radius = 35,
+		TeamAvailability = 2,
+	},
+	DEFEND_defend_truckbay = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.825, -0.565, -0.003),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(6104.724, -287.156, 1024.132),
+		Radius = 60,
+		TeamAvailability = 2,
+	},
+	DEFEND_pumphouse = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.964, 0.104, -0.244),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(4877.875, 3068.746, 669.268),
+		Radius = 35,
+		TeamAvailability = 2,
+	},
+	DEFEND_ship = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.097, 0.983, -0.154),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 6,
+		MinCampTime = 2,
+		Position = Vec3(3857.034, 3135.691, 1024.125),
+		Radius = 35,
+	},
+	FLAG_explosives_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(1792.000, 1835.000, 952.125),
+		TeamAvailability = 4,
+	},
+	FLAG_explosives_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(1888.000, 1835.000, 952.125),
+		TeamAvailability = 4,
+	},
+	FLAG_explosives_3 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(1984.000, 1835.000, 952.125),
+		TeamAvailability = 4,
+	},
+	FLAG_explosives_4 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(2080.000, 1835.000, 952.125),
+		TeamAvailability = 4,
+	},
+	FLAG_explosives_5 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(2176.000, 1835.000, 952.125),
+		TeamAvailability = 4,
+	},
+	FLAG_explosives_6 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(2272.000, 1835.000, 952.125),
+		TeamAvailability = 4,
+	},
+	HEALTHCAB_hospital_dummy_target = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(7630.000, 4570.000, 1092.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_1091 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(5312.000, -408.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_1147 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(7266.000, 4640.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_165 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(760.000, 1928.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_174 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2072.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_176 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2328.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_36 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2072.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_39 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2072.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_404 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(5312.000, -408.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_569 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(7266.000, 4640.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_609 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2328.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_620 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2328.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_631 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(760.000, 1928.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_632 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(872.000, 1768.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_936 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(872.000, 1768.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_961 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2328.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_962 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2072.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	PLANT_1st_Pumphouse_Door = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(4184.000, 2868.000, 1079.001),
+		TagName = "1st Pumphouse Door",
+		TeamAvailability = 4,
+	},
+	PLANT_2nd_Pumphouse_Door = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(5088.000, 2868.000, 1079.001),
+		TagName = "2nd Pumphouse Door",
+		TeamAvailability = 4,
+	},
+	PLANT_Fuel_Dump = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(3104.000, 352.000, 456.000),
+		TagName = "Fuel Dump",
+		TeamAvailability = 4,
+	},
+	PLANT_Fuel_Dump_Gate = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(2696.000, -264.000, 1088.000),
+		TagName = "Fuel Dump Gate",
+		TeamAvailability = 4,
+	},
+	PLANT_North_Gate = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(8976.000, 1792.000, 936.000),
+		TagName = "North Gate",
+		TeamAvailability = 4,
+	},
+	PLANT_North_Winding_Gear = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(8964.000, 4060.000, 892.000),
+		TagName = "North Winding Gear",
+		TeamAvailability = 4,
+	},
+	PLANT_Old_Lock = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1471.999, 6227.813, 832.000),
+		TagName = "Old Lock",
+		TeamAvailability = 4,
+	},
+	PLANT_Pump = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(4240.000, 3234.000, 797.500),
+		TeamAvailability = 4,
+	},
+	PLANT_South_Winding_Gear = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(3156.000, 4060.000, 892.000),
+		TagName = "South Winding Gear",
+		TeamAvailability = 4,
+	},
+	REPAIRMG42_1091 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(5312.000, -408.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_1147 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(7266.000, 4640.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_165 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(760.000, 1928.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_174 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2072.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_176 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2328.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_36 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2072.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_39 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2072.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_404 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(5312.000, -408.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_569 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(7266.000, 4640.000, 1160.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_609 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2328.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_620 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2328.000, 1736.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_631 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(760.000, 1928.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_632 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(872.000, 1768.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_936 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(872.000, 1768.000, 1222.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_961 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2328.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_962 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2072.000, 1976.000, 1254.000),
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	SNIPE_1000 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.880, 0.341, -0.330),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(4354.102, 5279.333, 1800.125),
+		Radius = 35,
+	},
+	SNIPE_297 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.920, -0.011, -0.391),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(6013.912, 2694.008, 1943.721),
+		Radius = 5,
+	},
+	SNIPE_911 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.446, 0.852, -0.274),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(9897.601, 4190.687, 1329.608),
+		Radius = 35,
+	},
+	SNIPE_912 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.610, -0.787, -0.089),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(9787.119, 3346.566, 1344.021),
+		Radius = 35,
+	},
+	SNIPE_943 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.431, -0.902, 0.003),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(217.533, 5609.777, 1408.125),
+		Radius = 35,
+	},
+	SNIPE_948 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.393, 0.918, -0.050),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(3957.289, 312.101, 1232.125),
+		Radius = 35,
+	},
+	SNIPE_996 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.388, -0.910, -0.146),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(3068.313, 3835.252, 1424.125),
+		Radius = 35,
+	},
+	SNIPE_997 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.945, -0.264, -0.195),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(3294.971, 4101.531, 1424.125),
+		Radius = 35,
+	},
+	SNIPE_998 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.556, 0.752, -0.355),
+		},
+		GoalType = "Snipe",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(2871.141, 4273.835, 1424.125),
+		Radius = 35,
+	},
+	Version = 1,
+};

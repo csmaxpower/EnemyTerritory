@@ -1,0 +1,231 @@
+global _MG = 
+{
+	AMMOCAB_south_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-46.000, -254.000, 38.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_south_ammocabinet_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(46.000, -183.000, 38.000),
+		Range = 1250,
+		TagName = "south_ammocabinet",
+		TeamAvailability = 6,
+	},
+	BUILD_Allied_Sewer_Wall = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-520.000, -120.000, -328.000),
+		TagName = "Allied Sewer Wall",
+		TeamAvailability = 2,
+	},
+	BUILD_Allied_Tank = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Mobile = 1,
+		Position = Vec3(-262.000, -1236.000, 70.000),
+		TagName = "Allied Tank",
+		TeamAvailability = 4,
+	},
+	BUILD_Allies_Tank_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2280.000, -1160.000, 56.000),
+		TagName = "Allies Tank Barrier 1",
+		TeamAvailability = 2,
+	},
+	BUILD_Allies_Tank_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-2200.000, 1240.000, 56.000),
+		TagName = "Allies Tank Barrier 2",
+		TeamAvailability = 2,
+	},
+	BUILD_Axis_Sewer_Wall = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(528.000, -140.000, -320.000),
+		TagName = "Axis Sewer Wall",
+		TeamAvailability = 4,
+	},
+	BUILD_Axis_Tank = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Mobile = 1,
+		Position = Vec3(-270.000, -984.000, 86.000),
+		TagName = "Axis Tank",
+		TeamAvailability = 2,
+	},
+	BUILD_Axis_Tank_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2216.000, 1224.000, 56.000),
+		TagName = "Axis Tank Barrier 1",
+		TeamAvailability = 4,
+	},
+	BUILD_Axis_Tank_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-2208.000, -1232.000, 56.000),
+		TagName = "Axis Tank Barrier 2",
+		TeamAvailability = 4,
+	},
+	BUILD_Neutral_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(32.000, 544.000, 596.000),
+		TagName = "Neutral Command Post",
+		TeamAvailability = 6,
+	},
+	ESCORT_Allied_Tank = 
+	{
+		GoalType = "ESCORT",
+		MinRadius = 32,
+		Offsets = 
+		{
+			[0] = Vec3(3.482, -194.250, -37.875),
+			[1] = Vec3(-98.125, -43.155, -37.875),
+			[2] = Vec3(98.134, -16.279, -37.875),
+		},
+		Position = Vec3(-334.252, -1236.329, 1.125),
+		Vehicle = "MOVER_tank",
+	},
+	ESCORT_Axis_Tank = 
+	{
+		GoalType = "ESCORT",
+		MinRadius = 32,
+		Offsets = 
+		{
+			[0] = Vec3(-3.380, -165.125, -10.875),
+			[1] = Vec3(81.125, -48.503, -10.875),
+			[2] = Vec3(-81.771, -38.440, -10.875),
+		},
+		Position = Vec3(-328.125, -998.041, 1.125),
+		Vehicle = "MOVER_tank2",
+	},
+	HEALTHCAB_south_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-46.000, -185.000, 38.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_south_healthcabinet_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(46.000, -252.000, 38.000),
+		Range = 1250,
+		TagName = "south_healthcabinet",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_Arm_Car = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 90,
+		MinCampTime = 15,
+		Position = Vec3(957.000, 128.000, 132.000),
+		TeamAvailability = 6,
+	},
+	MOVER_tank = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-140.000, -1232.000, 62.000),
+		TeamAvailability = 4,
+	},
+	MOVER_tank2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-163.000, -1008.000, 35.000),
+		TeamAvailability = 2,
+	},
+	PLANT_Allied_Sewer_Wall = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 2,
+		GoalType = "PLANT",
+		Position = Vec3(-610.000, -120.000, -384.000),
+		TagName = "Allied Sewer Wall",
+		TeamAvailability = 4,
+	},
+	PLANT_Allies_Tank_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(2272.000, 524.000, 32.000),
+		TagName = "Allies Tank Barrier 1",
+		TeamAvailability = 4,
+	},
+	PLANT_Allies_Tank_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(-2268.000, 512.000, 32.000),
+		TagName = "Allies Tank Barrier 2",
+		TeamAvailability = 4,
+	},
+	PLANT_Axis_Sewer_Wall = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 2,
+		GoalType = "PLANT",
+		Position = Vec3(576.000, -131.625, -326.500),
+		TagName = "Axis Sewer Wall",
+		TeamAvailability = 2,
+	},
+	PLANT_Axis_Tank_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(2028.000, -412.000, 32.000),
+		TagName = "Axis Tank Barrier 1",
+		TeamAvailability = 2,
+	},
+	PLANT_Axis_Tank_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(-2008.000, -400.000, 36.000),
+		TagName = "Axis Tank Barrier 2",
+		TeamAvailability = 2,
+	},
+	PLANT_Neutral_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 2,
+		GoalType = "PLANT",
+		Position = Vec3(31.001, 611.500, 596.000),
+		TagName = "Neutral Command Post",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_Arm_Car = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(957.000, 128.000, 132.000),
+		TeamAvailability = 6,
+	},
+	Version = 1,
+};

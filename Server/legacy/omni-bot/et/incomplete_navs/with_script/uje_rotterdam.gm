@@ -1,0 +1,185 @@
+//==========================================================================================
+//
+//	uje_rotterdam.gm
+//
+//	Who       	When		What
+//------------------------------------------------------------------------------------------
+//	^1[UJE]^3Niek	19 February 2015	Initial Script
+//	MickyP		01 March 205	Script Basics
+//
+//==========================================================================================
+//
+
+global Map =
+{
+	Debug = 1, // please set to zero before distributing your script
+    ShowMovers = true,
+	Gate_Open = 0,
+	Documents_On_Boat = 0,
+	Boat_is_Built = 1,
+	
+	Allied_Generator_Built = function( trigger )
+	{
+		Map.Gate_Open = 0;
+		Util.MapDebugPrint( "Allied_Generator_Built" );
+	},
+
+	Allied_Generator_Destroyed = function( trigger )
+	{
+		Map.Gate_Open = 1;
+		Util.MapDebugPrint( "Allied_Generator_Destroyed" );
+	},
+
+	Command_Post_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Command_Post_Destroyed" );
+	},
+	
+	Shipcrack_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Shipcrack_Destroyed" );
+	},
+
+	Ship_Bridge_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Ship_Bridge_Destroyed" );
+	},
+
+	Boat_Built = function( trigger )
+	{
+		Map.Boat_is_Built = 1;
+		if (Map.Documents_On_Boat == 1)
+			{
+			SetAvailableMapGoals( TEAM.AXIS, true, "RIDE_axis_boat" );
+			SetAvailableMapGoals( TEAM.AXIS, true, "ESCORT_boat" );
+			}
+			
+		Util.MapDebugPrint( "Boat_Built" );
+	},
+
+	Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Command_Post_Built" );
+	},
+
+	Ship_Bridge_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Ship_Bridge_Built" );
+	},
+
+	shipcrack_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "shipcrack_Built" );
+	},
+
+	Axis_Passed_Doors = function( trigger )
+	{
+
+		Util.MapDebugPrint( "Axis_Passed_Doors" );
+	},
+
+	Boat_Damaged = function( trigger )
+	{
+		Map.Boat_is_Built = 0;
+		Util.MapDebugPrint( "Boat_Damaged" );
+	},
+
+	Shipcrack_Destroyed = function( trigger )
+	{
+
+		Util.MapDebugPrint( "Shipcrack_Destroyed" );
+	},
+
+	documents_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "documents_Taken" );
+	},
+
+	documents_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "documents_Returned" );
+	},
+
+	documents_Secured = function( trigger )
+	{
+		Map.Documents_On_Boat = 1;
+		SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Boat" );
+		SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_Allied_Generator" );
+		if (Map.Boat_is_Built == 1)
+			{
+			SetAvailableMapGoals( TEAM.AXIS, true, "RIDE_axis_boat" );
+			SetAvailableMapGoals( TEAM.AXIS, true, "ESCORT_boat" );
+			}
+		Util.MapDebugPrint( "documents_Secured" );
+	},
+
+	forward_spawn_Axis_Captured = function( trigger )
+	{
+		Util.MapDebugPrint( "forward_spawn_Axis_Captured" );
+	},
+
+	forward_spawn_Allies_Captured = function( trigger )
+	{
+		Util.MapDebugPrint( "forward_spawn_Allies_Captured" );
+	},
+
+};
+
+global OnMapLoad = function()
+{
+	// Register callback functions
+	OnTrigger( "Allies have build the Generator!", Map.Allied_Generator_Built );
+	OnTrigger( "MISSING_STRING", Map.Boat_Built );
+	OnTrigger( "Allied Command Post constructed. Charge speed increased!", Map.Command_Post_Built );
+	OnTrigger( "Axis Command Post constructed. Charge speed increased!", Map.Command_Post_Built );
+	OnTrigger( "^1The Bridge has been build.", Map.Ship_Bridge_Built );
+	OnTrigger( "the shipcrack has been contructed", Map.shipcrack_Built );
+	OnTrigger( "^7Axis are past the Doors!", Map.Axis_Passed_Doors );
+	OnTrigger( "The Boat has been damaged!", Map.Boat_Damaged );
+	OnTrigger( "the ShipCrack has been destroyed", Map.Shipcrack_Destroyed );
+	OnTrigger( "Magnetic seal deactivated - opening doors", Map.Allied_Generator_Destroyed );
+	OnTrigger( "Axis team has destroyed the Allied Command Post!", Map.Command_Post_Destroyed );
+	OnTrigger( "Allied team has destroyed the Axis Command Post!", Map.Command_Post_Destroyed );
+	OnTrigger( "^3The Bridge has been destroyed.", Map.Ship_Bridge_Destroyed );
+	OnTrigger( "^7Axis have stolen the secret war documents!", Map.documents_Taken );
+	OnTrigger( "^7Documents returned!", Map.documents_Returned );
+	OnTrigger( "^7Axis have secured the secret war documents!", Map.documents_Secured );
+	OnTrigger( "Axis capture the Forward Spawn!", Map.forward_spawn_Axis_Captured );
+	OnTrigger( "Allies capture the Forward Spawn!", Map.forward_spawn_Allies_Captured );
+
+	//Util.DisableGoal( ".*", true ); // all but routes
+	
+	Util.EnableGoal( "CHECKPOINT_forward_spawn" );
+	Util.EnableGoal( "AMMOCAB.*" );
+	Util.EnableGoal( "HEALTHCAB.*" );
+	
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Command_Post" );
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Ship_Bridge" );
+	SetAvailableMapGoals( TEAM.AXIS, true, "CAPPOINT_boat" );
+	SetAvailableMapGoals( TEAM.AXIS, true, "CHECKPOINT_forward_spawn" );
+	SetAvailableMapGoals( TEAM.AXIS, true, "FLAG_documents" );
+	SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_Command_Post" );
+	SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_shipcrack" );
+	
+	SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_Allied_Generator" );
+	SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_Command_Post" );
+	SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_shipcrack" );
+	SetAvailableMapGoals( TEAM.ALLIES, true, "CHECKPOINT_forward_spawn" );
+	SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Command_Post" );
+	SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Ship_Bridge" );
+
+	Util.MapDebugPrint( "Omni-bot map script for " + GetMapName() + " executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+	bot.TargetBreakableDist = 90.0;
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+	};
+	Util.Routes(MapRoutes);
+};

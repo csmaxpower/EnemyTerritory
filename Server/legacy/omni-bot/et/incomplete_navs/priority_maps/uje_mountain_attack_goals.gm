@@ -1,0 +1,259 @@
+global _MG = 
+{
+	AMMOCAB_uje2_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(2800.000, 3680.000, 237.000),
+		Range = 1250,
+		TeamAvailability = 2,
+	},
+	AMMOCAB_uje4_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(1376.000, 1592.000, -27.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_uje8_ammocabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-2008.000, -1324.000, 493.000),
+		Range = 1250,
+		TeamAvailability = 4,
+	},
+	BUILD_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(3200.000, -1472.000, 156.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	BUILD_Truck = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Mobile = 1,
+		Position = Vec3(3029.000, 450.000, 124.000),
+		TeamAvailability = 4,
+	},
+	BUILD_Truck_Barrier = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(1774.492, 996.000, 132.000),
+		TagName = "Truck Barrier",
+		TeamAvailability = 2,
+	},
+	BUILD_defence1 = 
+	{
+		GoalType = "BUILD",
+		MinRadius = 32,
+		Position = Vec3(1761.577, 1059.766, 97.169),
+		TeamAvailability = 2,
+		TraceInfo = 
+		{
+		},
+	},
+	BUILD_factory_side_door = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(4008.000, 1616.000, 88.000),
+		TagName = "factory side door",
+		TeamAvailability = 2,
+	},
+	CAMP_axis1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.993, -0.118, 0.027),
+			[1] = Vec3(-0.800, -0.600, -0.019),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(3961.576, 2003.924, 33.125),
+		Radius = 32,
+		Roles = 
+		{
+			[0] = "DEFENDER",
+		},
+		Stance = "crouch",
+	},
+	CAPPOINT_truck = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(2884.303, 408.585, 85.209),
+		TeamAvailability = 4,
+	},
+	CHECKPOINT_bunker_flag = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "CHECKPOINT",
+		Position = Vec3(-401.000, 2658.000, 160.000),
+	},
+	DYNAMITE_warehouse_Entrance = 
+	{
+		CoverSpots = 
+		{
+			[0] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(0.319, 0.942, -0.102),
+				},
+				position = Vec3(2772.958, 1243.113, 57.422),
+				stance = "prone",
+			},
+			[1] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(-0.231, 0.971, -0.067),
+				},
+				position = Vec3(3075.104, 1239.456, 60.046),
+				stance = "crouch",
+			},
+			[2] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(0.970, 0.238, -0.044),
+				},
+				position = Vec3(2232.019, 1646.498, 57.259),
+				stance = "crouch",
+			},
+		},
+		GoalType = "DYNAMITE",
+		GroupName = "warehouse_Entrance",
+		MinRadius = 32,
+		Position = Vec3(3036.893, 1812.220, 32.125),
+		Radius = 32,
+		Roles = 
+		{
+			[0] = "ATTACKER",
+		},
+		TeamAvailability = 4,
+	},
+	ESCORT_truck = 
+	{
+		GoalType = "ESCORT",
+		MinRadius = 32,
+		Offsets = 
+		{
+			[0] = Vec3(-5.034, -187.076, -34.335),
+			[1] = Vec3(-76.125, -9.749, -34.205),
+			[2] = Vec3(80.823, -1.135, -34.275),
+			[3] = Vec3(16.375, 186.763, -34.275),
+		},
+		Position = Vec3(2875.389, 273.830, 87.274),
+		TeamAvailability = 4,
+		Vehicle = "MOVER_truck",
+	},
+	FLAG_gold_crate = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(3904.000, 2210.000, 76.125),
+		TeamAvailability = 4,
+	},
+	HEALTHCAB_uje2_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(2722.000, 3680.000, 237.000),
+		Range = 1250,
+		TeamAvailability = 2,
+	},
+	HEALTHCAB_uje4_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(1376.000, 1668.000, -27.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_uje8_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-2080.000, -1324.000, 493.000),
+		Range = 1250,
+		TeamAvailability = 6,
+		Version = 4,
+	},
+	MOVER_truck = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(2889.000, 584.501, 142.500),
+		TeamAvailability = 4,
+	},
+	PLANT_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(3196.999, -1442.502, 156.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	PLANT_Truck_Barrier = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(2049.998, 1237.000, 62.002),
+		TagName = "Truck Barrier",
+		TeamAvailability = 4,
+	},
+	PLANT_Truck_Barrier_1 = 
+	{
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		MinRadius = 32,
+		Position = Vec3(2138.864, 1108.965, 30.794),
+		TagName = "Truck_Barrier",
+		TeamAvailability = 4,
+		TraceInfo = 
+		{
+		},
+	},
+	PLANT_Truck_Barrier_2 = 
+	{
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		MinRadius = 32,
+		Position = Vec3(1974.305, 1205.602, 33.238),
+		TagName = "Truck_Barrier",
+		TeamAvailability = 4,
+		TraceInfo = 
+		{
+		},
+	},
+	PLANT_factory_side_door = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(3944.000, 1548.000, 472.000),
+		TagName = "factory side door",
+		TeamAvailability = 4,
+	},
+	PLANT_warehouse_Entrance = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(3534.000, 1762.000, 276.000),
+		TagName = "warehouse Entrance",
+		TeamAvailability = 4,
+	},
+	Version = 1,
+};

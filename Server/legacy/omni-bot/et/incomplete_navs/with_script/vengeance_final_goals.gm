@@ -1,0 +1,317 @@
+global _MG = 
+{
+	AMMOCAB_supplycabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(2906.000, 762.000, 70.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	BUILD_Ammo_Bunker_Door_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2344.000, -870.000, 144.000),
+		TagName = "Ammo Bunker Door 1",
+		TeamAvailability = 4,
+	},
+	BUILD_Ammo_Bunker_Door_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2584.000, -1662.000, 172.000),
+		TagName = "Ammo Bunker Door 2",
+		TeamAvailability = 4,
+	},
+	BUILD_Ammo_Bunker_Door_3 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2487.000, -2405.000, 188.000),
+		TagName = "Ammo Bunker Door 3",
+		TeamAvailability = 4,
+	},
+	BUILD_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2880.000, 1582.000, 84.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	BUILD_North_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-2668.000, 2784.000, 324.000),
+		TagName = "North Bunker MG",
+		TeamAvailability = 4,
+	},
+	BUILD_Side_Door = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(1886.000, -2848.000, 230.000),
+		TagName = "Side Door",
+		TeamAvailability = 4,
+	},
+	BUILD_South_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-2746.000, -100.000, 372.000),
+		TagName = "South Bunker MG",
+		TeamAvailability = 4,
+	},
+	CAPPOINT_North_Rocket = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(-1364.125, 3172.527, 106.125),
+		Radius = 20,
+	},
+	CAPPOINT_South_Rocket = 
+	{
+		GoalType = "CapPoint",
+		Position = Vec3(-1560.125, 423.459, 120.125),
+		Radius = 20,
+	},
+	CHECKPOINT_forward_spawn = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "CHECKPOINT",
+		Position = Vec3(1540.000, -1310.000, 190.000),
+	},
+	FLAG_warhead_pick2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(2830.000, -1524.000, 167.125),
+		TeamAvailability = 2,
+	},
+	HEALTHCAB_healthcabinet = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(2906.000, 842.000, 70.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_Main_Gate = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.024, -0.978, -0.207),
+			[1] = Vec3(-0.064, -0.976, -0.210),
+			[2] = Vec3(-0.137, -0.968, -0.211),
+			[3] = Vec3(0.277, -0.955, -0.111),
+			[4] = Vec3(-0.826, -0.526, -0.204),
+			[5] = Vec3(-0.512, -0.803, -0.305),
+			[6] = Vec3(-0.022, -0.953, -0.303),
+		},
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 90,
+		MinCampTime = 15,
+		Position = Vec3(260.000, 308.000, 448.000),
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_North_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 90,
+		MinCampTime = 15,
+		Position = Vec3(-2749.000, 2650.000, 360.000),
+		TagName = "North Bunker MG",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_North_Rocket = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.453, 0.855, -0.253),
+			[1] = Vec3(-0.206, 0.940, -0.272),
+			[2] = Vec3(0.002, 0.973, -0.232),
+			[3] = Vec3(0.140, 0.981, -0.134),
+			[4] = Vec3(0.539, 0.776, -0.328),
+		},
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 90,
+		MinCampTime = 15,
+		Position = Vec3(-192.000, 1384.000, 444.000),
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_South_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 90,
+		MinCampTime = 15,
+		Position = Vec3(-2837.000, -242.000, 404.000),
+		TagName = "South Bunker MG",
+		TeamAvailability = 6,
+	},
+	PLANT_Ammo_Bunker_Door_1 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(2246.337, -770.091, 188.000),
+		TagName = "Ammo Bunker Door 1",
+		TeamAvailability = 2,
+	},
+	PLANT_Ammo_Bunker_Door_2 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(2654.000, -1522.000, 210.000),
+		TagName = "Ammo Bunker Door 2",
+		TeamAvailability = 2,
+	},
+	PLANT_Ammo_Bunker_Door_3 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(2557.000, -2264.000, 218.000),
+		TagName = "Ammo Bunker Door 3",
+		TeamAvailability = 2,
+	},
+	PLANT_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(2909.500, 1585.000, 84.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	PLANT_Main_Gate = 
+	{
+		CoverSpots = 
+		{
+			[0] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(0.790, 0.610, 0.058),
+				},
+				position = Vec3(20.460, -1717.549, 111.274),
+				stance = "crouch",
+			},
+			[1] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(0.973, 0.050, -0.225),
+				},
+				position = Vec3(-314.545, -1562.971, 287.221),
+				stance = "crouch",
+			},
+			[2] = 
+			{
+				AimVectors = 
+				{
+					[0] = Vec3(0.179, 0.984, 0.015),
+				},
+				position = Vec3(199.747, -1916.052, 138.465),
+				stance = "crouch",
+			},
+		},
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(184.563, -1302.010, 184.000),
+		TagName = "Main Gate",
+		TeamAvailability = 2,
+	},
+	PLANT_North_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(-2715.999, 2648.501, 310.000),
+		TagName = "North Bunker MG",
+		TeamAvailability = 2,
+	},
+	PLANT_North_Rocket = 
+	{
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		MinRadius = 32,
+		Position = Vec3(-833.467, 2637.874, -88.875),
+		TraceInfo = 
+		{
+			class = "GOAL",
+			endPos = Vec3(-121.514, 2425.436, -352.613),
+			eyePos = Vec3(-1021.505, 2772.898, -9.302),
+			id = 136,
+		},
+	},
+	PLANT_Side_Door = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1812.000, -2888.000, 216.000),
+		TagName = "Side Door",
+		TeamAvailability = 2,
+	},
+	PLANT_South_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(-2811.999, -243.499, 356.000),
+		TagName = "South Bunker MG",
+		TeamAvailability = 2,
+	},
+	PLANT_South_Rocket = 
+	{
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		MinRadius = 32,
+		Position = Vec3(-3110.126, -209.105, 71.125),
+		TraceInfo = 
+		{
+			class = "GOAL",
+			endPos = Vec3(-2695.129, -848.483, -127.237),
+			eyePos = Vec3(-3249.287, -28.011, 134.125),
+			id = 134,
+		},
+	},
+	REPAIRMG42_Main_Gate = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(260.000, 308.000, 448.000),
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_North_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(-2749.000, 2650.000, 360.000),
+		TagName = "North Bunker MG",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_North_Rocket = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(-192.000, 1384.000, 444.000),
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_South_Bunker_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(-2837.000, -242.000, 404.000),
+		TagName = "South Bunker MG",
+		TeamAvailability = 6,
+	},
+	Version = 1,
+};
