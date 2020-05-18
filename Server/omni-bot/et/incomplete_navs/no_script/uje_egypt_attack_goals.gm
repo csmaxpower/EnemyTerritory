@@ -1,0 +1,278 @@
+global _MG = 
+{
+	AMMOCAB_125 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-1288.000, 4448.000, 1088.000),
+		Range = 1250,
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	AMMOCAB_ammo2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(2994.000, 2850.000, 1252.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_ammo3 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(840.000, 2912.000, 940.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_ammo5 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(3652.000, -3440.000, 1004.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_ammo6 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(1410.000, -5560.000, 557.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_ammo7 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-3094.000, 3136.000, 1196.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_ammo8 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(-1320.000, 4570.000, 1836.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	BUILD_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(576.000, 4544.000, 1204.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	BUILD_Tank = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Mobile = 1,
+		Position = Vec3(-1170.000, 1376.000, 1230.000),
+		TeamAvailability = 4,
+	},
+	BUILD_Tank_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-363.000, 3551.000, 963.000),
+		TagName = "Tank Barrier 1",
+		TeamAvailability = 2,
+	},
+	BUILD_Tank_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(3549.000, -795.000, 952.000),
+		TagName = "Tank Barrier 2",
+		TeamAvailability = 2,
+	},
+	BUILD_Truck = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Mobile = 1,
+		Position = Vec3(2732.000, -2438.000, 949.000),
+		TeamAvailability = 4,
+	},
+	BUILD_Truck_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2076.000, -1744.000, 952.000),
+		TagName = "Truck Barrier 1",
+		TeamAvailability = 2,
+	},
+	BUILD_Truck_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(115.000, -263.000, 949.000),
+		TagName = "Truck Barrier 2",
+		TeamAvailability = 2,
+	},
+	ESCORT_tank = 
+	{
+		Buttons = 
+		{
+		},
+		GoalType = "ESCORT",
+		MinRadius = 32,
+		Offsets = 
+		{
+			[0] = Vec3(2.327, -194.250, -37.875),
+			[1] = Vec3(-98.125, -68.787, -37.875),
+			[2] = Vec3(-98.125, 52.822, -37.875),
+			[3] = Vec3(98.125, -74.218, -37.875),
+			[4] = Vec3(98.125, 31.210, -37.875),
+			[5] = Vec3(-3.440, 158.125, -37.875),
+		},
+		Position = Vec3(-1625.037, 1365.998, 1153.125),
+		TeamAvailability = 4,
+		Vehicle = "MOVER_tank",
+	},
+	ESCORT_truck = 
+	{
+		Buttons = 
+		{
+		},
+		GoalType = "ESCORT",
+		MinRadius = 32,
+		Offsets = 
+		{
+			[0] = Vec3(-0.938, -163.821, -32.875),
+			[1] = Vec3(-86.317, -52.526, -32.875),
+			[2] = Vec3(76.125, -39.140, -32.875),
+			[3] = Vec3(6.504, 185.071, -32.875),
+		},
+		Position = Vec3(2754.555, -2394.395, 897.125),
+		TeamAvailability = 4,
+		Vehicle = "MOVER_truck",
+	},
+	FLAG_gold_crate = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(1794.000, -3398.000, 965.125),
+		TeamAvailability = 4,
+	},
+	HEALTHCAB_126 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-1324.000, 4320.000, 1088.000),
+		Range = 1250,
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_health2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(2994.000, 2940.000, 1252.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_health3 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(310.000, 2908.000, 940.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_health5 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(3652.000, -3338.000, 1004.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_health6 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(1534.000, -5560.000, 557.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_health7 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-3264.000, 2838.000, 1196.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_health8 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(-1444.000, 4570.000, 1836.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	MOVER_tank = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1330.044, 1392.670, 1214.000),
+		TeamAvailability = 4,
+	},
+	MOVER_truck = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(2567.000, -2294.500, 953.000),
+		TeamAvailability = 4,
+	},
+	PLANT_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(573.000, 4573.500, 1204.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	PLANT_Tank_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(-606.562, 3823.562, 1120.000),
+		TagName = "Tank Barrier 1",
+		TeamAvailability = 4,
+	},
+	PLANT_Tank_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(3357.000, -602.000, 924.000),
+		TagName = "Tank Barrier 2",
+		TeamAvailability = 4,
+	},
+	PLANT_Truck_Barrier_1 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1854.000, -1728.000, 942.000),
+		TagName = "Truck Barrier 1",
+		TeamAvailability = 4,
+	},
+	PLANT_Truck_Barrier_2 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(24.000, 280.000, 929.001),
+		TagName = "Truck Barrier 2",
+		TeamAvailability = 4,
+	},
+	Version = 1,
+};

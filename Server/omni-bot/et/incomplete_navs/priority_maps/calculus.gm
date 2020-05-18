@@ -1,0 +1,261 @@
+//==========================================================================================
+//
+//  Calculus (Beta 1) - calculus.gm
+//
+//  Who         When                What
+//------------------------------------------------------------------------------------------
+//  Mateos      25 November 2017    Initial Script
+//
+//==========================================================================================
+//
+
+/****************************************************
+Path mapping and script by Mateos
+Correspondant WAY file size: -
+Last update: 6th December 2017
+****************************************************/
+
+/*
+ * TODO
+ * - Routing for CAPPOINT_Truck
+ * - Cover spots for PLANT_Canyon_MG
+ * - Make Axis follow the train (CAMP spots), especially if FLAG_garage_docs are already secured
+ * - Handle MG42 depending on Train position and if FLAG_garage_docs is stolen or nothing
+ * - Add class-based goals
+ */
+
+global Map =
+{
+    Debug = 0, // Please set to zero before distributing your script
+
+    // ************************************************************************
+
+    /**
+     * Indicates if the Train is gone past the tracks section handled by the switch with the paintings.
+     */
+    isSwitchUseless = false,
+
+    // ************************************************************************
+
+    /**
+     * Enable/Disable the track switch for the correct team.
+     * Does nothing if the switch is useless (see Map.isSwitchUseless).
+     */
+    EnableSwitchForTeam = function( team )
+    {
+        if ( Map.isSwitchUseless )
+        {
+            return;
+        }
+
+        isTeamAllies = team == TEAM.ALLIES;
+
+        SetAvailableMapGoals( TEAM.ALLIES, isTeamAllies, "SWITCH_Track" );
+        SetAvailableMapGoals( TEAM.AXIS, !isTeamAllies, "SWITCH_Track" );
+    },
+
+    // ************************************************************************
+
+    Canyon_MG_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Canyon_MG_Built", true );
+    },
+
+    Canyon_MG_Destroyed = function( trigger )
+    {
+        Util.MapDebugPrint( "Canyon_MG_Destroyed", true );
+    },
+
+    Allies_Track_Switched = function( trigger )
+    {
+        Map.EnableSwitchForTeam( TEAM.AXIS );
+
+        Util.MapDebugPrint( "Allies_Track_Switched" );
+    },
+
+    Axis_Track_Switched = function( trigger )
+    {
+        Map.EnableSwitchForTeam( TEAM.ALLIES );
+
+        Util.MapDebugPrint( "Axis_Track_Switched" );
+    },
+
+    garage_docs_Taken = function( trigger )
+    {
+        Util.EnableGoal( "CAMP_Truck.*" );
+
+        SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Docs.*" );
+
+        Util.MapDebugPrint( "garage_docs_Taken" );
+    },
+
+    garage_docs_Returned = function( trigger )
+    {
+        Util.DisableGoal( "CAMP_Truck.*" );
+
+        SetAvailableMapGoals( TEAM.AXIS, true, "DEFEND_Docs.*" );
+
+        Util.MapDebugPrint( "garage_docs_Returned" );
+    },
+
+    garage_docs_Secured = function( trigger )
+    {
+        Util.DisableGoal( "CAMP_Truck.*" );
+
+        Util.MapDebugPrint( "garage_docs_Secured" );
+    },
+
+    Paintings_Secured = function( trigger )
+    {
+        Util.DisableGoal( "RIDE_Train" );
+
+        Util.MapDebugPrint( "Paintings_Secured" );
+    },
+
+    Game_Over = function( trigger )
+    {
+        Util.MapDebugPrint( "Game_Over", true );
+    },
+
+    vehicle_at_location = function( trigger )
+    {
+        switch( Map.VehicleLocation )
+        {
+            case 1:
+            {
+                Util.MapDebugPrint( "First passage forward without the paintings", true );
+            }
+
+            case 2:
+            {
+                Util.MapDebugPrint( "(Second trigger) First passage forward without the paintings", true );
+            }
+
+            case 3:
+            {
+                Map.EnableSwitchForTeam( TEAM.ALLIES );
+
+                Util.MapDebugPrint( "(Second trigger) First passage backward without the paintings: the track switch must be available for the Allies" );
+            }
+
+            case 4:
+            {
+                Util.MapDebugPrint( "First passage backward without the paintings", true );
+            }
+
+            case 5:
+            {
+                Util.MapDebugPrint( "Second passage forward with the paintings", true );
+            }
+
+            case 6:
+            {
+                Util.MapDebugPrint( "(Second trigger) Second passage forward with the paintings", true );
+            }
+
+            case 7:
+            {
+                Map.EnableSwitchForTeam( TEAM.ALLIES );
+
+                Util.MapDebugPrint( "(Second trigger) Second passage backward with the paintings: the track switch must be available for the Allies" );
+            }
+
+            case 8:
+            {
+                Map.isSwitchUseless = true;
+
+                Util.DisableGoal( "CAMP_Switch" );
+                Util.DisableGoal( "SWITCH_Track" );
+
+                Util.MapDebugPrint( "Second passage backward with the paintings: disabling the track switch" );
+            }
+        }
+    },
+};
+
+global OnMapLoad = function()
+{
+    // *** TRIGGERS ***
+    OnTrigger( "Allied team has constructed the Canyon MG!", Map.Canyon_MG_Built );
+    OnTrigger( "Axis team has destroyed the Canyon MG!", Map.Canyon_MG_Destroyed );
+
+    OnTrigger( "The Allies switched the track!", Map.Allies_Track_Switched );
+    OnTrigger( "The Axis switched the track!", Map.Axis_Track_Switched );
+
+    OnTrigger( "Allies have stolen the Manifest!", Map.garage_docs_Taken );
+    OnTrigger( "Axis have returned the Manifest!", Map.garage_docs_Returned );
+    OnTrigger( "The Allies have secured the manifest in the truck!", Map.garage_docs_Secured );
+
+    OnTrigger( "Allied team has secured the paintings!", Map.Paintings_Secured );
+
+    OnTrigger( "Allied team has secured the paintings and the manifest!", Map.Game_Over );
+
+    // Train triggers
+    OnTriggerRegion( AABB( 100.515, 493.383, 17.125, 242.608, 677.495, 91.125 ), RegionTrigger.VehicleTrigger );
+    OnTriggerRegion( AABB( 312.885, 487.494, 17.125, 461.133, 673.970, 92.070 ), RegionTrigger.VehicleTrigger );
+    OnTrigger( "train at location", Map.vehicle_at_location );
+
+    // *** CLEAR ALL GOALS FOR BOTH TEAMS ***
+    Util.DisableGoal( ".*", true ); // All but routes
+
+    Util.EnableGoal( "CAMP_Switch.*" );
+
+    // Enabled for Axis as well for a good defense
+    Util.EnableGoal( "RIDE_Train.*" );
+
+    // *** AXIS GOALS ***
+    SetAvailableMapGoals( TEAM.AXIS, true, {
+        "DEFEND_Docs.*",
+        "MOUNTMG42_EastDepotMG42",
+        "MOUNTMG42_WestDepotMG42",
+        "PLANT_Canyon_MG",
+        "REPAIRMG42_EastDepotMG42",
+        "REPAIRMG42_WestDepotMG42",
+    });
+
+    // *** ALLIED GOALS ***
+    SetAvailableMapGoals( TEAM.ALLIES, true, {
+        "BUILD_Canyon_MG",
+        "CAPPOINT_Truck",
+        "FLAG_garage_docs",
+        "SWITCH_Track",
+    });
+
+    // *** GOAL PROPERTIES ***
+    SetGoalPriority( "CAMP_Truck.*", 0.51 );
+    SetGoalPriority( "RIDE_Train", 0.8 );   // Same as FLAG_garage_docs
+    SetGoalPriority( "SWITCH_Track", 0.8 ); // Same as FLAG_garage_docs
+    SetMapGoalProperties( "CAMP_.*",    { mincamptime = 60, maxcamptime = 120 } );
+    SetMapGoalProperties( "DEFEND_.*",  { mincamptime = 60, maxcamptime = 120 } );
+
+    // Useless goal
+    Util.RemoveGoal( "BUILD_Train" );
+
+    Util.MapDebugPrint( "Omni-Bot 0.8x map script for Calculus (Beta 1) by Mateos executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+    bot.TargetBreakableDist = 90.0;
+
+    // Only set MaxViewDistance on maps with limited sight (e.g. fog)
+    bot.MaxViewDistance = 2400;
+};
+
+global InitializeRoutes = function()
+{
+    MapRoutes =
+    {
+        BUILD_Canyon_MG =
+        {
+        },
+        PLANT_Canyon_MG =
+        {
+        },
+        FLAG_garage_docs =
+        {
+        },
+    };
+
+    Util.Routes( MapRoutes );
+};

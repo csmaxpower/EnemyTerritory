@@ -1,0 +1,462 @@
+//==========================================================================================
+//
+//	bremen_x.gm
+//
+//	Who			When		What
+//------------------------------------------------------------------------------------------
+//Blindman			2 21 2010
+//palota  			18 February 2017
+//==========================================================================================
+//
+
+global Map =
+{
+	Debug = false,
+
+	maindoor_status = 0,
+	key_status = 0,
+
+	covie =
+	{
+		Name = "covie",
+		TriggerOnClass = CLASS.COVERTOPS,
+		OnEnter = function(ent)
+		{
+			if ( GetEntTeam(ent) == TEAM.ALLIES)
+			{
+				Util.EnableGroup("cv", TEAM.AXIS);
+				Util.DisableGroup("axis1", TEAM.AXIS);
+				//Util.ChangeSpawn(TEAM.AXIS, 4, 9);
+				Util.MapDebugPrint( "Covie shift" );
+			}
+		},
+	},
+
+	SideGate_Destroyed = function( trigger )
+	{
+		sleep(2);
+		if(!Map.key_status){ SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_FrameWork"); }
+		Util.EnableGroup("cab", TEAM.ALLIES);
+		Util.MapDebugPrint( "SideGate_Destroyed" );
+	},
+
+	SideGate_Built = function( trigger )
+	{
+		SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_FrameWork");
+		Util.DisableGroup("cab", TEAM.ALLIES);
+		Util.MapDebugPrint( "SideGate_Built" );
+	},
+
+	FrameWork_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "FrameWork_Built" );
+	},
+
+	FrameWork_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "FrameWork_Destroyed" );
+	},
+
+	KeyAccessible = function()
+	{
+		if (!Map.maindoor_status)
+		{
+			Map.maindoor_status = 1;
+			sleep(2);
+			Util.EnableGroup("keydefense", TEAM.AXIS );
+			Util.DisableGroup("axis1");
+			Util.DisableGroup("allies1");
+			Util.EnableGroup("allies2", TEAM.ALLIES);
+			Util.EnableGroup("cp", TEAM.ALLIES);
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Roof_Planks" );
+			Util.ClearRoleForGoals("FLAG_keycard_flag", ROLE.INFILTRATOR);
+			DeleteTriggerRegion("covie");
+		}
+	},
+
+	Side_Door_Destroyed = function( trigger )
+	{
+		Map.KeyAccessible();
+
+		Util.MapDebugPrint( "Side_Door_Destroyed" );
+	},
+
+	Main_Gate_Destroyed = function( trigger )
+	{
+		Map.KeyAccessible();
+		Util.DisableGroup("cv", TEAM.AXIS);
+		Util.DisableGoal( "CHECKPOINT_flag1_flag" );
+
+		Util.MapDebugPrint( "Main_Gate_Destroyed" );
+	},
+
+	Roof_Planks_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Roof_Planks_Built" );
+	},
+
+	Roof_Planks_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Roof_Planks_Destroyed" );
+	},
+
+	keycard_flag_Taken = function( trigger )
+	{
+		Util.EnableGroup("allies4", TEAM.ALLIES);
+		Util.EnableGroup("keydefense2", TEAM.AXIS);
+		Util.DisableGroup("keydefense", TEAM.AXIS);
+		Util.DisableGroup("allies2", TEAM.ALLIES);
+		SetAvailableMapGoals( TEAM.ALLIES, true, "FLAG_.*" );
+
+		Util.MapDebugPrint( "keycard_flag_Taken" );
+	},
+
+	keycard_flag_Returned = function( trigger )
+	{
+		// if wall is still intact shift them back to the proper phase
+		if ( !Map.maindoor_status ) {
+			Util.EnableGroup("axis1", TEAM.AXIS );
+		}
+		else {
+			Util.EnableGroup("allies2", TEAM.ALLIES);
+			Util.EnableGroup("keydefense", TEAM.AXIS);
+		}
+
+		Util.DisableGroup("keydefense2", TEAM.AXIS);
+		Util.DisableGroup("allies4", TEAM.ALLIES);
+		Util.DisableGroup("cv", TEAM.AXIS);
+
+		Util.MapDebugPrint( "keycard_flag_Returned" );
+	},
+
+	keycard_flag_Secured = function( trigger )
+	{
+		Map.key_status = 1;
+		Util.DisableGroup("keydefense2", TEAM.AXIS );
+		Util.DisableGroup("cv", TEAM.AXIS);
+		Util.DisableGroup("allies4", TEAM.ALLIES );
+		Util.EnableGroup("garage", TEAM.ALLIES);
+		Util.EnableGroup("axis2", TEAM.AXIS);
+		SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Truck_Barrier_1" );
+		SetAvailableMapGoals( TEAM.AXIS, false, {
+			"BUILD_Roof_Planks",
+			"PLANT_FrameWork",
+			"BUILD_SideGate",
+		});
+		SetAvailableMapGoals( TEAM.ALLIES, true, {
+			"BUILD_truck",
+		});
+		SetAvailableMapGoals( TEAM.ALLIES, false, {
+			"ATTACK_key.*",
+			"BUILD_FrameWork",
+			"PLANT_SideGate",
+			"PLANT_Roof_Planks",
+			"CAPPOINT_.*",
+		});
+
+		Util.MapDebugPrint( "keycard_flag_Secured" );
+	},
+
+	Truck_Built = function( trigger )
+	{
+		Util.DisableGroup("axis2", TEAM.AXIS);
+		Util.EnableGroup("axis3", TEAM.AXIS);
+		Util.DisableGroup("garage", TEAM.ALLIES);
+		SetAvailableMapGoals( TEAM.ALLIES, true, {
+			"ESCORT_truck",
+			"PLANT_Truck_Barrier_1",
+		});
+
+		Util.MapDebugPrint( "Truck_Built" );
+	},
+
+	escort =
+	{
+		Name = "escort",
+		TriggerOnEntity = GetGoal("MOVER_truck").GetEntity(),
+		OnEnter = function(ent)
+		{
+			// open up all the offsets
+			ETUtil.SetExcludeIndexes("ESCORT_truck");
+		},
+	},
+
+	TriggerOne =
+	{
+		Name = "TriggerOne",
+		TriggerOnEntity = GetGoal("MOVER_truck").GetEntity(),
+		OnEnter = function(ent)
+		{
+			Util.DisableGroup("axis3", TEAM.AXIS);
+			Util.EnableGroup("axis4", TEAM.AXIS);
+			Util.EnableGroup("bar2", TEAM.ALLIES);
+			SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_Truck_Barrier_1" );
+			SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Truck_Barrier_2" );
+			SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Truck_Barrier_2" );
+			Util.MapDebugPrint("TriggerOne");
+		},
+	},
+
+	spawntrigger =
+	{
+		Name = "spawntrigger",
+		TriggerOnEntity = GetGoal("MOVER_truck").GetEntity(),
+		OnEnter = function(ent)
+		{
+			Util.ChangeSpawn(TEAM.ALLIES, 2, 9);
+			Util.MapDebugPrint("spawntrigger");
+		},
+	},
+
+	truckmoving =
+	{
+		Name = "truckmoving",
+		TriggerOnEntity = GetGoal("MOVER_truck").GetEntity(),
+		OnEnter = function(ent)
+		{
+			SetAvailableMapGoals( TEAM.ALLIES, false, "PLANT_Side_Door" );
+			Util.MapDebugPrint("truckmoving");
+		},
+	},
+
+	TriggerTwo =
+	{
+		Name = "TriggerTwo",
+		TriggerOnEntity = GetGoal("MOVER_truck").GetEntity(),
+		OnEnter = function(ent)
+		{
+			Util.DisableGroup("axis4", TEAM.AXIS);
+			Util.EnableGroup("axis5");
+			Util.DisableGroup("bar2", TEAM.ALLIES);
+			SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_Truck_Barrier_2" );
+			Util.MapDebugPrint("TriggerTwo");
+		},
+	},
+
+	backspawn =
+	{
+		Name = "backspawn",
+		TriggerOnEntity = GetGoal("MOVER_truck").GetEntity(),
+		OnEnter = function(ent)
+		{
+			Util.ChangeSpawn(TEAM.ALLIES, 1, 9);
+			SetAvailableMapGoals( TEAM.ALLIES, true, "MOBILEMORTAR_backspawn1" );
+			Util.MapDebugPrint("backspawn");
+		},
+	},
+
+	Truck_Barrier_1_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Truck_Barrier_1_Built" );
+	},
+
+	Truck_Barrier_2_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Truck_Barrier_2_Built" );
+	},
+
+	Truck_Barrier_1_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Truck_Barrier_1_Destroyed" );
+	},
+
+	Truck_Barrier_2_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Truck_Barrier_2_Destroyed" );
+	},
+
+	Neutral_Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Neutral_Command_Post_Built" );
+	},
+
+	Neutral_Command_Post_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Neutral_Command_Post_Destroyed" );
+	},
+
+	flag1_flag_Axis_Captured = function( trigger )
+	{
+		Util.MapDebugPrint( "flag1_flag_Axis_Captured" );
+	},
+
+	flag1_flag_Allies_Captured = function( trigger )
+	{
+		Util.MapDebugPrint( "flag1_flag_Allies_Captured" );
+	},
+};
+
+global OnMapLoad = function()
+{
+	OnTrigger( "Allied Command post constructed. Charge speed increased.", Map.Neutral_Command_Post_Built );
+	OnTrigger( "The Truck has been repaired!", Map.Truck_Built );
+	OnTrigger( "Truck Barrier #1 has been constructed.", Map.Truck_Barrier_1_Built );
+	OnTrigger( "Truck Barrier #2 has been constructed.", Map.Truck_Barrier_2_Built );
+	OnTrigger( "The main gate has been destroyed!", Map.Main_Gate_Destroyed );
+	OnTrigger( "Axis team has destroyed the Allied Command Post!", Map.Neutral_Command_Post_Destroyed );
+	OnTrigger( "The side door has been destroyed!", Map.Side_Door_Destroyed );
+	OnTrigger( "Truck Barrier #1 has been destroyed.", Map.Truck_Barrier_1_Destroyed );
+	OnTrigger( "Truck Barrier #2 has been destroyed.", Map.Truck_Barrier_2_Destroyed );
+	OnTrigger( "Allies have stolen the Keycard!", Map.keycard_flag_Taken );
+	OnTrigger( "Flag returned keycard_flag!", Map.keycard_flag_Returned );
+	OnTrigger( "Allied team has gained access to the truck!", Map.keycard_flag_Secured );
+	OnTrigger( "The Axis have reclaimed the forward bunker!", Map.flag1_flag_Axis_Captured );
+	OnTrigger( "The Allies have captured the forward bunker!", Map.flag1_flag_Allies_Captured );
+	OnTrigger( "Framework has been constructed.", Map.FrameWork_Built );
+	OnTrigger( "Framework has been destroyed.", Map.FrameWork_Destroyed );
+	OnTrigger( "Roof Planks has been constructed.", Map.Roof_Planks_Built );
+	OnTrigger( "Roof Planks has been destroyed.", Map.Roof_Planks_Destroyed );
+	OnTrigger( "Side Gate has been constructed.", Map.SideGate_Built );
+	OnTrigger( "Side Gate has been destroyed.", Map.SideGate_Destroyed );
+
+	OnTriggerRegion(AABB(2140.201,-539.198,63.125,2427.025,-420.330,137.242),Map.escort);
+	OnTriggerRegion(AABB(966.809,1068.9,56.505,1259.212,1319.8,153.125), Map.TriggerOne);
+	OnTriggerRegion(AABB(-829.24,1622.1,55.125,-494.425,1999.13,138.544), Map.spawntrigger);
+	OnTriggerRegion(AABB(-1133.8,1432.8,63.125,-878.6,1694.6,137.125), Map.truckmoving);
+	OnTriggerRegion(AABB(-1556.64,206.912,63.274,-1031.68,336.874,144.106), Map.TriggerTwo);
+	OnTriggerRegion(AABB(-1882.64,-472.875,66.793,-1834.875,9.407,145.242), Map.backspawn);
+	OnTriggerRegion(AABB(-956.875,1107.2,95.125,-907.818,1264.874,169.125), Map.covie);
+	//OnTriggerRegion(AABB(-2342.312,883.321,63.125,-2214.777,1544.874,143.981), Map.covie);
+
+	Util.DisableGoal(".*", true); // all but routes
+	Util.AddInvVehicle("MOVER_truck");
+
+	// cs: these can be removed from script once the goals are saved ...
+	// Allied groups
+	Util.SetGroup( "MOBILEMORTAR_spwan.", "allies1");
+	Util.SetGroup( "ATTACK_flag.*", "allies1");
+	Util.SetGroup( "FLAG_keycard_flag", "allies2");
+	Util.SetGroup( "ATTACK_key.*", "allies2");
+	Util.SetGroup( "ATTACK_keypath.*", "allies4");
+	Util.SetGroup( "ATTACK_garage.*", "garage");
+	Util.SetGroup( "CAMP_tb.*", "bar2");
+
+	//Axis groups
+	Util.SetGroup( "DEFEND_flag.*", "axis1");
+	Util.SetGroup( "MOBILEMORTAR_axis", "axis1");
+	Util.SetGroup( "CAMP_covie.*", "cv");
+	Util.SetGroup( "MOBILEMG42_covie2", "cv");
+	Util.SetGroup( "CAMP_key.*", "keydefense");
+	Util.SetGroup( "MOBILEMG42_key5", "keydefense");
+	Util.SetGroup( "ATTACK_cappoint.*", "keydefense2");
+	Util.SetGroup( "CAMP_truck.*", "axis2");
+	Util.SetGroup( "CAMP_barrier1_.*", "axis3");
+	Util.SetGroup( "CAMP_barrier2_.*", "axis4");
+	Util.SetGroup( "CAMP_endgame.*", "axis5");
+
+	Util.SetGroup( "BUILD_Neutral_Command_Post", "cp");
+	Util.SetGroup( "PLANT_Neutral_Command_Post", "cp");
+	Util.SetGroup( "AMMOCAB_first_ammocabinet", "cab");
+	Util.SetGroup( "HEALTHCAB_first_healthcabinet", "cab");
+
+	Util.EnableGroup("allies1", TEAM.ALLIES);
+	Util.EnableGroup("axis1", TEAM.AXIS);
+	Util.EnableGroup("cp", TEAM.AXIS);
+	Util.EnableGroup("cab", TEAM.AXIS);
+	Util.EnableGoal( "CHECKPOINT_flag1_flag" );
+
+	SetAvailableMapGoals( TEAM.ALLIES, true, {
+		"PLANT_Main_Gate",
+		"PLANT_Side_Door",
+		"FLAG_keycard_flag",
+		"PLANT_SideGate",
+		"CAPPOINT_.*",
+	});
+	SetAvailableMapGoals( TEAM.AXIS, true, {
+		"BUILD_SideGate",
+		"BUILD_Roof_Planks",
+		"PLANT_FrameWork",
+		"BUILD_SideGate",
+	});
+
+	Util.SetRoleForGoals("FLAG_keycard_flag", ROLE.INFILTRATOR);
+
+	SetGoalPriority("BUILD_Truck_Barrier_1", 0.91, TEAM.AXIS);
+	SetGoalPriority("BUILD_SideGate", 0.81, TEAM.AXIS);
+	SetGoalPriority("BUILD_Roof_Planks", 0.81, TEAM.AXIS);
+	SetGoalPriority("BUILD_FrameWork", 0.81, TEAM.ALLIES);
+	SetGoalPriority("BUILD_Neutral_Command_Post", 0.81, TEAM.ALLIES);
+	SetGoalPriority("FLAG_keycard_flag", 0.7, TEAM.ALLIES);
+	SetGoalPriority("FLAG_keycard_flag", 0.8, TEAM.ALLIES, CLASS.COVERTOPS );
+
+	// Max users per goal
+	Util.SetMaxUsers( 3, "CHECKPOINT_.*" );
+	Util.SetMaxUsers( 1, "PLANT_Side_Door" );
+	Util.SetMaxUsers( 1, "PLANT_SideGate" );
+	Util.SetMaxUsers( 4, "FLAG_.*" );
+	Util.SetMaxUsers( 3, "ESCORT_.*" );
+
+	//Util.AddUseWp( "PLANT_Truck_Barrier_2", "plantbarrier2" );
+	//Util.AddUseWp( "PLANT_Truck_Barrier_1", "plantbarrier1" );
+	Util.AddUsePoint( "PLANT_Side_Door", Vec3(-1501.867, 1941.1, 264.125) );
+	Util.AddUsePoint( "PLANT_Main_Gate", { Vec3(-948.994, 1612.258, 88.125), Vec3(-913.734, 1747.311, 88.125) });
+	Util.AddUsePoint( "PLANT_SideGate", Vec3(1354.998, -3015.316, 88.125));
+
+	// only escort from front until it gets around the corner
+	ETUtil.SetExcludeIndexes("ESCORT_truck", { 0, 1, 2, 3, 4, 5 });
+
+	Util.FixMoverPos("truck", Vec3(1817.500, -923.000, 122.500), Vec3(1672.000, -924.000, 66.000));
+
+	Util.MapDebugPrint( "Omni-bot map script for " + GetMapName() + " executed." );
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+		PLANT_Truck_Barrier_1 =
+		{
+			ROUTE_cpspawn  =
+			{
+				ROUTE_cp2  =
+				{
+					ROUTE_cp3  =
+					{
+						ROUTE_cp4  =
+						{
+							ROUTE_cp5  =
+							{
+								ROUTE_cp6  =
+								{
+									ROUTE_cp7  =
+									{
+										ROUTE_cp8  =
+										{
+										},
+									},
+								},
+							},
+							ROUTE_cp4a  =
+							{
+								ROUTE_cp4b  =
+								{
+									ROUTE_cp4c  =
+									{
+										ROUTE_cp8  =
+										{
+										},
+									},
+									ROUTE_cp4d  =
+									{
+									},
+								},
+							},
+						},
+					},
+					ROUTE_cp4d  =
+					{
+					},
+				},
+			},
+		},
+	};
+
+	MapRoutes.FLAG_keycard_flag = MapRoutes.PLANT_Truck_Barrier_1;
+	MapRoutes["ATTACK_key1.*"] = MapRoutes.FLAG_keycard_flag;
+	Util.Routes(MapRoutes);
+};
+
+global OnBotJoin = function( bot )
+{
+	bot.TargetBreakableDist = 90.0;
+};

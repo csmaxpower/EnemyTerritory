@@ -1,0 +1,319 @@
+global _MG = 
+{
+	BUILD_Canyon_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(-472.000, -2064.000, 196.000),
+		TagName = "Canyon MG",
+		TeamAvailability = 4,
+	},
+	CAMP_Switch1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.987, 0.117, -0.114),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(229.875, 922.125, 103.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAMP_Switch2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.752, -0.600, -0.274),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(229.875, 1189.875, 159.125),
+		Radius = 32,
+	},
+	CAMP_Switch3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.798, 0.416, -0.436),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(293.418, 939.817, 385.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAMP_Switch4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.969, 0.179, -0.172),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-31.775, 1049.367, 385.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAMP_Truck1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.381, 0.887, 0.260),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1068.528, -2031.975, 15.837),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAMP_Truck2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.610, 0.739, 0.287),
+			[1] = Vec3(0.982, 0.133, 0.137),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1207.077, -1687.136, 23.126),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAMP_Truck3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.815, 0.559, 0.152),
+			[1] = Vec3(0.980, -0.194, -0.051),
+			[2] = Vec3(-0.815, -0.543, -0.204),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1153.373, -1321.690, 215.711),
+		Radius = 32,
+	},
+	CAMP_Truck4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.491, 0.843, 0.219),
+			[1] = Vec3(0.893, 0.429, 0.137),
+			[2] = Vec3(-0.999, 0.041, -0.001),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1306.731, -2127.223, 12.112),
+		Radius = 32,
+	},
+	CAMP_Truck5 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.901, 0.381, 0.207),
+			[1] = Vec3(0.998, 0.001, 0.060),
+			[2] = Vec3(-0.757, -0.649, -0.073),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1574.671, -1515.479, 65.525),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAMP_Truck6 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.910, 0.388, 0.144),
+			[1] = Vec3(0.986, 0.116, 0.116),
+			[2] = Vec3(-0.316, -0.949, -0.005),
+		},
+		GoalType = "CAMP",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1926.101, -1708.836, 18.388),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	CAPPOINT_Truck = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(-1503.703, -1792.747, 57.125),
+	},
+	DEFEND_Docs1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.749, -0.657, 0.082),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1148.658, 1365.643, 1.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Docs2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.950, 0.306, 0.057),
+			[1] = Vec3(-0.660, 0.693, 0.290),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1466.553, 1108.961, 1.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Docs3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.982, -0.181, 0.060),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1847.102, 1343.553, 1.125),
+		Radius = 32,
+		Stance = "prone",
+	},
+	DEFEND_Docs4 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.864, -0.504, 0.023),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1805.927, 1650.002, 1.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	DEFEND_Docs5 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.802, -0.597, 0.015),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		Position = Vec3(-1929.823, 1873.934, 1.125),
+		Radius = 32,
+		Stance = "crouch",
+	},
+	FLAG_garage_docs = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(-1712.000, 2000.000, 49.125),
+		TeamAvailability = 4,
+	},
+	MOUNTMG42_Canyon_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 60,
+		MinCampTime = 15,
+		Position = Vec3(-516.000, -1858.000, 520.000),
+		TagName = "Canyon MG",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_EastDepotMG42 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 60,
+		MinCampTime = 15,
+		Position = Vec3(-1108.000, 1108.000, 364.000),
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_WestDepotMG42 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 60,
+		MinCampTime = 15,
+		Position = Vec3(-1960.000, 1104.000, 364.000),
+		TeamAvailability = 6,
+	},
+	MOVER_train = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-1373.031, -2008.000, 88.000),
+		TeamAvailability = 6,
+	},
+	PLANT_Canyon_MG = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(-516.000, -1924.000, 364.000),
+		TagName = "Canyon MG",
+		TeamAvailability = 2,
+	},
+	REPAIRMG42_Canyon_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(-516.000, -1858.000, 520.000),
+		TagName = "Canyon MG",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_EastDepotMG42 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(-1108.000, 1108.000, 364.000),
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_WestDepotMG42 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(-1960.000, 1104.000, 364.000),
+		TeamAvailability = 6,
+	},
+	RIDE_Train = 
+	{
+		BoardPositions = 
+		{
+			[0] = Vec3(108.190, -92.585, -55.875),
+			[1] = Vec3(-104.281, -92.916, -53.822),
+		},
+		GoalType = "RIDE",
+		MinRadius = 32,
+		Position = Vec3(-1632.030, -1816.040, 96.125),
+		SeatRadius = 30,
+		Seats = 
+		{
+			[0] = Vec3(-4.083, -92.862, -15.643),
+		},
+		Stance = "crouch",
+		Vehicle = "MOVER_train",
+	},
+	SWITCH_Track = 
+	{
+		AimPosition = Vec3(-89.862, 1111.927, 425.310),
+		Facing = Vec3(0.000, 0.000, 0.000),
+		GoalType = "SWITCH",
+		Position = Vec3(-61.685, 1112.311, 385.125),
+		Radius = 32,
+	},
+	Version = 1,
+};

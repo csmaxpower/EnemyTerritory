@@ -1,0 +1,137 @@
+//==========================================================================================
+//
+//	midnightraid_b1.gm
+//
+//	Who       	When		What
+//------------------------------------------------------------------------------------------
+//	^1[UJE]^3Niek	21 December 2013	Initial Script
+//
+//==========================================================================================
+//
+
+global Map =
+{
+	Debug = 1, // please set to zero before distributing your script
+
+	Command_Post_Dyno = 0,
+	East_Fuel_Drums_Dyno = 0,
+	West_Fuel_Drums_Dyno = 0,
+
+	Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Command_Post_Built" );
+	},
+
+	Command_Post_Planted = function( trigger )
+	{
+		Map.Command_Post_Dyno += 1;
+		Util.MapDebugPrint( "Command_Post_Planted" );
+	},
+
+	East_Fuel_Drums_Planted = function( trigger )
+	{
+		Map.East_Fuel_Drums_Dyno += 1;
+		Util.MapDebugPrint( "East_Fuel_Drums_Planted" );
+	},
+
+	West_Fuel_Drums_Planted = function( trigger )
+	{
+		Map.West_Fuel_Drums_Dyno += 1;
+		Util.MapDebugPrint( "West_Fuel_Drums_Planted" );
+	},
+
+	Command_Post_Defused = function( trigger )
+	{
+		Map.Command_Post_Dyno -= 1;
+		Util.MapDebugPrint( "Command_Post_Defused" );
+	},
+
+	East_Fuel_Drums_Defused = function( trigger )
+	{
+		Map.East_Fuel_Drums_Dyno -= 1;
+		Util.MapDebugPrint( "East_Fuel_Drums_Defused" );
+	},
+
+	West_Fuel_Drums_Defused = function( trigger )
+	{
+		Map.West_Fuel_Drums_Dyno -= 1;
+		Util.MapDebugPrint( "West_Fuel_Drums_Defused" );
+	},
+
+	Command_Post_Destroyed = function( trigger )
+	{
+		Map.Command_Post_Dyno = 0;
+
+		Util.MapDebugPrint( "Command_Post_Destroyed" );
+	},
+
+	East_Fuel_Drums_Destroyed = function( trigger )
+	{
+		Map.East_Fuel_Drums_Dyno = 0;
+
+		Util.MapDebugPrint( "East_Fuel_Drums_Destroyed" );
+	},
+
+	West_Fuel_Drums_Destroyed = function( trigger )
+	{
+		Map.West_Fuel_Drums_Dyno = 0;
+
+		Util.MapDebugPrint( "West_Fuel_Drums_Destroyed" );
+	},
+
+};
+
+global OnMapLoad = function()
+{
+	// Register callback functions
+	OnTrigger( "MISSING_STRING", Map.Command_Post_Built );
+	OnTrigger( "Planted at the MISSING_STRING.", Map.Command_Post_Planted );
+	OnTrigger( "Planted at the MISSING_STRING.", Map.East_Fuel_Drums_Planted );
+	OnTrigger( "Planted at the MISSING_STRING.", Map.West_Fuel_Drums_Planted );
+	OnTrigger( "Defused at the MISSING_STRING.", Map.Command_Post_Defused );
+	OnTrigger( "Defused at the MISSING_STRING.", Map.East_Fuel_Drums_Defused );
+	OnTrigger( "Defused at the MISSING_STRING.", Map.West_Fuel_Drums_Defused );
+	OnTrigger( "MISSING_STRING", Map.Command_Post_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.East_Fuel_Drums_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.West_Fuel_Drums_Destroyed );
+
+	//~Util.DisableGoal( ".*", true ); // all but routes
+	//~SetAvailableMapGoals( TEAM.AXIS, true, "ATTACK_.*" );
+	//~SetAvailableMapGoals( TEAM.ALLIES, true, "ATTACK_.*" );
+
+	// Max users per goal
+	//Util.SetMaxUsers( 1, "DEFEND_.*" );
+	//Util.SetMaxUsers( 1, "GRENADE_.*" );
+	//Util.SetMaxUsers( 1, "MOUNTMG42_.*" );
+
+	// Camp times
+	SetMapGoalProperties( "MOUNTMG42_.*", {MinCampTime=15, MaxCampTime=90} );
+	SetMapGoalProperties( "MOBILEMG42_.*", {MinCampTime=10, MaxCampTime=60} );
+
+
+	Util.MapDebugPrint( "Omni-bot map script for " + GetMapName() + " executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+		BUILD_Command_Post =
+		{
+		},
+		PLANT_West_Fuel_Drums =
+		{
+		},
+		PLANT_East_Fuel_Drums =
+		{
+		},
+		PLANT_Command_Post =
+		{
+		},
+	};
+	Util.Routes(MapRoutes);
+};

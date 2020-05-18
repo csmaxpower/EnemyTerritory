@@ -1,0 +1,361 @@
+//==========================================================================================
+//
+//	vengeance_final.gm
+//
+//	Who			When				What
+//------------------------------------------------------------------------------------------
+//	Slayer		17 April 2013		Waypoints
+//	MickyP		17 April 2013		Initial Script
+//	d00d		9 May 2013		Minor cleanup
+//
+//==========================================================================================
+//
+
+global Map =
+{
+	Debug = 0,
+	Flag = 0, // this variable stores the position of codes
+
+	Main_Gate_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Main_Gate_Destroyed" );
+	},
+
+	Side_Door_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Side_Door_Built" );
+	},
+
+	Side_Door_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Side_Door_Destroyed" );
+	},
+
+	Ammo_Bunker_Door_1_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Ammo_Bunker_Door_1_Built" );
+	},
+
+	Ammo_Bunker_Door_1_Destroyed = function( trigger )
+	{
+		if ( Map.Flag == 1 )
+		{
+			// If codes are hidden behind door 1, disable the other door goals since they are useless.
+			SetAvailableMapGoals( TEAM.ALLIES, false, {
+				"BUILD_Ammo_Bunker_Door_2",
+				"BUILD_Ammo_Bunker_Door_3",
+			});
+			SetAvailableMapGoals( TEAM.AXIS, false, {
+				"PLANT_Ammo_Bunker_Door_2",
+				"PLANT_Ammo_Bunker_Door_3",
+			});
+		}
+		else
+		{
+			// Otherwise, disable door 1 goals.
+			SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_Ammo_Bunker_Door_1" );
+			SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_Ammo_Bunker_Door_1" );
+		}
+
+		Util.MapDebugPrint( "Ammo_Bunker_Door_1_Destroyed" );
+	},
+
+	Ammo_Bunker_Door_2_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Ammo_Bunker_Door_2_Built" );
+	},
+
+	Ammo_Bunker_Door_2_Destroyed = function( trigger )
+	{
+		if ( Map.Flag == 2 )
+		{
+			SetAvailableMapGoals( TEAM.ALLIES, false, {
+				"BUILD_Ammo_Bunker_Door_1",
+				"BUILD_Ammo_Bunker_Door_3",
+			});
+			SetAvailableMapGoals( TEAM.AXIS, false, {
+				"PLANT_Ammo_Bunker_Door_1",
+				"PLANT_Ammo_Bunker_Door_3",
+			});
+		}
+		else
+		{
+			SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_Ammo_Bunker_Door_2" );
+			SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_Ammo_Bunker_Door_2" );
+		}
+
+		Util.MapDebugPrint( "Ammo_Bunker_Door_2_Destroyed" );
+	},
+
+	Ammo_Bunker_Door_3_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Ammo_Bunker_Door_3_Built" );
+	},
+
+	Ammo_Bunker_Door_3_Destroyed = function( trigger )
+	{
+		if ( Map.Flag == 3 )
+		{
+			SetAvailableMapGoals( TEAM.ALLIES, false, {
+				"BUILD_Ammo_Bunker_Door_1",
+				"BUILD_Ammo_Bunker_Door_2",
+			});
+			SetAvailableMapGoals( TEAM.AXIS, false, {
+				"PLANT_Ammo_Bunker_Door_1",
+				"PLANT_Ammo_Bunker_Door_2",
+			});
+		}
+		else
+		{
+			SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_Ammo_Bunker_Door_3" );
+			SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_Ammo_Bunker_Door_3" );
+		}
+
+		Util.MapDebugPrint( "Ammo_Bunker_Door_3_Destroyed" );
+	},
+
+	Warhead_Taken = function( trigger )
+	{
+		Util.MapDebugPrint( "Warhead_Taken" );
+	},
+
+	Warhead_Returned = function( trigger )
+	{
+		Util.MapDebugPrint( "Warhead_Returned" );
+	},
+
+	North_Codes_Secured = function( trigger )
+	{
+		SetAvailableMapGoals( TEAM.AXIS, false, "CAPPOINT_North_Rocket" );
+		SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_North_Rocket" );
+
+		Util.MapDebugPrint( "North_Codes_Secured" );
+	},
+
+	North_Rocket_Destroyed = function( trigger )
+	{
+		SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_North_Rocket" );
+
+		Util.MapDebugPrint( "North_Rocket_Destroyed" );
+	},
+
+	South_Codes_Secured = function( trigger )
+	{
+		SetAvailableMapGoals( TEAM.AXIS, false, "CAPPOINT_South_Rocket" );
+		SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_South_Rocket" );
+
+		Util.MapDebugPrint( "South_Codes_Secured" );
+	},
+
+	South_Rocket_Destroyed = function( trigger )
+	{
+		SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_South_Rocket" );
+
+		Util.MapDebugPrint( "South_Rocket_Destroyed" );
+	},
+
+	All_Codes_Secured = function( trigger )
+	{
+		SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_Ammo_Bunker_Door.*" );
+		SetAvailableMapGoals( TEAM.AXIS, false, {
+			"PLANT_Ammo_Bunker_Door.*",
+			"FLAG_warhead_pick.*",
+		});
+
+		Util.MapDebugPrint( "All_Codes_Secured" );
+	},
+
+	forward_spawn_Axis_Captured = function( trigger )
+	{
+		Util.MapDebugPrint( "forward_spawn_Axis_Captured" );
+	},
+
+	forward_spawn_Allies_Captured = function( trigger )
+	{
+		Util.MapDebugPrint( "forward_spawn_Allies_Captured" );
+	},
+
+	Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Command_Post_Built" );
+	},
+
+	Command_Post_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "Command_Post_Destroyed" );
+	},
+
+	North_Bunker_MG_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "North_Bunker_MG_Built" );
+	},
+
+	North_Bunker_MG_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "North_Bunker_MG_Destroyed" );
+	},
+
+	South_Bunker_MG_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "South_Bunker_MG_Built" );
+	},
+
+	South_Bunker_MG_Destroyed = function( trigger )
+	{
+		Util.MapDebugPrint( "South_Bunker_MG_Destroyed" );
+	},
+
+};
+
+global OnMapLoad = function()
+{
+	// Register callback functions
+
+	OnTrigger( "Axis have breached the Main Gate", Map.Main_Gate_Destroyed );
+	OnTrigger( "Side passage doors constructed", Map.Side_Door_Built );
+	OnTrigger( "The Axis have breached the side passage doors", Map.Side_Door_Destroyed );
+
+	OnTrigger( "Ammo Bunker #1 Door has been built", Map.Ammo_Bunker_Door_1_Built );
+	OnTrigger( "The Axis have breached Ammo Bunker #1", Map.Ammo_Bunker_Door_1_Destroyed );
+	OnTrigger( "Ammo Bunker #2 Door has been built", Map.Ammo_Bunker_Door_2_Built );
+	OnTrigger( "The Axis have breached Ammo Bunker #2", Map.Ammo_Bunker_Door_2_Destroyed );
+	OnTrigger( "Ammo Bunker Door #3 has been built", Map.Ammo_Bunker_Door_3_Built );
+	OnTrigger( "The Axis have breached Ammo Bunker #3", Map.Ammo_Bunker_Door_3_Destroyed );
+
+	OnTrigger( "Axis have stolen a set of failsafe codes!", Map.Warhead_Taken );
+	OnTrigger( "Allies have returned a set of failsafe codes!", Map.Warhead_Returned );
+	OnTrigger( "Axis have disabled the north rocket fail safes", Map.North_Codes_Secured );
+	OnTrigger( "Axis have destroyed the North Rocket!", Map.North_Rocket_Destroyed );
+	OnTrigger( "Axis have disabled the south rocket fail safes", Map.South_Codes_Secured );
+	OnTrigger( "Axis have disabled all fail safes!", Map.All_Codes_Secured );
+	OnTrigger( "Axis have destroyed the South Rocket!", Map.South_Rocket_Destroyed );
+	OnTrigger( "Axis capture the Main Gate spawn!", Map.forward_spawn_Axis_Captured );
+	OnTrigger( "Allies capture the Main Gate spawn!", Map.forward_spawn_Allies_Captured );
+
+	OnTrigger( "Allied Command Post constructed. Charge speed increased!", Map.Command_Post_Built );
+	OnTrigger( "Axis Command Post constructed. Charge speed increased!", Map.Command_Post_Built );
+	OnTrigger( "Axis team has destroyed the Allied Command Post!", Map.Command_Post_Destroyed );
+	OnTrigger( "Allied team has destroyed the Axis Command Post!", Map.Command_Post_Destroyed );
+	OnTrigger( "North Bunker MG nest constructed!", Map.North_Bunker_MG_Built );
+	OnTrigger( "Axis team has destroyed the North Bunker MG nest!", Map.North_Bunker_MG_Destroyed );
+	OnTrigger( "South Bunker MG nest constructed!", Map.South_Bunker_MG_Built );
+	OnTrigger( "Axis team has destroyed the South Bunker MG nest!", Map.South_Bunker_MG_Destroyed );
+
+	Util.DisableGoal( ".*", true ); // all but routes
+
+	Util.EnableGoal( "AMMOCAB_supplycabinet", true );
+	Util.EnableGoal( "HEALTHCAB_healthcabinet", true );
+
+	SetAvailableMapGoals( TEAM.ALLIES, true, {
+		"CHECKPOINT_forward_spawn",
+		"BUILD_Side_Door",
+		"BUILD_Ammo_Bunker_Door.*",
+		"BUILD_Command_Post",
+	});
+
+	SetAvailableMapGoals( TEAM.AXIS, true, {
+		"PLANT_Ammo_Bunker_Door.*",
+		"PLANT_Main_Gate",
+		"PLANT_Side_Door",
+		"CHECKPOINT_forward_spawn",
+		"CAPPOINT.*",
+		"FLAG_warhead_pick.*",
+	});
+
+	// Max users per goal
+	Util.SetMaxUsers( 1, "ATTACK_.*" );
+	Util.SetMaxUsers( 1, "DEFEND_.*" );
+	Util.SetMaxUsers( 1, "GRENADE_.*" );
+	Util.SetMaxUsers( 1, "MOUNTMG42_.*" );
+	Util.SetMaxUsers( 1, "CAPPOINT_.*" );
+
+	// Camp times
+	SetMapGoalProperties( "MOUNTMG42_.*", {MinCampTime=15, MaxCampTime=90} );
+	SetMapGoalProperties( "MOBILEMG42_.*", {MinCampTime=10, MaxCampTime=60} );
+
+	SetGoalPriority( "BUILD_Side_Door", 0.89, 0, 0 ); // OBJ Doors more important
+	SetGoalPriority( "BUILD_Command_Post", 0.51, 0, 0 ); // Low Priority
+	SetGoalPriority( "PLANT_Main_Gate", 0.82, 0, 0 ); // Focus on this goal 1st
+
+
+	// Detection to see where the codes are hidden - Plant/Build goal to be set to false if empty when blown.
+	// Bots will not know if the codes are behind the door until it is blown.
+	sleep(2.1); // Needs this time or all 3 goals register
+	if ( GetGoal("FLAG_warhead_pick1") )
+		{ Map.Flag = 1; }
+	else if ( GetGoal("FLAG_warhead_pick2") )
+		{ Map.Flag = 2; }
+	else if ( GetGoal("FLAG_warhead_pick3") )
+		{ Map.Flag = 3; }
+	else
+		{ Util.MapDebugPrint( "Something went wrong with the flag detection!", true ); }
+};
+
+global OnBotJoin = function( bot )
+{
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+		BUILD_Ammo_Bunker_Door_2 =
+		{
+		},
+		BUILD_Side_Door =
+		{
+		},
+		BUILD_North_Bunker_MG =
+		{
+		},
+		BUILD_Ammo_Bunker_Door_3 =
+		{
+		},
+		BUILD_Command_Post =
+		{
+		},
+		BUILD_South_Bunker_MG =
+		{
+		},
+		BUILD_Ammo_Bunker_Door_1 =
+		{
+		},
+		PLANT_North_Bunker_MG =
+		{
+		},
+		PLANT_Ammo_Bunker_Door_3 =
+		{
+		},
+		PLANT_Side_Door =
+		{
+		},
+		PLANT_South_Bunker_MG =
+		{
+		},
+		PLANT_Ammo_Bunker_Door_2 =
+		{
+		},
+		PLANT_Command_Post =
+		{
+		},
+		PLANT_Main_Gate =
+		{
+		},
+		PLANT_Ammo_Bunker_Door_1 =
+		{
+		},
+		FLAG_warhead_pick1 =
+		{
+		},
+		FLAG_warhead_pick3 =
+		{
+		},
+		FLAG_warhead_pick2 =
+		{
+		},
+		CHECKPOINT_forward_spawn =
+		{
+		},
+	};
+	Util.Routes(MapRoutes);
+};

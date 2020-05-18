@@ -1,0 +1,1225 @@
+//=============================================================================
+//
+//  V1 Rocket (Beta 2) - v1rocket_b2.gm
+//
+//  Who         When                What
+//-----------------------------------------------------------------------------
+//  Mateos      26 December 2010    Based on files present before
+//
+//=============================================================================
+
+/****************************************************
+Path mapping updated and script by Mateos
+Correspondant WAY file size: -
+Last update: 20th December 2017
+****************************************************/
+
+/*
+ * TODO:
+ *    - Add and manage class-specific goals.
+ *
+ *    - Once the Lorraine is at the other side, some bots go around the back to plant the Main Entrance.
+ *      => Handle CHECKPOINT_depotflag (capture, defence)?
+ *
+ *    - CAMP_FlagB & CAMP_FlagT: Roles? (for both teams) and management (from Main Entrance destruction to Tank escorted event)
+ *
+ *    - CP: A role so an Axis engineer keeps spawning back to build it? (and perhaps later landmines)
+ *      Also a covi for destroying it?
+ *
+ *    - (INFO) Obj taken, goals priority:
+ *      Before: CAPPOINT_Generator (1.1) + FLAG_fuelcan (0.8) > MG42 goals (0.70, 0.81, was disabled at some point) + CAMP_Golf (0.50) > Switches (0.7) + CP (0.9, 0.81) + CHECKPOINT_depotflag (0.7)
+ *      After:  CAPPOINT_Generator (1.1) + FLAG_fuelcan (0.8) > MG42 goals (0.71, 0.81, was disabled at some point) + CAMP_Golf (0.71) > Switches (0.7) + CP (0.7, 0.70) + CHECKPOINT_depotflag (0.7)
+ *
+ * Secondary (optional) TODO:
+ *    - [...].
+ */
+
+ global Spawns =
+ {
+    ALLIED_ENTRANCE = 1,
+    MAIN_ENTRANCE = 2,
+    DEPOT_YARD = 3,
+    RADAR_1 = 4,
+    RADAR_2 = 5,
+ };
+
+global Map =
+{
+    Debug = 0,  // Please set to zero before distributing your script
+
+    // ************************************************************************
+
+    depotFlagTeam = TEAM.AXIS,
+
+    isBridgeBuilt = false,
+    isBridgeWalkable = false,
+    isMainEntranceDestroyed = false,
+    isRadarMGBuilt = false,
+    isRocDoorOpened = false,
+    isTankAtBridge = false,
+    isTankPastBridge = false,
+    isTankPastMainEntrance = false,
+    isTankEscorted = false,
+
+    // ************************************************************************
+
+    Navigation =
+    {
+        jump =
+        {
+            navigate = function( _this )
+            {
+                // Since this kind of navigation doesn't work well with waypoints
+                // and since it is made this way in several locations...
+                // Let's have a common name for the next waypoint of each
+                wpTable = {};
+                Wp.GetWaypointByName( "jump", wpTable );
+
+                // With a good jump while going forward to pass through
+                _this.AddAimRequest( Priority.High, "facing", wpTable.facing );
+                _this.Bot.HoldButton( BTN.FORWARD, 0.5 );
+
+                _this.Bot.HoldButton( BTN.JUMP, 0.5 );
+            },
+        },
+    },
+
+    // ************************************************************************
+
+    Roles =
+    {
+        AXIS = // Team
+        {
+            AllBots = true, // Each bot is considered for a role
+
+            // The Bridge Defence
+            DEFENDER =
+            {
+                voice = "defend",                   // Signals voice chat to randomly announce
+                spawnpt = Spawns.MAIN_ENTRANCE,     // Users of this role will choose the Main Entrance spawn
+                numbots = 4,                        // Maximum of 4 bots
+            },
+
+            // The Main Entrance Defence
+            DEFENDER1 =
+            {
+                voice = "defend",                   // Signals voice chat to randomly announce
+                spawnpt = Spawns.MAIN_ENTRANCE,     // Users of this role will choose the Main Entrance spawn
+                numbots = 4,                        // Maximum of 4 bots
+            },
+        },
+
+        ALLIES = // Team
+        {
+            AllBots = false,
+
+            // Attack the Main Entrance from the back
+            // Only once the Lorraine is at the other side of the Bridge
+            ATTACKER =
+            {
+                voice = "attack",                   // Signals voice chat to randomly announce
+                spawnpt = Spawns.DEPOT_YARD,        // Users of this role will choose the Depot Yard spawn
+                numbots = 4,                        // Maximum of 4 bots
+                crucialClass = CLASS.ENGINEER,      // First bot (has to be Engineer to plant)
+                //MinBotsForRole = 5,                 // Only assign this role if there are already 5 bots in game TODO With 6o6 no bot seem to be assigned, investigate
+            },
+
+            // Also have at least an engineer trying to plant by the front
+            ATTACKER1 =
+            {
+                voice = "attack",                   // Signals voice chat to randomly announce
+                spawnpt = Spawns.ALLIED_ENTRANCE,   // Users of this role will choose the Allied Entrance spawn
+                numbots = 3,                        // Maximum of 3 bots
+                crucialClass = CLASS.ENGINEER,      // First bot (has to be Engineer to plant)
+            },
+
+            // Once the Main Entrance is destroyed, one Allied bot can use the Depot Yard MG42
+            ATTACKER2 =
+            {
+                voice = "attack",                   // Signals voice chat to randomly announce
+                spawnpt = Spawns.MAIN_ENTRANCE,     // Users of this role will choose the Main Entrance spawn
+                numbots = 1,                        // Maximum of 1 bot
+                crucialClass = CLASS.ENGINEER,      // First bot (Engineer for REPAIRMG42) TODO Is it a good idea?
+                // TODO Once ATTACKER MinBotsForRole issue is investigated, have it set on 4 here
+            },
+
+            // A Covert-Ops to destroy the Radar 1 MG42
+            ATTACKER3 =
+            {
+                spawnpt = Spawns.DEPOT_YARD,
+                numbots = 1,
+                crucialClass = CLASS.COVERTOPS,
+            },
+        },
+    },
+
+    // ************************************************************************
+
+    /**
+     * If an Axis player falls down the bridge
+     * while there's no way back to the top of the hill,
+     * excepted to go a long way around, just suicide.
+     */
+    Axis_Bridge_Suicide =
+    {
+        Name = "Axis_Bridge_Suicide",
+        TriggerOnClass = CLASS.ANYPLAYER,
+        OnEnter = function( ent )
+        {
+            bot = Util.IsBot( ent );
+
+            if ( !bot ) { return; }
+
+            // TODO: Case when the bridge is planted...
+            if ( !Map.isBridgeWalkable && bot.GetTeam() == TEAM.AXIS )
+            {
+                bot.ExecCommand( "kill" );
+
+                Util.MapDebugPrint( "An Axis bot has fallen down the bridge without any way back", true );
+            }
+        },
+    },
+
+    // ************************************************************************
+
+    /**
+     * When the Lorraine has been escorted,
+     * if the Radar 1 MG42 is built,
+     * have an Allies Covert-Ops destroy it.
+     */
+    Allies_Axis_MG42_Management = function()
+    {
+        if ( !Map.isTankEscorted )
+        {
+            return;
+        }
+
+        goal = "PLANT_Axis_MG42_Construction";
+        SetAvailableMapGoals( TEAM.ALLIES, Map.isRadarMGBuilt, goal );
+        if ( Map.isRadarMGBuilt )
+        {
+            SetGoalRole( goal, ROLE.ATTACKER3 );
+        }
+        else
+        {
+            ClearGoalRole( goal, ROLE.ATTACKER3 );
+        }
+    },
+
+    /**
+     * Manages the role ATTACKER to set up an Allied attack from the back.
+     * @param bEnable Either set or clear the role.
+     */
+    Allies_Main_Entrance_Role = function( bEnable )
+    {
+        // TODO CAMP spots around CHECKPOINT_depotflag
+        campSpots = "CAMP_FlagB.*";
+        defendSpots = "CAMP_Bravo[458]";
+        goalTableAttacker = { campSpots, "CHECKPOINT_depotflag", defendSpots, "PLANT_Main_Entrance_to_the_Rocket_Base" };
+        goalTableAttacker1 = { "BUILD_Bridge", "BUILD_Allied_MG_nest", "BUILD_Lorraine", "PLANT_Main_Entrance_to_the_Rocket_Base", "REPAIRMG42_Allied_MG_nest" };
+
+        // Set the goals role and their priority
+        if ( bEnable )
+        {
+            SetGoalPriority( campSpots, 0.81 );
+            SetGoalPriority( defendSpots, 0.81 );
+            SetGoalPriority( "CHECKPOINT_depotflag", 0.82 );
+            Util.SetRoleForTable( goalTableAttacker, ROLE.ATTACKER );
+            Util.SetRoleForTable( goalTableAttacker1, ROLE.ATTACKER1 );
+        }
+        else
+        {
+            SetGoalPriority( campSpots, 0.5 );
+            SetGoalPriority( defendSpots, 0.5 );
+            SetGoalPriority( "CHECKPOINT_depotflag", 0.7 );
+            Util.ClearRoleForTable( goalTableAttacker, ROLE.ATTACKER );
+            Util.ClearRoleForTable( goalTableAttacker1, ROLE.ATTACKER1 );
+        }
+
+        // Set the goals availability
+        SetAvailableMapGoals( TEAM.ALLIES, bEnable, goalTableAttacker );
+
+        Cabinets.Depot_Cabinets( TEAM.ALLIES, bEnable );
+    },
+
+    /**
+     * Once the Main Entrance destroyed,
+     * some Allies may "need" to kill themselves,
+     * depending on their position on the map.
+     * The Lorraine must be at the other side of the Bridge too.
+     */
+    Allies_Main_Entrance_Suicide = function()
+    {
+        if ( !Map.isTankPastBridge )
+        {
+            return;
+        }
+
+        foreach ( id and bot in BotTable )
+        {
+            pos = bot.GetPosition();
+
+            // Two possibilities:
+            // - The bot is around the first spawn (y < -1500);
+            // - The bot is at the other side of the Bridge (x > 2400)
+            // I had in mind a third possibility
+            // (the bot is going for the flag but far from it, x < -3000),
+            // but it sounds better to let it go
+            if ( pos.x > 2400 || pos.y < -1500 )
+            {
+                bot.ExecCommand( "kill" );
+
+                Util.MapDebugPrint( bot.Name + " ^(had to kill himself to spawn at the Main Entrance", true );
+            }
+        }
+    },
+
+    /**
+     * If the Main Entrance is still there,
+     * depending on its reachability from the Allied Entrance spawn,
+     * sets or clears the role ATTACKER1 for Allies,
+     * so they don't travel around the map unnecessarily...
+     */
+    Allies_Role_Attacker1_Management = function()
+    {
+        if ( Map.isMainEntranceDestroyed )
+        {
+            return;
+        }
+
+        if ( Map.isBridgeWalkable )
+        {
+            SetGoalRole( "PLANT_Main_Entrance_to_the_Rocket_Base", ROLE.ATTACKER1 );
+        }
+        else
+        {
+            ClearGoalRole( "PLANT_Main_Entrance_to_the_Rocket_Base", ROLE.ATTACKER1 );
+        }
+    },
+
+    /**
+     * From my point of view, Allies should first get the Lorraine to the other side,
+     * then plant the Main Entrance by the back (ROLE.ATTACKER).
+     * @returns If the Allies should plant the Main Entrance.
+     */
+    Allies_Should_Plant_Main_Entrance = function()
+    {
+        return Map.isTankPastBridge && !Map.isTankPastMainEntrance;
+    },
+
+    /**
+     * Similar to Allies_Main_Entrance_Suicide,
+     * but for Axis during the first part,
+     * when their side isn't reachable because the Bridge isn't walkable.
+     */
+    Axis_Bridge_Destruction_Suicide = function()
+    {
+        if ( Map.isMainEntranceDestroyed )
+        {
+            return;
+        }
+
+        foreach ( id and bot in BotTable )
+        {
+            // Only Axis
+            if ( bot.GetTeam() == TEAM.ALLIES )
+            {
+                continue;
+            }
+
+            pos = bot.GetPosition();
+
+            // Three possibilities:
+            // - The bot is around the first spawn (y < -1500);
+            // - The bot is at the other side of the Bridge (x > 2400) ;
+            // - The bot is going for the flag but far from it (x < -3000)
+            if ( x < -3000 || pos.x > 2400 || pos.y < -1500 )
+            {
+                bot.ExecCommand( "kill" );
+
+                Util.MapDebugPrint( bot.Name + " ^(had to kill himself to spawn back at the Main Entrance", true );
+            }
+        }
+    },
+
+    /**
+     * Manages end game goal priorities.
+     */
+    EndGameGoalPriorityManagement = function()
+    {
+        SetGoalPriority( ".*_Command_Post", 0.70 );
+        SetGoalPriority( "CAMP_Foxtrot.*", 0.70 );
+        SetGoalPriority( "CAMP_Golf.*", 0.71 );
+        SetGoalPriority( "MOUNTMG42_.*", 0.71 );
+        SetGoalPriority( "REPAIRMG42_.*", 0.79 );
+    },
+
+    /**
+     * Checks the Lorraine possibility to be escorted.
+     * @returns If the Lorraine is escortable.
+     */
+    IsLorraineEscortable = function()
+    {
+        // Util.MapDebugPrint( "!Map.isTankAtBridge : " + !Map.isTankAtBridge, true );
+        // Util.MapDebugPrint( "Map.isTankAtBridge && Map.isBridgeBuilt : " + (Map.isTankAtBridge && Map.isBridgeBuilt), true );
+        // Util.MapDebugPrint( "Map.isBridgeWalkable && Map.isTankPastBridge : " + (Map.isBridgeWalkable && Map.isTankPastBridge), true );
+        // Util.MapDebugPrint( "Map.isTankPastMainEntrance : " + Map.isTankPastMainEntrance, true );
+
+        return  !Map.isTankAtBridge ||
+                Map.isTankAtBridge && Map.isBridgeBuilt ||
+                Map.isBridgeWalkable && Map.isTankPastBridge ||
+                Map.isTankPastMainEntrance;
+    },
+
+    // ************************************************************************
+
+    Allied_Command_Post_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Allied_Command_Post_Built", true );
+    },
+
+    Axis_Command_Post_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Axis_Command_Post_Built", true );
+    },
+
+    Allied_MG_nest_Built = function( trigger )
+    {
+        if ( !Map.isTankPastMainEntrance )
+        {
+            Maschinengewehr42.Allied_MG_nest( true );
+        }
+
+        Util.MapDebugPrint( "Allied_MG_nest_Built", true );
+    },
+
+    Axis_MG42_Construction_Built = function( trigger )
+    {
+        Map.isRadarMGBuilt = true;
+
+        Map.Allies_Axis_MG42_Management();
+
+        Util.MapDebugPrint( "Axis_MG42_Construction_Built" );
+    },
+
+    Axis_MG42_Construction_1_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Axis_MG42_Construction_1_Built", true );
+    },
+
+    Bridge_Reinforce = function( trigger )
+    {
+        Map.isBridgeWalkable = true;
+
+        if ( !Map.isTankPastMainEntrance )
+        {
+            SetAvailableMapGoals( TEAM.AXIS, true, {
+                "PLANT_Allied_MG_nest",
+                "PLANT_Bridge",
+            });
+
+            SetAvailableMapGoals( TEAM.ALLIES, Map.Allies_Should_Plant_Main_Entrance(), "PLANT_Main_Entrance_to_the_Rocket_Base" );
+            SetAvailableMapGoals( TEAM.ALLIES, Map.IsLorraineEscortable(), "ESCORT_Lorraine" );
+        }
+
+        Util.MapDebugPrint( "Bridge_Reinforce" );
+    },
+
+    Bridge_Built = function( trigger )
+    {
+        Map.isBridgeBuilt = true;
+
+        // If it was fully built then damaged, it wasn't walkable,
+        // so also enable the main destructible here
+        // TODO Since code dup, own function?
+        if ( !Map.isTankPastMainEntrance )
+        {
+            // Sometimes there's no text when the Bridge has to be reinforced,
+            // so the PLANT goal wasn't enabled again
+            SetAvailableMapGoals( TEAM.AXIS, true, {
+                "PLANT_Allied_MG_nest",
+                "PLANT_Bridge",
+            });
+
+            SetAvailableMapGoals( TEAM.ALLIES, Map.Allies_Should_Plant_Main_Entrance(), "PLANT_Main_Entrance_to_the_Rocket_Base" );
+            SetAvailableMapGoals( TEAM.ALLIES, Map.IsLorraineEscortable(), "ESCORT_Lorraine" );
+        }
+
+        // ATTACKER1 role management
+        Map.Allies_Role_Attacker1_Management();
+
+        Util.MapDebugPrint( "Bridge_Built" );
+    },
+
+    Lorraine_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Lorraine_Built", true );
+    },
+
+    Allied_Command_Post_Destroyed = function( trigger )
+    {
+        Util.MapDebugPrint( "Allied_Command_Post_Destroyed", true );
+    },
+
+    Axis_Command_Post_Destroyed = function( trigger )
+    {
+        Util.MapDebugPrint( "Axis_Command_Post_Destroyed", true );
+    },
+
+    Allied_MG_nest_Destroyed = function( trigger )
+    {
+        Maschinengewehr42.Allied_MG_nest( false );
+
+        Util.MapDebugPrint( "Allied_MG_nest_Destroyed", true );
+    },
+
+    Axis_MG42_Construction_Destroyed = function( trigger )
+    {
+        Map.isRadarMGBuilt = false;
+
+        Map.Allies_Axis_MG42_Management();
+
+        Util.MapDebugPrint( "Axis_MG42_Construction_Destroyed" );
+    },
+
+    Axis_MG42_Construction_1_Destroyed = function( trigger )
+    {
+        Util.MapDebugPrint( "Axis_MG42_Construction_1_Destroyed", true );
+    },
+
+    Bridge_Damaged = function( trigger )
+    {
+        Map.isBridgeBuilt = false;  // Only when changing from Built to Damaged state
+        Map.isBridgeWalkable = false;
+
+        Map.Axis_Bridge_Destruction_Suicide();
+
+        // Unreachable, excepted if you walk by the back... Too far away
+        SetAvailableMapGoals( TEAM.ALLIES, Map.Allies_Should_Plant_Main_Entrance(), "PLANT_Main_Entrance_to_the_Rocket_Base" );
+        SetAvailableMapGoals( TEAM.ALLIES, Map.IsLorraineEscortable(), "ESCORT_Lorraine" );
+
+        Util.MapDebugPrint( "Bridge_Damaged" );
+    },
+
+    Bridge_Destroyed = function( trigger )
+    {
+        Map.isBridgeWalkable = false;
+
+        // Even though it is destroyed, they still try to plant it...
+        SetAvailableMapGoals( TEAM.AXIS, false, {
+                "PLANT_Allied_MG_nest",
+                "PLANT_Bridge",
+            });
+
+        // Unreachable, excepted if you walk by the back... Too far away
+        SetAvailableMapGoals( TEAM.ALLIES, Map.Allies_Should_Plant_Main_Entrance(), "PLANT_Main_Entrance_to_the_Rocket_Base" );
+        SetAvailableMapGoals( TEAM.ALLIES, Map.IsLorraineEscortable(), "ESCORT_Lorraine" );
+
+        // ATTACKER1 role management
+        Map.Allies_Role_Attacker1_Management();
+
+        Util.MapDebugPrint( "Bridge_Destroyed" );
+    },
+
+    Lorraine_Destroyed = function( trigger )
+    {
+        if ( !Map.isTankPastMainEntrance && Map.isTankPastBridge )
+        {
+            // Case when the Lorraine just got over the river right before the Bridge gets destroyed
+            // It was keeping the BUILD_Lorraine goal available while not (easily) reachable
+            SetAvailableMapGoals( TEAM.ALLIES, Map.IsLorraineEscortable(), "BUILD_Lorraine" );
+        }
+
+        Util.MapDebugPrint( "Lorraine_Destroyed" );
+    },
+
+    Main_Entrance_to_the_Rocket_Base_Destroyed = function( trigger )
+    {
+        // NOTE: Spawns are switched here
+
+        // If available anymore from now, Axis shoud spawn at the Depot Yard
+        Util.ChangeSpawn( TEAM.AXIS, Spawns.DEPOT_YARD );
+
+        Map.isMainEntranceDestroyed = true;
+
+        // TODO Here, the defence/attack of the flag is REQUIRED (when there's a lot of bots/players, else focus on the Lorraine)
+
+        Util.DisableGoal( ".*", true ); // All but routes
+
+        // Clear the ATTACKER role for the other goals
+        // Also handles a few goal availability,
+        // thus the EnableGoal set afterward
+        Map.Allies_Main_Entrance_Role( false );
+
+        // Clear the role assigned to the Depot flag, and its restrictions
+        ClearGoalRole( "CHECKPOINT_depotflag", ROLE.DEFENDER1 );
+        Util.SetMaxUsers( 3, "CHECKPOINT_.*" );
+
+        Util.EnableGoal( "CHECKPOINT_depotflag" );
+        Util.EnableGoal( "CAMP_Bravo.*" );
+
+        SetAvailableMapGoals( TEAM.AXIS, true, {
+            "BUILD_Command_Post",
+            "PLANT_Command_Post",
+        });
+
+        Cabinets.Depot_Cabinets( TEAM.AXIS, true );
+
+        SetAvailableMapGoals( TEAM.ALLIES, true, {
+            "BUILD_Lorraine",
+            "ESCORT_Lorraine",
+        });
+
+        // If CHECKPOINT_depotflag is captured, spawn there; also allow CP in this case
+        // TODO Move to a function so it can be called on flag capture/loss (bool param + check Lorraine position)
+        if ( Map.depotFlagTeam == TEAM.ALLIES )
+        {
+            // TODO Replace with a function
+            // See http://omni-bot.invisionzone.com/wiki/index.php?title=Changing_spawns
+            Util.ChangeSpawn( TEAM.ALLIES, Spawns.DEPOT_YARD );
+
+            SetAvailableMapGoals( TEAM.ALLIES, true, {
+                "BUILD_Command_Post",
+                "PLANT_Command_Post",
+            });
+        }
+        else
+        {
+            // Enforce all Allies move to the Main Entrance spawn (especially ATTACKER1)
+            Util.ChangeSpawn( TEAM.ALLIES, Spawns.MAIN_ENTRANCE );
+        }
+
+        // Depending on the Tank position and the available spawns,
+        // some Allies may "need" to kill themselves to get closer
+        Map.Allies_Main_Entrance_Suicide();
+
+        // Finally, enable the Depot Yard MG42 for Allies, with a role
+        Maschinengewehr42.Depot_Yard_MG( true );
+
+        Util.MapDebugPrint( "Main_Entrance_to_the_Rocket_Base_Destroyed" );
+    },
+
+    depotflag_Axis_Captured = function( trigger )
+    {
+        Map.depotFlagTeam = TEAM.AXIS;
+
+        Util.MapDebugPrint( "depotflag_Axis_Captured", true );
+    },
+
+    depotflag_Allies_Captured = function( trigger )
+    {
+        Map.depotFlagTeam = TEAM.ALLIES;
+
+        Util.MapDebugPrint( "depotflag_Allies_Captured", true );
+    },
+
+    Bridge_Planted = function( trigger )
+    {
+        if ( !Map.isBridgeWalkable || !Map.isTankPastBridge )
+        {
+            // Too dangerous
+            SetAvailableMapGoals( TEAM.ALLIES, false, "DEFUSE_Bridge.*" );
+        }
+
+        Util.MapDebugPrint( "Bridge_Planted" );
+    },
+
+    Tank_At_Bridge = function( trigger )
+    {
+        Map.isTankAtBridge = true;
+
+        // Enable an extra routing node to use the Lorraine as cover for BUILD_Bridge
+        Util.EnableGoal( "ROUTE_BridgeNode5" );
+
+        SetAvailableMapGoals( TEAM.ALLIES, Map.IsLorraineEscortable(), "ESCORT_Lorraine" );
+
+        Util.MapDebugPrint( "Tank_At_Bridge" );
+    },
+
+    Tank_Past_Bridge = function( trigger )
+    {
+        // isTankAtBridge left at true to simplify ESCORT_Lorraine availability calculation
+        Map.isTankPastBridge = true;
+
+        // Disable the extra routing node
+        Util.DisableGoal( "ROUTE_BridgeNode5" );
+
+        // Set the ATTACKER role
+        Map.Allies_Main_Entrance_Role( true );
+
+        // TODO: Handle once first part is OK
+
+        // Disable Allied weapon goal targets that will be problematic for Allies themselves
+        //WeaponGoals.Start( false );
+        WeaponGoals.DangerousSpots();
+
+        // Updating priorities
+        SetGoalPriority( "PLANT_Main_Entrance_to_the_Rocket_Base", 0.92 );
+        SetGoalPriority( "BUILD_Allied_MG_nest", 0.91 ):
+        SetGoalPriority( "BUILD_Bridge", 0.91 );
+        SetGoalPriority( "REPAIRMG42_Allied_MG_nest", 0.91 ):
+        SetGoalPriority( "BUILD_Lorraine", 0.90 );
+
+        Util.MapDebugPrint( "Tank_Past_Bridge" );
+    },
+
+    Tank_Past_Main_Entrance = function( trigger )
+    {
+        Map.isTankPastMainEntrance = true;
+
+        Util.MapDebugPrint( "Tank_Past_Main_Entrance", true );
+    },
+
+    Tank_Second_Part_Tunnel = function( trigger )
+    {
+        Util.DisableGoal( "CAMP_Bravo.*" );
+        Util.EnableGoal( "CAMP_Charlie.*" );
+
+        Util.MapDebugPrint( "Tank_Second_Part_Tunnel" );
+    },
+
+    Tank_Third_Part_Tunnel = function( trigger )
+    {
+        Util.DisableGoal( "CAMP_Charlie.*" );
+        Util.EnableGoal( "CAMP_Delta.*" );
+
+        Util.MapDebugPrint( "Tank_Third_Part_Tunnel" );
+    },
+
+    Tank_Fourth_Part_Tunnel = function( trigger )
+    {
+        Util.DisableGoal( "CAMP_Delta.*" );
+        Util.EnableGoal( "CAMP_Echo.*" );
+
+        Util.MapDebugPrint( "Tank_Fourth_Part_Tunnel" );
+    },
+
+    Tank_Escorted = function( trigger )
+    {
+        Map.isTankEscorted = true;
+
+        Util.ChangeSpawn( TEAM.AXIS, Spawns.RADAR_2 );
+
+        // TODO Make Allies spawn at the flag, or just half?
+
+        Util.DisableGoal( "CAMP_Echo.*" );
+        Util.EnableGoal( "CAMP_Foxtrot.*" );
+
+        Maschinengewehr42.Depot_Yard_MG( false );
+        Maschinengewehr42.Fuel_Depot_MG( true );
+
+        // TODO Perhaps not CP
+        SetAvailableMapGoals( TEAM.AXIS, false, {
+            "BUILD_Command_Post",
+            "CHECKPOINT_depotflag", // Too far away TODO Also cabinets!
+            "PLANT_Command_Post",
+        });
+        SetAvailableMapGoals( TEAM.AXIS, true, {
+            "BUILD_Axis_MG42_Construction",
+        });
+
+        // TODO Also disable the MG42 (the one assigned to ATTACKER2) + Clear the role (move the bot spawn first!)
+        SetAvailableMapGoals( TEAM.ALLIES, false, {
+            "BUILD_Lorraine",
+            "ESCORT_Lorraine",
+        });
+        SetAvailableMapGoals( TEAM.ALLIES, true, {
+            "BUILD_Command_Post",
+            "CAPPOINT_Generator",
+            "FLAG_fuelcan",
+            "PLANT_Axis_MG42_Construction",
+            "PLANT_Command_Post",
+            "SWITCH_rocdoor_outside",
+        });
+
+        // TODO
+        Util.SetMaxUsers( 1, "BUILD_Command_Post" );
+        Util.SetMaxUsers( 1, "PLANT_Command_Post" );
+
+        // Priorities
+        Map.EndGameGoalPriorityManagement();
+
+        Util.MapDebugPrint( "Tank_Escorted" );
+    },
+
+    fuelcan_Taken = function( trigger )
+    {
+        Util.ChangeSpawn( TEAM.AXIS, Spawns.RADAR_1 );
+
+        if ( Map.isTankEscorted )
+        {
+            Util.DisableGoal( "CAMP_Foxtrot.*" );
+
+            Util.EnableGoal( "CAMP_Golf.*" );
+
+            if ( Map.isRadarMGBuilt )
+            {
+                Maschinengewehr42.Radar_MG( true );
+            }
+        }
+
+        Maschinengewehr42.Fuel_Depot_MG( false );
+
+        Util.MapDebugPrint( "fuelcan_Taken" );
+    },
+
+    fuelcan_Returned = function( trigger )
+    {
+        if ( !Map.isMainEntranceDestroyed )
+        {
+            Util.ChangeSpawn( TEAM.AXIS, Spawns.MAIN_ENTRANCE );
+        }
+        else if ( Map.isTankEscorted )
+        {
+            // TODO Handle better depending on game progress!
+            Util.ChangeSpawn( TEAM.AXIS, Spawns.RADAR_2 );
+
+            Util.DisableGoal( "CAMP_Golf.*" );
+
+            Util.EnableGoal( "CAMP_Foxtrot.*" );
+
+            Maschinengewehr42.Fuel_Depot_MG( true );
+        }
+
+        Maschinengewehr42.Radar_MG( false );
+
+        Util.MapDebugPrint( "fuelcan_Returned" );
+    },
+
+    CAPPOINT_Generator_Captured = function( trigger )
+    {
+        Util.MapDebugPrint( "CAPPOINT_Generator_Captured", true );
+    },
+
+    rocdoor_Moving = function( trigger )
+    {
+        // Update the status of the Roc Door
+        Map.isRocDoorOpened = !Map.isRocDoorOpened;
+
+        // Allies open from outside, Axis close from inside
+        SetAvailableMapGoals( TEAM.AXIS, Map.isRocDoorOpened, "SWITCH_rocdoor_inside" );
+        SetAvailableMapGoals( TEAM.ALLIES, !Map.isRocDoorOpened, "SWITCH_rocdoor_outside" );
+    },
+};
+
+global OnMapLoad = function()
+{
+    // *** TRIGGERS ***
+    OnTrigger( "Allied Command Post constructed. Charge speed increased!", Map.Allied_Command_Post_Built );
+    OnTrigger( "Axis Command Post constructed. Charge speed increased!", Map.Axis_Command_Post_Built );
+    OnTrigger( "The Allied MG Nest has been constructed.", Map.Allied_MG_nest_Built );
+    OnTrigger( "Axis Team have built the MG42 nest near the First Radar!!", Map.Axis_MG42_Construction_Built );
+    OnTrigger( "Axis Team have built the MG42 at the bunker!!", Map.Axis_MG42_Construction_1_Built );
+    OnTrigger( "fueldump_allies_bridge_reinforce", Map.Bridge_Reinforce );
+    OnTrigger( "Allied team has reinforced the Bridge!", Map.Bridge_Built );
+    OnTrigger( "The Tank has been repaired", Map.Lorraine_Built );
+    OnTrigger( "Axis team has destroyed the Allied Command Post!", Map.Allied_Command_Post_Destroyed );
+    OnTrigger( "Allied team has destroyed the Axis Command Post!", Map.Axis_Command_Post_Destroyed );
+    OnTrigger( "The Allied MG Nest has been destroyed.", Map.Allied_MG_nest_Destroyed );
+    OnTrigger( "Allies have destroyed the MG42 nest near the First Radar!!", Map.Axis_MG42_Construction_Destroyed );
+    OnTrigger( "Allies have destroyed the MG42 nest at the bunker!!", Map.Axis_MG42_Construction_1_Destroyed );
+    OnTrigger( "Axis team has damaged the Bridge!", Map.Bridge_Damaged );
+    OnTrigger( "Axis team has destroyed the Bridge!", Map.Bridge_Destroyed );
+    OnTrigger( "The Tank has been damaged", Map.Lorraine_Destroyed );
+    OnTrigger( "Allies have breached the Main Entrance and entered the Rocket Base", Map.Main_Entrance_to_the_Rocket_Base_Destroyed );
+    OnTrigger( "Axis captured the Depot Yard!", Map.depotflag_Axis_Captured );
+    OnTrigger( "Allies captured the Depot Yard!", Map.depotflag_Allies_Captured );
+
+    OnTrigger( "Planted at The Bridge.", Map.Bridge_Planted );
+
+    OnTriggerRegion( AABB( 839.173, -2163.921, 137.125, 3140.962, 104.713, 239.862 ), Map.Axis_Bridge_Suicide );
+
+    // Lorraine triggers
+    Util.OnTriggerPosition( "MOVER_tank", Vector3( 3675.0, -620.0, 505.0 ), 200.0, Map.Tank_At_Bridge );
+    Util.OnTriggerPosition( "MOVER_tank", Vector3( 2380.0, -515.0, 505.0 ), 200.0, Map.Tank_Past_Bridge );
+    Util.OnTriggerPosition( "MOVER_tank", "region1", 200.0, Map.Tank_Past_Main_Entrance );
+    Util.OnTriggerPosition( "MOVER_tank", Vector3( 715.0, 440.0, 370.0 ), 200.0, Map.Tank_Second_Part_Tunnel );
+    Util.OnTriggerPosition( "MOVER_tank", Vector3( 395.0, -925.0, 370.0 ), 200.0, Map.Tank_Third_Part_Tunnel );
+    Util.OnTriggerPosition( "MOVER_tank", Vector3( -613.0, -1145.0, 370.0 ), 200.0, Map.Tank_Fourth_Part_Tunnel );
+    OnTrigger( "Allies have escorted the Lorraine to the DepotYard", Map.Tank_Escorted );
+
+    // Fuel can triggers
+    OnTrigger( "Allies have stolen The Rocket Fuel!", Map.fuelcan_Taken );
+    OnTrigger( "Axis have returned The Rocket Fuel!", Map.fuelcan_Returned );
+    OnTrigger( "MISSING_STRING", Map.CAPPOINT_Generator_Captured );   // No announcement ingame
+
+    // Roc door trigger
+    OnTrigger( "rocdoor_lever1_Moving", Map.rocdoor_Moving );
+
+    // *** CLEAR ALL GOALS AND ROLES FOR BOTH TEAMS ***
+    Util.DisableGoal( ".*", true ); // All but Routes
+    Util.DisableGoal( "ROUTE_BridgeNode5" );
+    ClearGoalRole( ".*", { ROLE.ATTACKER, ROLE.ATTACKER1, ROLE.ATTACKER2, ROLE.DEFENDER, ROLE.DEFENDER1 } );
+
+    // *** AXIS GOALS ***
+    SetAvailableMapGoals( TEAM.AXIS, true, {
+        "CHECKPOINT_depotflag",
+        "DEFEND_Alpha.*",
+    });
+
+    // *** ALLIED GOALS ***
+    SetAvailableMapGoals( TEAM.ALLIES, true, {
+        "ATTACK_Alpha.*",
+        "BUILD_Allied_MG_nest",
+        "BUILD_Bridge",
+        "BUILD_Lorraine",
+        "ESCORT_Lorraine",
+    });
+
+    Cabinets.Allied_River_Cabinet();
+
+    WeaponGoals.Start( true );
+
+    // *** GOALS PROPERTIES ***
+    Util.SetMaxUsers( 1, "MOUNTMG42_.*" );
+    Util.SetMaxUsers( 1, "CHECKPOINT_.*" );
+
+    // Priorities
+    // Main Entrance @ 0.90
+    SetGoalPriority( "BUILD_Lorraine", 0.92 );
+    SetGoalPriority( "BUILD_Allied_MG_nest", 0.91 );
+    SetGoalPriority( "BUILD_Bridge", 0.91 );
+    SetGoalPriority( "REPAIRMG42_Allied_MG_nest", 0.91 );
+
+    // TODO Add ATTACK spots at the other side of the Bridge with a priority of 0.52?
+    SetGoalPriority( "ATTACK_Alpha[1-3]", 0.53 );
+    SetGoalPriority( "ATTACK_Alpha[4-5]", 0.51 );
+
+    // *** ROLES ***
+    SetGoalRole( "DEFEND_Alpha[5-8]", ROLE.DEFENDER );
+    Util.SetRoleForTable( { "CHECKPOINT_depotflag", "DEFEND_Alpha[1-4]" }, ROLE.DEFENDER1 );
+
+    // So the other bots camp at the ATTACK spots
+    Util.SetMaxUsers( 1, "ESCORT_Lorraine" );
+
+    Util.AddUsePoint( "BUILD_Allied_MG_nest", Vec3( 3109.0125, -1993.123, 456.125 ) );
+    Util.AddUsePoint( "BUILD_Bridge", Vec3( 3408.726, -307.198, 504.125 ) );
+    Util.AddUsePoint( "PLANT_Bridge", Vec3( 2310, -620, 505 ) );
+
+    // Outside
+    Util.AddUsePoint( "PLANT_Main_Entrance_to_the_Rocket_Base", Vec3( 1930, -85, 505 ) );
+
+    // Inside
+    Util.AddUsePoint( "PLANT_Main_Entrance_to_the_Rocket_Base", Vec3( 1870, -45, 505 ) );
+
+    Util.ExcludeClass( "MOUNTMG42_.*", TEAM.AXIS, CLASS.MEDIC, CLASS.ENGINEER );
+    Util.ExcludeClass( "MOUNTMG42_.*", TEAM.ALLIES, CLASS.MEDIC, CLASS.ENGINEER );
+    Util.LimitToClass( "PLANT_Allied_MG_nest", TEAM.AXIS, CLASS.COVERTOPS );
+    Util.LimitToClass( "PLANT_Axis_MG42_Construction.*", TEAM.ALLIES, CLASS.COVERTOPS );
+
+    SetMapGoalProperties( "ATTACK_.*",      { mincamptime = 60, maxcamptime = 120 } );
+    SetMapGoalProperties( "CAMP_.*",        { mincamptime = 60, maxcamptime = 120 } );
+    SetMapGoalProperties( "DEFEND_.*",      { mincamptime = 60, maxcamptime = 120 } );
+    //SetMapGoalProperties( "MOBILEMG42_.*",  { mincamptime = 60, maxcamptime = 120 } );
+
+    Util.MapDebugPrint( "Omni-bot 0.8x map script for V1 Rocket (Beta 2) by Mateos" );
+};
+
+global OnBotJoin = function( bot )
+{
+    // Only set MaxViewDistance on maps with limited sight (e.g. fog)
+    bot.MaxViewDistance = 2800;
+};
+
+global InitializeRoutes = function()
+{
+    MapRoutes =
+    {
+        BUILD_Allied_MG_nest =
+        {
+            ROUTE_AlliedEntranceSpawn1 =
+            {
+                ROUTE_BridgeNode1 =
+                {
+                    ROUTE_BridgeNode2 =
+                    {
+                        ROUTE_BridgeNode3 = {},
+                    },
+                },
+            },
+
+            ROUTE_AlliedEntranceSpawn2 =
+            {
+                ROUTE_BridgeNode1 =
+                {
+                    ROUTE_BridgeNode2 =
+                    {
+                        ROUTE_BridgeNode3 = {},
+                    },
+                },
+            },
+
+            ROUTE_AlliedEntranceSpawn3 =
+            {
+                ROUTE_BridgeNode1 =
+                {
+                    ROUTE_BridgeNode2 =
+                    {
+                        ROUTE_BridgeNode3 = {},
+                    },
+                },
+            },
+        },
+
+        BUILD_Bridge =
+        {
+            ROUTE_AlliedEntranceSpawn1 =
+            {
+                ROUTE_BridgeNode1 =
+                {
+                    ROUTE_BridgeNode2 =
+                    {
+                        ROUTE_BridgeNode3 =
+                        {
+                            ROUTE_BridgeNode4 =
+                            {
+                                ROUTE_BridgeNode5 = {},
+                            },
+                        },
+                    },
+                },
+            },
+
+            ROUTE_AlliedEntranceSpawn2 =
+            {
+                ROUTE_BridgeNode1 =
+                {
+                    ROUTE_BridgeNode2 =
+                    {
+                        ROUTE_BridgeNode3 =
+                        {
+                            ROUTE_BridgeNode4 =
+                            {
+                                ROUTE_BridgeNode5 = {},
+                            },
+                        },
+                    },
+                },
+            },
+
+            ROUTE_AlliedEntranceSpawn3 =
+            {
+                ROUTE_BridgeNode1 =
+                {
+                    ROUTE_BridgeNode2 =
+                    {
+                        ROUTE_BridgeNode3 =
+                        {
+                            ROUTE_BridgeNode4 =
+                            {
+                                ROUTE_BridgeNode5 = {},
+                            },
+                        },
+                    },
+                },
+            },
+        },
+
+        CAPPOINT_Generator =
+        {
+            ROUTE_FuelCan =
+            {
+                ROUTE_FuelDepot =
+                {
+                    ROUTE_WestNode = {},
+
+                    ROUTE_SouthNode1 =
+                    {
+                        ROUTE_SouthNode2 =
+                        {
+                            ROUTE_SouthNode3 =
+                            {
+                                ROUTE_SouthNodeDirect = { Weight = 2, },
+
+                                ROUTE_SouthNodeIndirect1 =
+                                {
+                                    ROUTE_SouthNodeIndirect2 = {},
+                                },
+                            },
+                        },
+                    },
+                },
+
+                ROUTE_NorthNode1 =
+                {
+                    ROUTE_NorthNode2 =
+                    {
+                        ROUTE_NorthNode3 = {},
+                    },
+
+                    ROUTE_FuelDepot =
+                    {
+                        ROUTE_WestNode = {},
+
+                        ROUTE_SouthNode1 =
+                        {
+                            ROUTE_SouthNode2 =
+                            {
+                                ROUTE_SouthNode3 =
+                                {
+                                    ROUTE_SouthNodeDirect = { Weight = 2, },
+
+                                    ROUTE_SouthNodeIndirect1 =
+                                    {
+                                        ROUTE_SouthNodeIndirect2 = {},
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+
+                ROUTE_TopNode1 =
+                {
+                    ROUTE_TopNode2 =
+                    {
+                        ROUTE_SouthNode1 =
+                        {
+                            ROUTE_SouthNode2 =
+                            {
+                                ROUTE_SouthNode3 =
+                                {
+                                    ROUTE_SouthNodeDirect = { Weight = 2, },
+
+                                    ROUTE_SouthNodeIndirect1 =
+                                    {
+                                        ROUTE_SouthNodeIndirect2 = {},
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    };
+
+    // Copy routes
+    MapRoutes.ATTACK_Alpha3 = MapRoutes.BUILD_Allied_MG_nest;
+    MapRoutes.MOUNTMG42_Allied_MG_nest = MapRoutes.BUILD_Allied_MG_nest;
+    MapRoutes.REPAIRMG42_Allied_MG_nest = MapRoutes.BUILD_Allied_MG_nest;
+
+    MapRoutes.ATTACK_Alpha1 = MapRoutes.BUILD_Bridge;
+    MapRoutes.SMOKEBOMB_AlliesAlpha = MapRoutes.BUILD_Bridge;
+
+    Util.Routes( MapRoutes );
+};
+
+global Cabinets =
+{
+    Allied_River_Cabinet = function()
+    {
+        SetAvailableMapGoals( TEAM.ALLIES, true, {
+            "AMMOCAB_north_ammocabinet",
+            "HEALTHCAB_north_healthcabinet",
+        });
+    },
+
+    Depot_Cabinets = function( team, bAvailability )
+    {
+        SetAvailableMapGoals( team, bAvailability, {
+            "AMMOCAB_depot_ammocabinet",
+            "HEALTHCAB_depot_healthcabinet",
+        });
+    },
+};
+
+global Maschinengewehr42 =
+{
+    Allied_MG_nest = function( bAvailability )
+    {
+        SetAvailableMapGoals( TEAM.ALLIES,  bAvailability , {
+            "MOUNTMG42_Allied_MG_nest",
+            "REPAIRMG42_Allied_MG_nest",
+        });
+    },
+
+    Dam_MG = function()
+    {
+        SetAvailableMapGoals( TEAM.AXIS, true, {
+            "MOUNTMG42_Axis_MG42_Construction_1",
+            "REPAIRMG42_Axis_MG42_Construction_1",
+        });
+    },
+
+    Depot_Yard_MG = function( bAvailability )
+    {
+        goalTable = { "MOUNTMG42_1074", "REPAIRMG42_1074" };
+
+        if ( bAvailability )
+        {
+            Util.SetRoleForTable( goalTable, ROLE.ATTACKER2 );
+        }
+        else
+        {
+            Util.ClearRoleForTable( goalTable, ROLE.ATTACKER2 );
+        }
+
+        SetAvailableMapGoals( TEAM.ALLIES, bAvailability, goalTable );
+    },
+
+    Fuel_Depot_MG = function( bAvailability )
+    {
+        SetAvailableMapGoals( TEAM.AXIS, bAvailability, {
+            "MOUNTMG42_mg42_2",
+            "REPAIRMG42_mg42_2",
+        });
+        SetAvailableMapGoals( TEAM.ALLIES, bAvailability, {
+            "MOUNTMG42_mg42_2",
+            "REPAIRMG42_mg42_2",
+        });
+    },
+
+    Radar_MG = function( bAvailability )
+    {
+        SetAvailableMapGoals( TEAM.AXIS, bAvailability, {
+            "MOUNTMG42_Axis_MG42_Construction",
+            "REPAIRMG42_Axis_MG42_Construction",
+        });
+
+        SetAvailableMapGoals( TEAM.ALLIES, bAvailability, {
+            "MOUNTMG42_Axis_MG42_Construction",
+            "REPAIRMG42_Axis_MG42_Construction",
+        });
+    },
+};
+
+/**
+ * Weapon goals management:
+ *     - Soldier: Mobile MG42 and Mobile Mortar;
+ *     - Engineer: Landmine (perhaps silEnT tripmine);
+ *     - Field Op: Artillery and FFE;
+ *     - Covert Op: Sniping weapons and smoke bomb.
+ */
+global WeaponGoals =
+{
+    Start = function( bAvailability )
+    {
+        SetAvailableMapGoals( TEAM.ALLIES, bAvailability, {
+            "ARTILLERY_D_AlliesAlpha.*",
+            "CALLARTILLERY_AlliesAlpha.*",
+            "MOBILEMORTAR_AlliesAlpha",
+            "SMOKEBOMB_AlliesAlpha",
+            "SNIPE_AlliesAlpha",
+        });
+    },
+
+    DangerousSpots = function()
+    {
+        SetAvailableMapGoals( TEAM.ALLIES, false, {
+            "ARTILLERY_D_AlliesAlpha1",
+        });
+    },
+
+    TankPastBridge = function( bAvailability )
+    {
+    },
+
+    TankPastMainEntrance = function( bAvailability )
+    {
+    },
+
+    TankV1Secured = function( bAvailability )
+    {
+    },
+};

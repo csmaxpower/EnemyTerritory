@@ -1,0 +1,137 @@
+//==========================================================================================
+//
+//	sabotage_te.gm
+//
+//	Who       	When		What
+//------------------------------------------------------------------------------------------
+//	^1[UJE]^3Niek	24 December 2013	Initial Script
+//
+//==========================================================================================
+//
+
+global Map =
+{
+	Debug = 1, // please set to zero before distributing your script
+
+	Main_Entrance_Dyno = 0,
+	Neutral_Command_Post_Dyno = 0,
+	Radar_1_Dyno = 0,
+
+	Neutral_Command_Post_Built = function( trigger )
+	{
+		Util.MapDebugPrint( "Neutral_Command_Post_Built" );
+	},
+
+	Main_Entrance_Planted = function( trigger )
+	{
+		Map.Main_Entrance_Dyno += 1;
+		Util.MapDebugPrint( "Main_Entrance_Planted" );
+	},
+
+	Neutral_Command_Post_Planted = function( trigger )
+	{
+		Map.Neutral_Command_Post_Dyno += 1;
+		Util.MapDebugPrint( "Neutral_Command_Post_Planted" );
+	},
+
+	Radar_1_Planted = function( trigger )
+	{
+		Map.Radar_1_Dyno += 1;
+		Util.MapDebugPrint( "Radar_1_Planted" );
+	},
+
+	Main_Entrance_Defused = function( trigger )
+	{
+		Map.Main_Entrance_Dyno -= 1;
+		Util.MapDebugPrint( "Main_Entrance_Defused" );
+	},
+
+	Neutral_Command_Post_Defused = function( trigger )
+	{
+		Map.Neutral_Command_Post_Dyno -= 1;
+		Util.MapDebugPrint( "Neutral_Command_Post_Defused" );
+	},
+
+	Radar_1_Defused = function( trigger )
+	{
+		Map.Radar_1_Dyno -= 1;
+		Util.MapDebugPrint( "Radar_1_Defused" );
+	},
+
+	Main_Entrance_Destroyed = function( trigger )
+	{
+		Map.Main_Entrance_Dyno = 0;
+
+		Util.MapDebugPrint( "Main_Entrance_Destroyed" );
+	},
+
+	Neutral_Command_Post_Destroyed = function( trigger )
+	{
+		Map.Neutral_Command_Post_Dyno = 0;
+
+		Util.MapDebugPrint( "Neutral_Command_Post_Destroyed" );
+	},
+
+	Radar_1_Destroyed = function( trigger )
+	{
+		Map.Radar_1_Dyno = 0;
+
+		Util.MapDebugPrint( "Radar_1_Destroyed" );
+	},
+
+};
+
+global OnMapLoad = function()
+{
+	// Register callback functions
+	OnTrigger( "MISSING_STRING", Map.Neutral_Command_Post_Built );
+	OnTrigger( "Planted at the MISSING_STRING.", Map.Main_Entrance_Planted );
+	OnTrigger( "Planted at the MISSING_STRING.", Map.Neutral_Command_Post_Planted );
+	OnTrigger( "Planted at the MISSING_STRING.", Map.Radar_1_Planted );
+	OnTrigger( "Defused at the MISSING_STRING.", Map.Main_Entrance_Defused );
+	OnTrigger( "Defused at the MISSING_STRING.", Map.Neutral_Command_Post_Defused );
+	OnTrigger( "Defused at the MISSING_STRING.", Map.Radar_1_Defused );
+	OnTrigger( "MISSING_STRING", Map.Main_Entrance_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.Neutral_Command_Post_Destroyed );
+	OnTrigger( "MISSING_STRING", Map.Radar_1_Destroyed );
+
+	//~Util.DisableGoal( ".*", true ); // all but routes
+	//~SetAvailableMapGoals( TEAM.AXIS, true, "ATTACK_.*" );
+	//~SetAvailableMapGoals( TEAM.ALLIES, true, "ATTACK_.*" );
+
+	// Max users per goal
+	//Util.SetMaxUsers( 1, "DEFEND_.*" );
+	//Util.SetMaxUsers( 1, "GRENADE_.*" );
+	//Util.SetMaxUsers( 1, "MOUNTMG42_.*" );
+
+	// Camp times
+	SetMapGoalProperties( "MOUNTMG42_.*", {MinCampTime=15, MaxCampTime=90} );
+	SetMapGoalProperties( "MOBILEMG42_.*", {MinCampTime=10, MaxCampTime=60} );
+
+
+	Util.MapDebugPrint( "Omni-bot map script for " + GetMapName() + " executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+		BUILD_Neutral_Command_Post =
+		{
+		},
+		PLANT_Main_Entrance =
+		{
+		},
+		PLANT_Radar_1 =
+		{
+		},
+		PLANT_Neutral_Command_Post =
+		{
+		},
+	};
+	Util.Routes(MapRoutes);
+};

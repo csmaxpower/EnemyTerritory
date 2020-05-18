@@ -1,0 +1,64 @@
+global _MG = 
+{
+	BUILD_Allied_Ladder = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(4736.000, 4824.000, 80.000),
+		TagName = "Allied Ladder",
+		TeamAvailability = 4,
+	},
+	CAPPOINT_Escape_Truck = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(2673.647, 980.891, 1.125),
+	},
+	CHECKPOINT_flag = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "CHECKPOINT",
+		Position = Vec3(2176.000, 4096.000, -84.000),
+	},
+	FLAG_gold_crate1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(7408.000, 2896.000, 57.125),
+		TeamAvailability = 4,
+	},
+	FLAG_gold_crate2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(6848.000, 4640.000, 41.125),
+		TeamAvailability = 4,
+	},
+	PLANT_Allied_Ladder = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(4781.858, 4706.000, 88.000),
+		TagName = "Allied Ladder",
+		TeamAvailability = 2,
+	},
+	PLANT_Cave_Wall = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(4680.000, 132.000, 104.000),
+		TagName = "Cave Wall",
+		TeamAvailability = 4,
+	},
+	PLANT_Gate = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(3820.000, 2304.000, 100.000),
+		TeamAvailability = 4,
+	},
+	Version = 1,
+};

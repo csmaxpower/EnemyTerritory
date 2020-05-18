@@ -1,0 +1,1241 @@
+//==========================================================================================
+//
+//	de_dusted2b1.gm
+//
+//	Who          	When		What
+//------------------------------------------------------------------------------------------
+//	^1[UJE]^3Captain	01 April 2018	Initial Script
+//
+//==========================================================================================
+//
+//   /bot waypoint_setproperty paththrough Navigation_PT:
+//   /bot waypoint_setproperty paththrough UseSwitch_PT:
+global Map =
+{
+	Debug = 0, // please set to zero before distributing your script
+
+	ShowMovers = false,
+	elevator_one_pos = "bottom", // down at start 
+	elevator_two_pos = "bottom", // down at start 
+	Bots_inLift1 = 0,
+	IntrusionBackDoor = 0,
+	IntruisionRocketArea = 0,
+	RoastsDestroyed = false,
+	Axis_CP_Build = false,
+	Center_door = true,
+	Defense_back_door = true,
+	Rocket_launcher = true,
+      Military_warehouse = true,
+	Baricade1 = true,
+	Baricade2 = true,
+	Movers =
+	{
+		"MOVER_assenseur",
+		"MOVER_assenseur2",
+	},
+		Roles =
+	{
+		AXIS =
+		{
+			AllBots = true, // each bot is considered for a role
+			DEFENDER =	
+			{
+				numbots = 8,
+				crucialClass = CLASS.ENGINEER,
+			},
+			DEFENDER1 =	
+			{
+				numbots = 8,
+				crucialClass = CLASS.ENGINEER,
+			},
+			INFILTRATOR = // Plant CP - MG42
+			{
+				numbots = 1,
+				crucialClass = CLASS.COVERTOPS,				
+			},
+		},
+		
+		ALLIES =
+		{
+			AllBots = true, // each bot is considered for a role
+			ATTACKER =	
+			{
+				numbots = 8,
+				crucialClass = CLASS.ENGINEER,
+			},
+			ATTACKER1 =	
+			{
+				numbots = 8,
+				crucialClass = CLASS.ENGINEER,
+			},
+			INFILTRATOR = // Plant CP - MG42
+			{
+				numbots = 1,
+				crucialClass = CLASS.COVERTOPS,				
+			},
+		},
+	},
+	//lift1 switches
+      Switches =
+     	{  	//Elevator one switches
+	      //  /bot waypoint_setproperty paththrough UseSwitch_PT:call_top_and_go_bot
+		call_top_and_go_bot =
+		{
+			Enabled = false,
+			Priority = 0,
+			WaypointName = "call_top_and_go_bot",
+			LimitBots = 1,
+			ExitConditions =
+			{
+				f = function(bot){
+					return Map.elevator_one_pos == "bottom";
+				}
+			},
+			Wait = function()
+			{
+				return Map.elevator_one_pos == "bottom";
+			},
+			
+		},
+		//  /bot waypoint_setproperty paththrough UseSwitch_PT:go_lift1_top
+		go_lift1_top =
+		{
+		      AimPosition = Vec3(2738.559, 2435.125, -1230.875), // /bot aim_pos
+			Enabled = true,
+			Priority = 0,
+			WaypointName = "go_lift1_top",
+			LimitBots = 1,
+			ExitConditions =
+			{
+				f = function(bot){
+					return Map.elevator_one_pos == "top";
+				}
+			},
+			Wait = function()
+			{
+				return Map.elevator_one_pos == "top";
+			},
+			
+		},			
+		//Elevator two switches
+		//  /bot waypoint_setproperty paththrough UseSwitch_PT:call_lift2_top
+		call_lift2_top =
+		{
+			Enabled = false,
+			Priority = 0,
+			WaypointName = "call_lift2_top",
+			LimitBots = 1,
+			ExitConditions =
+			{
+				f = function(bot){
+					return Map.elevator_two_pos == "top";
+				}
+			},
+			Wait = function()
+			{
+				return Map.elevator_two_pos == "top";
+			},
+			
+		},		
+		//  /bot waypoint_setproperty paththrough UseSwitch_PT:go_lift2_top
+		go_lift2_top =
+		{
+		      AimPosition = Vec3(1983.125, 3682.436, -796.432), // /bot aim_pos
+			Enabled = true,
+			Priority = 0,
+			WaypointName = "go_lift2_top",
+			LimitBots = 1,
+			Timeout = 1800,	
+						Wait = function()
+			{
+				return Map.elevator_two_pos == "top";
+			},
+			
+		},
+		//  /bot waypoint_setproperty paththrough UseSwitch_PT:call_lift2_bottom
+		call_lift2_bottom =
+		{
+			Enabled = false,
+			Priority = 0,
+			WaypointName = "call_lift2_bottom",
+			LimitBots = 1,
+			ExitConditions =
+			{
+				f = function(bot){
+					return Map.elevator_two_pos == "bottom";
+				}
+			},
+			Wait = function()
+			{
+				return Map.elevator_two_pos == "bottom";
+			},
+			
+		},	
+		//  /bot waypoint_setproperty paththrough UseSwitch_PT:go_lift2_bottom
+		go_lift2_bottom =
+		{
+			Enabled = false,
+			Priority = 0,
+			WaypointName = "go_lift2_bottom",
+			LimitBots = 1,
+			Timeout = 6500,
+			ExitConditions =
+			{
+				f = function(bot){
+					return Map.elevator_two_pos =="bottom";
+				}
+			},
+			Wait = function()
+			{
+				return Map.elevator_two_pos == "bottom";
+			},
+			
+		},		
+	},
+      //Elevator one switch control
+	Elevator_one = function(trigger)
+	{
+	if (Map.Debug) { print("elevator one moving"); }
+		Map.elevator_one_pos = "Moving"; //elevator one is moving now
+		Map.Switches.go_lift1_top.Enabled = false;
+		Map.Switches.call_top_and_go_bot.Enabled = false;		
+		sleep(4.0); //wait is 6.5 in map script
+		vel = ToVector(trigger.Action);
+		if(vel.z < 0) //going down
+		{ 
+		//enable switches
+			Map.elevator_one_pos = "bottom";
+			Map.Switches.go_lift1_top.Enabled = true;
+			Map.Switches.call_top_and_go_bot.Enabled = false;
+			Util.MapDebugPrint("elevator one is down");
+		}
+		//going up
+		else if(vel.z > 0)
+		{ 	  
+		//enable switches
+			Map.elevator_one_pos = "top";
+			Map.Switches.call_top_and_go_bot.Enabled = true;
+                  Map.Switches.go_lift1_top.Enabled = false;
+			Util.MapDebugPrint("elevator_one is up");
+		}
+      },
+      //Elevator two switch control
+	elevator_two = function(trigger)
+	{
+	if (Map.Debug) { print("elevator_two moving"); }
+		Map.elevator_two_pos = "Moving"; //elevator two is moving now
+			Map.Switches.go_lift2_top.Enabled = false;
+			Map.Switches.go_lift2_bottom.Enabled = false;
+			Map.Switches.call_lift2_bottom.Enabled = false;
+			Map.Switches.call_lift2_top.Enabled = false;	
+		sleep(1.5); //wait is for this lift
+		vel = ToVector(trigger.Action);
+		if (vel.z < 0) //going down
+		{ 
+		//enable switches
+			Map.elevator_two_pos = "bottom";
+			Map.Switches.go_lift2_top.Enabled = true;
+			Map.Switches.call_lift2_top.Enabled = true;
+		      Util.MapDebugPrint("elevator two is down");
+		}
+		//going up
+		else  if(vel.z > 0)
+		{ 	
+		//enable switches
+		      Map.elevator_two_pos = "top";
+			Map.Switches.go_lift2_bottom.Enabled = true;
+			Map.Switches.call_lift2_bottom.Enabled = true;
+			Util.MapDebugPrint("elevator_two is up");	
+		}	
+	},
+      Navigation =
+		{
+		
+		//  	/bot waypoint_setproperty paththrough Navigation_PT:ladder_rocket
+		ladder_rocket =
+		{
+			navigate = function(_this)
+			{
+				if ( _this.Goto(Vector3(3143.125, -290.125, -968.157)) == EVENT.PATH_SUCCESS )
+				{
+					_this.AddAimRequest(Priority.VeryHigh, "facing", Vector3(-0.115, -0.004, 0.993));
+					sleep(0.4);
+					_this.Bot.HoldButton(BTN.SPRINT, BTN.FORWARD, 1.75);
+					sleep(1.75);
+				}
+			},
+		},
+		//  	/bot waypoint_setproperty paththrough Navigation_PT:jump_in_window
+		jump_in_window =
+		{
+			navigate = function(_this)
+			{
+				if ( _this.Goto(Vector3(4070.310, 2966.058, -371.125)) == EVENT.PATH_SUCCESS )
+				{
+					bot = _this.Bot;
+					_this.AddAimRequest(Priority.High, "facing", Vector3(0.054, 0.986, 0.159));
+					sleep(0.2);
+					bot.HoldButton(BTN.JUMP, 2);
+					sleep(0.5);
+					bot.HoldButton(BTN.CROUCH, 4);
+					bot.HoldButton(BTN.FORWARD, 3);
+					sleep(1.8);
+					_this.ReleaseAimRequest();
+				}
+			},
+		},
+		//  /bot waypoint_setproperty paththrough Navigation_PT:wait_lift1_bottom
+		wait_lift1_bottom =
+		{
+		      gotowp = "wait_lift1_bottom", // waypoint for the bot to go to before doing anything else
+			EvalFunc = function() // if this function returns false, navigation will not run
+			{
+				return Map.elevator_one_pos != "bottom";
+		
+			},
+                  navigate = function(_this)
+			{		
+				if (Map.elevator_one_pos == "top")
+				{
+				while ( Map.elevator_one_pos != "top" )
+					{
+						yield();
+					}
+					yield();
+					sleep(0.5);
+				_this.AddAimRequest(Priority.High, "position", Vec3(2731.053, 2435.125, -1202.064));
+				}
+				_this.Goto(Vector3(2731.053, 2435.125, -1202.064));
+				_this.AddAimRequest(Priority.High, "facing", Vector3(-0.178,-0.980,0.091));
+				 sleep(2);
+				_this.Bot.PressButton(BTN.USE);
+				 sleep(5);
+				_this.AddAimRequest(Priority.High, "facing", Vector3(0.999, 0.044, -0.024));
+                        _this.AddAimRequest(Priority.High, "position", Vec3(2566.125, 2550.989, -1201.469));
+			      _this.Bot.HoldButton(BTN.FORWARD, 0.2);
+                         sleep(2);
+			      _this.ReleaseAimRequest();
+			}
+		},
+		//  /bot waypoint_setproperty paththrough Navigation_PT:wait_lift1_top
+		wait_lift1_top =
+		{     
+		      gotowp = "wait_lift1_top", // waypoint for the bot to go to before doing anything else
+			EvalFunc = function() // if this function returns false, navigation will not run
+			{
+				return Map.elevator_one_pos != "top";		
+			},
+                  navigate = function(_this)
+			{		
+				if (Map.elevator_one_pos == "bottom")
+				{
+				while ( Map.elevator_one_pos != "bottom" )
+					{
+						yield();
+					}
+					yield();
+					sleep(0.5);
+				_this.AddAimRequest(Priority.High, "position", Vec3(2553.875, 2644.242, -776.659));
+				}
+				_this.Goto(Vector3(2553.875, 2644.242, -776.659));
+				_this.AddAimRequest(Priority.High, "facing", Vector3(0997, 0.010, -0.076));	
+				 sleep(2);
+				_this.Bot.PressButton(BTN.USE);
+	                   sleep(2);
+				_this.AddAimRequest(Priority.High, "facing", Vector3(0.999, 0.044, -0.024));
+				_this.AddAimRequest(Priority.High, "position", Vec3(2709.875, 2575.696, -755.508));
+				//_this.Bot.HoldButton(BTN.FORWARD, 0.2);
+                         sleep(3);
+				_this.ReleaseAimRequest();
+			}
+		},
+            //  /bot waypoint_setproperty paththrough Navigation_PT:wait_lift2_bottom
+		wait_lift2_bottom =
+		{    
+		      gotowp = "wait_lift2_bottom", // waypoint for the bot to go to before doing anything else
+			EvalFunc = function() // if this function returns false, navigation will not run
+			{
+				return Map.elevator_two_pos != "bottom";
+		
+			},
+                  navigate = function(_this)
+			{		
+				if (Map.elevator_two_pos == "top")
+				{
+				while ( Map.elevator_two_pos != "top" )
+					{
+						yield();
+					}
+				 yield();
+				 sleep(0.5);
+				 _this.AddAimRequest(Priority.High, "position", Vec3(2002.125, 3731.230, -770.736));	
+				 }	
+				 _this.Goto(Vector3(2002.125, 3731.230, -770.736));							
+				 sleep(3);
+				_this.Bot.PressButton(BTN.USE);
+				sleep(1);
+				_this.AddAimRequest(Priority.High, "position", Vec3(2087.063, 3900.875, -754.976));	
+				_this.AddAimRequest(Priority.High, "facing", Vector3(0.038, 0.999, -0.036));
+                         sleep(4);
+				_this.ReleaseAimRequest();
+			}
+		},
+			      //  /bot waypoint_setproperty paththrough Navigation_PT:wait_lift2_top
+		wait_lift2_top =
+		{    
+		      gotowp = "wait_lift2_top", // waypoint for the bot to go to before doing anything else
+			EvalFunc = function() // if this function returns false, navigation will not run
+			{
+				return Map.elevator_two_pos != "top";
+		
+			},
+                  navigate = function(_this)
+			{		
+				if (Map.elevator_two_pos == "bottom")
+				{
+				while ( Map.elevator_two_pos != "bottom" )
+					{
+						yield();
+					}
+				 yield();
+				 sleep(0.5);
+                         _this.AddAimRequest(Priority.High, "position", Vec3(2081.581, 3900.875, -628.249));
+				 _this.AddAimRequest(Priority.High, "facing", Vector3(0.039, 0.965, -0.259));
+				 }	
+				 _this.Goto(Vector3(2002.125, 3734.819, -582.819));			
+				_this.AddAimRequest(Priority.High, "facing", Vector3(-.966, 0.045, -0.013));	
+				 sleep(2);
+				_this.Bot.PressButton(BTN.USE);
+				 sleep(1);
+				_this.AddAimRequest(Priority.High, "position", Vec3(2081.581, 3900.875, -628.249));	
+				_this.AddAimRequest(Priority.High, "facing", Vector3(0.039, 0.965, -0.259));
+				_this.Bot.HoldButton(BTN.FORWARD, 0.3);
+                         sleep(3);
+				_this.ReleaseAimRequest();
+			}
+		},
+		//  /bot waypoint_setproperty paththrough Navigation_PT:wait_bot_leave_lift1
+		wait_bot_leave_lift1 =
+		{
+			gotowp = "wait_bot_leave_lift1", // waypoint for the bot to go to before doing anything else
+			EvalFunc = function() // if this function returns false, navigation will not run
+			{
+			return Map.Bots_inLift1 > 0 ;
+			},
+	
+			navigate = function(_this)
+			{
+				if ( Map.Bots_inLift1 > 1 )
+				{
+					_this.AddAimRequest(Priority.High, "facing", Vector3(-0.084,-0.977,-0.195));
+					_this.Bot.HoldButton(BTN.WALK, 10);
+					_this.Bot.HoldButton(BTN.BACKWARD, 0.2);
+					sleep(5);
+				}
+				else if ( Map.Bots_inLift1 == 1 )
+				{
+					//print("^8run first lift navigate");
+				}
+				else if ( Map.Bots_inLift1 == 0 )
+				{
+					//print("^8bad navigate");
+				}
+			  },
+		    },
+	      },	
+
+	      Bots_In_Lift1 =
+	            {
+		      Name = "Bots_In_Lift1",
+		      TriggerOnClass = CLASS.ANYPLAYER,
+		      OnEnter = function(ent)
+		      {
+			Map.Bots_inLift1 += 1;
+			
+			print("^8Bot entered the lift");
+			
+		      },
+		      OnExit = function(ent)
+		      {
+		      print("^8Bot leave the lift");
+		      Map.Bots_inLift1 -= 1;
+		     },
+	      },
+
+
+	Allied_Command_Post_Built = function( trigger )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_Allied_Command_Post" );
+		
+	SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_Allied_Command_Post" );
+	
+		Util.MapDebugPrint( "Allied_Command_Post_Built" );
+	},
+
+	Allied_Command_Post_Destroyed = function( trigger )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_Allied_Command_Post" );
+		
+	SetAvailableMapGoals( TEAM.AXIS, false, "PLANT_Allied_Command_Post" );
+		
+		Util.MapDebugPrint( "Allied_Command_Post_Destroyed" );
+	},
+	
+	Axis_Command_Post_Built = function( trigger )
+	{
+	Map.Axis_CP_Build = true;
+	if ( Map.Center_door_Destroyed )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Axis_Command_Post" );
+      }	
+	SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_Axis_Command_Post" );
+	
+		Util.MapDebugPrint( "Axis_Command_Post_Built" );
+	},
+	
+	Axis_Command_Post_Destroyed = function( trigger )
+	{
+	Map.Axis_CP_Build = false;
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Axis_Command_Post" );
+		
+	SetAvailableMapGoals( TEAM.ALLIES, false, "PLANT_Axis_Command_Post" );
+	
+		Util.MapDebugPrint( "Axis_Command_Post_Destroyed" );
+	},
+	
+	Axis_MG42_Construction_on_2nd_floor_Built = function( trigger )
+	{
+	if ( Map.Military_warehouse )
+	{
+	SetAvailableMapGoals( TEAM.AXIS, true, {"MOUNTMG42_axis.*","MOUNTMG42_defense.*"} );
+	}
+      SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_Axis_MG42_Construction_on_2nd_floor" );
+		
+		Util.MapDebugPrint( "Axis_MG42_Construction_on_2nd_floor_Built" );
+	},
+
+	Axis_MG42_Construction_on_2nd_floor_Destroyed = function( trigger )
+	{
+	if ( !Map.Military_warehouse )
+	{
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Axis_MG42_Construction_on_2nd_floor" );
+	}
+	SetAvailableMapGoals( TEAM.AXIS, false, {"MOUNTMG42_axis.*","MOUNTMG42_defense.*"} );
+	
+		Util.MapDebugPrint( "Axis_MG42_Construction_on_2nd_floor_Destroyed" );
+	},
+	
+	Garrison_MG_Nest_Built = function( trigger )
+	{
+	SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_Garrison.*" );
+	
+	SetAvailableMapGoals( TEAM.AXIS, true, "MOUNTMG42_Garrison.*" );
+	
+		Util.MapDebugPrint( "Garrison_MG_Nest_Built" );
+	},
+
+	Garrison_MG_Nest_Destroyed = function( trigger )
+	{
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_Garrison.*" );
+	
+		Util.MapDebugPrint( "Garrison_MG_Nest_Destroyed" );
+	},
+	
+	Old_City_MG_Nest_Built = function( trigger )
+	{
+	if ( !Map.Center_door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"MOUNTMG42_Old.*","MOUNTMG42_mg42.*"} );
+	}
+	SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_Old.*" );
+	
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"MOUNTMG42_Old.*","MOUNTMG42_mg42.*"} );
+	
+		Util.MapDebugPrint( "Old_City_MG_Nest_Built" );
+	},
+
+	Old_City_MG_Nest_Destroyed = function( trigger )
+	{
+	if ( !Map.Center_door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_Old_City_MG_Nest" );
+	}
+	SetAvailableMapGoals( TEAM.ALLIES, false, {"MOUNTMG42_Old.*","MOUNTMG42_mg42.*"} );
+	
+		Util.MapDebugPrint( "Old_City_MG_Nest_Destroyed" );
+	},
+	
+	defensive_Allied_MG42_Construction_on_left_spawn_Built = function( trigger )
+	{
+	if ( Map.Center_door && Map.Military_warehouse )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "MOUNTMG42_defensive_Allied_MG42.*" );
+	
+	SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_defensive_Allied_MG42.*" );
+	}
+	SetAvailableMapGoals( TEAM.ALLIES, false, "BUILD_defensive_Allied_MG42.*" );
+	
+		Util.MapDebugPrint( "defensive_Allied_MG42_Construction_on_left_spawn_Built" );
+	},
+	
+	defensive_Allied_MG42_Construction_on_left_spawn_Destroyed = function( trigger )
+	{
+	if ( Map.Center_door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "BUILD_defensive_Allied_MG42.*" );
+	}
+	SetAvailableMapGoals( TEAM.ALLIES, false, "MOUNTMG42_defensive_Allied_MG42.*" );
+	
+	SetAvailableMapGoals( TEAM.AXIS, true, "PLANT_defensive_Allied_MG42.*" );
+	
+		Util.MapDebugPrint( "defensive_Allied_MG42_Construction_on_left_spawn_Destroyed" );
+	},
+
+	barrier_roasts_on_the_left_Built = function( trigger )
+	{
+	Map.RoastsDestroyed = true;
+	SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_barrier_roasts_on_the_left" );
+	ClearGoalRole("BUILD_barrier.*", {ROLE.DEFENDER, ROLE.DEFENDER1} );
+	
+	      Util.DisableGoal( {"ROUTE_Roasts_Rocket_Access","Route_Near_Barrier"} );
+		Util.MapDebugPrint( "barrier_roasts_on_the_left_Built" );
+	},
+	
+	barrier_roasts_on_the_left_Destroyed = function( trigger )
+	{
+	Map.RoastsDestroyed = false;
+	if ( Map.Baricade1 )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "GRENADE_Baricade_Roasts" );
+	}
+
+	if ( Map.Baricade2 )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "GRENADE_Baricade_Rocket_Access" );
+	
+      Util.EnableGoal( "ROUTE_Roasts_Rocket_Access" );
+	}
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_barrier_roasts_on_the_left" );
+	SetGoalRole("BUILD_barrier.*", {ROLE.DEFENDER, ROLE.DEFENDER1} );
+	
+	      Util.EnableGoal( {"ROUTE_Roasts_Rocket_Access","Route_Near_Barrier"} );
+		Util.MapDebugPrint( "barrier_roasts_on_the_left_Destroyed" );
+	},
+
+	defense_Back_Door_Built = function( trigger )
+	{
+	if ( Map.Military_warehouse && Map.Center_door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, false, {"ATTACK_Military.*","PLANT_military_warehouse.*"} );
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"ATTACK_Back_Door.*","MOUNTMG42_defensive_Allied_MG42.*"} );
+	
+	SetGoalRole("ATTACK_Back_Door.*", ROLE.ATTACKER );
+	ClearGoalRole("ATTACK_Military.*", ROLE.ATTACKER1 );
+	}
+	if ( Map.Rocket_launcher && Map.Center_door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, false, {"ATTACK_Rocket.*","PLANT_Rocket_Launcher.*"} );
+	}
+	SetAvailableMapGoals( TEAM.AXIS, false, "BUILD_defense_Back_Door" );
+	
+	ClearGoalRole("BUILD_defense_Back_Door*", {ROLE.DEFENDER, ROLE.DEFENDER1} );
+	
+	Util.DisableGoal( "ROUTE_Roasts_Rocket_Access" );
+		Util.MapDebugPrint( "defense_Back_Door_Built" );
+	},
+
+	defense_Back_Door_Destroyed = function( trigger )
+	{
+	if ( Map.Military_warehouse && Map.Center_door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"ATTACK_Military.*","PLANT_military_warehouse.*"} );
+	SetAvailableMapGoals( TEAM.ALLIES, false, {"ATTACK_Back_Door.*","MOUNTMG42_defensive_Allied_MG42.*"} );
+	
+	SetGoalRole("ATTACK_Military.*", ROLE.ATTACKER );
+	ClearGoalRole("ATTACK_Back_Door.*", ROLE.ATTACKER );
+	}
+	if ( Map.Rocket_launcher && Map.Center_Door )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"ATTACK_Rocket.*","PLANT_Rocket_Launcher.*"} );
+	}
+	SetAvailableMapGoals( TEAM.AXIS, true, "BUILD_defense_Back_Door" );
+	
+	SetGoalRole("BUILD_defense_Back_Door.*", {ROLE.DEFENDER, ROLE.DEFENDER1} );
+	
+		Util.MapDebugPrint( "defense_Back_Door_Destroyed" );
+	},
+
+	Center_Door_Destroyed = function( trigger )
+	{
+	Map.Center_door = false;
+	if ( Map.Military_warehouse )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"ATTACK_Military.*","PLANT_military_warehouse.*"} );
+	
+	SetAvailableMapGoals( TEAM.AXIS, true, {"DEFEND_Back_Door.*","DEFEND_Military.*"} );
+	
+	SetGoalRole("ATTACK_Military.*", ROLE.ATTACKER );
+	Util.SetRoleForTable({"DEFEND_Military.*","DEFEND_Back_Door.*"}, {ROLE.DEFENDER} );
+	}
+	if ( Map.Rocket_launcher )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, {"ATTACK_Rocket.*","PLANT_Rocket_Launcher.*"} );
+	
+	SetAvailableMapGoals( TEAM.AXIS, true, "DEFEND_Rocket.*" );
+	SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Barrier.*" );
+	
+	SetGoalRole("ATTACK_Rocket.*", ROLE.ATTACKER1 );
+	SetGoalRole("DEFEND_Rocket.*", ROLE.DEFENDER1 );
+	ClearGoalRole("DEFEND_Barrier.*", ROLE.DEFENDER1 );
+	}
+	if ( Map.Axis_CP_Build  )
+	{
+	SetAvailableMapGoals( TEAM.ALLIES, true, "PLANT_Axis_Command_Post" );
+	}
+	SetAvailableMapGoals( TEAM.ALLIES, false, {"ATTACK_Back_Door.*","MOUNTMG42_defensive_Allied_MG42.*","ATTACK_Center_Door.*","MOUNTMG42_Old.*"} );
+	
+	SetAvailableMapGoals( TEAM.AXIS, false, {"DEFEND_Center_Door.*","PLANT_Old_City_MG_Nest.*","PLANT_defensive_Allied_MG42.*"} );
+	SetAvailableMapGoals( TEAM.AXIS, true, {"MOUNTMG42_48.*","REPAIRMG42_48.*"} );
+	Util.ClearRoleForTable( {"ATTACK_Center.*","ATTACK_Back_Door.*"}, {ROLE.ATTACKER, ROLE.ATTACKER1} );
+	ClearGoalRole( "DEFEND_Center_Door.*", ROLE.DEFENDER1 );
+	
+		Util.MapDebugPrint( "Center_Door_Destroyed" );
+	},
+
+	baricade_of_rock_Destroyed = function( trigger )
+	{
+	SetAvailableMapGoals( TEAM.AXIS, true, {"PLANTMINE_Rock_Access.*","PLANTMINE_Rocket.*","DEFEND_Rock_Access.*"} );
+	SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Baricade.*" );
+	Util.SetRoleForTable({"PLANTMINE_Rocket.*","PLANTMINE_Rock_Access.*"}, {ROLE.DEFENDER, ROLE.DEFENDER1} );
+	ClearGoalRole( "DEFEND_Baricade.*", ROLE.DEFENDER );
+	
+		Util.MapDebugPrint( "baricade_of_rock_Destroyed" );
+	},
+
+	military_warehouse_artillery_B_Site_B_Destroyed = function( trigger )
+	{
+	Map.Military_warehouse = false;
+
+	SetAvailableMapGoals( TEAM.AXIS, false, {"DEFEND_Military.*","DEFEND_Back_Door.*","MOUNTMG42_axis.*","MOUNTMG42_defense.*"} );
+	
+	SetAvailableMapGoals( TEAM.ALLIES, false, {"ATTACK_Military.*","PLANT_military.*"} );
+	
+	ClearGoalRole( "ATTACK_Military.*", ROLE.ATTACKER );
+	SetGoalRole( "ATTACK_Rocket.*", ROLE.ATTACKER );
+	Util.ClearRoleForTable( {"DEFEND_Back_Door.*","DEFEND_Military.*"}, ROLE.DEFENDER );
+      Util.SetRoleForTable( {"DEFEND_Rocket.*","DEFEND_Rock_Access.*"}, ROLE.DEFENDER );
+	
+		Util.MapDebugPrint( "military_warehouse_artillery_B_Site_B_Destroyed" );
+	},
+
+	rocket_launcher__B_Site_A_Destroyed = function( trigger )
+	{
+	Map.Rocket_launcher = false;
+	SetAvailableMapGoals( TEAM.AXIS, false, {"DEFEND_Rocket.*","DEFEND_Rock_Access.*""PLANTMINE_Rocket.*"} );
+	
+	SetAvailableMapGoals( TEAM.ALLIES, false, "ATTACK_Rocket.*" );
+	
+	ClearGoalRole( "ATTACK_Rocket.*", ROLE.ATTACKER1 );
+	SetGoalRole( "ATTACK_Military.*", ROLE.ATTACKER1 );
+	Util.ClearRoleForTable( {"DEFEND_Rocket.*","DEFEND_Rock_Access.*"}, ROLE.DEFENDER1 );
+      Util.SetRoleForTable( {"DEFEND_Military.*","DEFEND_Back_Door.*"}, ROLE.DEFENDER1 );
+	
+		Util.MapDebugPrint( "rocket_launcher__B_Site_A_Destroyed" );
+	},
+	
+	Baricade_1_Exploded = function( trigger )
+	{
+	Map.Baricade1Exploded = false;
+		
+		Util.MapDebugPrint( "^5Baricade_1_Exploded" );
+	},
+
+	Baricade_2_Exploded = function( trigger )
+	{
+	Map.Baricade2 = false;
+	
+            Util.MapDebugPrint( "^5Baricade_2_Exploded" );
+	},
+	
+	Intrusion_Rocket_Area =
+      {
+ 	Name="Intrusion_Rocket_Area",
+ 	TriggerOnClass=CLASS.ENGINEER,
+ 	OnEnter = function(ent)
+ 	{
+	      if ( GetEntTeam(ent) == TEAM.ALLIES )
+		{
+		Map.IntruisionRocketArea += 1;	 
+		}
+		if ( Map.IntruisionRocketArea > 0 && Map.Center_door )
+		{
+	      SetAvailableMapGoals( TEAM.AXIS, true, {"DEFEND_Rocket.*","DEFEND_Rock_Access.*"} );
+		SetAvailableMapGoals( TEAM.AXIS, false, "DEFEND_Barrier.*" );
+		SetGoalRole("DEFEND_Rocket.*", ROLE.DEFENDER1);
+		ClearGoalRole( "DEFEND_Barrier.*", ROLE.DEFENDER1 );
+			foreach ( id and bot in BotTable )
+			{
+			if ( bot.GetTeam() == TEAM.Allies )
+			{
+		      bot.SayTeam("^1Allies Entered Rocket Launcher Area.");
+		      }
+               }
+           }
+ 	},
+ 	OnExit = function(ent)
+ 	{
+		if ( GetEntTeam(ent) == TEAM.ALLIES )
+		{
+		Map.IntruisionRocketArea -= 1;	 
+		}
+	      sleep(5);
+		if ( Map.IntruisionRocketArea == 0 && Map.Center_door )
+		{
+		SetAvailableMapGoals( TEAM.AXIS, false, {"DEFEND_Rocket.*","DEFEND_Rock_Access.*"} );
+		SetAvailableMapGoals( TEAM.AXIS, true, "DEFEND_Barrier.*" );
+		ClearGoalRole("DEFEND_Rocket.*", ROLE.DEFENDER1);
+		SetGoalRole( "DEFEND_Barrier.*", ROLE.DEFENDER1 );
+		      foreach ( id and bot in BotTable )
+			{
+			if ( bot.GetTeam() == TEAM.ALLIES )
+			{
+		      bot.SayTeam("^1Rocket Launcher Area Is Save.");
+		      }
+	         }
+            }
+         },
+      },
+	
+	Intrusion_Back_Door =
+      {
+ 	Name="Intrusion_Back_Door",
+ 	TriggerOnClass=CLASS.ENGINEER,
+ 	OnEnter = function(ent)
+ 	{
+	      if ( GetEntTeam(ent) == TEAM.ALLIES )
+		{
+		Map.IntrusionBackDoor += 1;	 
+		}
+		if ( Map.IntrusionBackDoor > 0 && Map.Center_door )
+		{
+	      SetAvailableMapGoals( TEAM.AXIS, true, {"DEFEND_Military.*","DEFEND_Back_Door.*"} );
+		Util.SetRoleForTable({"DEFEND_Military.*","DEFEND_Back_Door.*"}, ROLE.DEFENDER );
+			foreach ( id and bot in BotTable )
+			{
+			if ( bot.GetTeam() == TEAM.ALLIES )
+			{
+		      bot.SayTeam("^1Allies Entered Back_Door Military_warehouse.");
+		      }
+               }
+           }
+ 	},
+ 	OnExit = function(ent)
+ 	{
+		if ( GetEntTeam(ent) == TEAM.ALLIES )
+		{
+		Map.IntrusionBackDoor -= 1;	 
+		}
+	      sleep(5);
+		if ( Map.IntrusionBackDoor == 0 && Map.Center_door )
+		{
+		SetAvailableMapGoals( TEAM.AXIS, false, {"DEFEND_Military.*","DEFEND_Back_Door.*"} );
+		Util.ClearRoleForTable({"DEFEND_Military.*","DEFEND_Back_Door.*"}, ROLE.DEFENDER );
+		      foreach ( id and bot in BotTable )
+			{
+			if ( bot.GetTeam() == TEAM.ALLIES )
+			{
+		      bot.SayTeam("^1Military warehouse artillery Is Save.");
+		      }
+	         }
+           }
+        },
+    },
+};
+
+global OnMapLoad = function()
+{
+	// Register callback functions
+	OnTrigger( "Allied Command Post constructed. Charge speed increased!", Map.Allied_Command_Post_Built );
+	OnTrigger( "Axis team has destroyed the Allied Command Post!", Map.Allied_Command_Post_Destroyed );
+	OnTrigger( "Axis Command Post constructed. Charge speed increased!", Map.Axis_Command_Post_Built );
+	OnTrigger( "Allied team has destroyed the Axis Command Post!", Map.Axis_Command_Post_Destroyed );
+     
+      OnTrigger( "the barrier roasts on the left has been constructed.", Map.barrier_roasts_on_the_left_Built );
+	OnTrigger( "the barrier roasts on the left has been destroyed.", Map.barrier_roasts_on_the_left_Destroyed );
+	OnTrigger( "the defensive Back Door on right of B-Site B has been repared.", Map.defense_Back_Door_Built );
+	OnTrigger( "the protect_door on right has been destroyed.", Map.defense_Back_Door_Destroyed );	
+	
+	OnTrigger( "Axis Team have built the MG42 nest!!", Map.Axis_MG42_Construction_on_2nd_floor_Built );
+	OnTrigger( "Allies have destroyed the MG42 Nest!!", Map.Axis_MG42_Construction_on_2nd_floor_Destroyed );
+	OnTrigger( "Allied Team have built the MG42 nest!!", Map.defensive_Allied_MG42_Construction_on_left_spawn_Built );
+	OnTrigger( "Axis have destroyed the MG42 Nest!!", Map.defensive_Allied_MG42_Construction_on_left_spawn_Destroyed );
+	OnTrigger( "The Garrison MG Nest has been constructed!", Map.Garrison_MG_Nest_Built );
+	OnTrigger( "The Garrison MG Nest has been damaged!", Map.Garrison_MG_Nest_Destroyed );
+	OnTrigger( "The Old City MG Nest has been constructed!", Map.Old_City_MG_Nest_Built );
+	OnTrigger( "The Old City MG Nest has been damaged!", Map.Old_City_MG_Nest_Destroyed );
+	
+	OnTrigger( "Allies have breached the middle Door!!!!!!", Map.Center_Door_Destroyed );
+	OnTrigger( "Allies have blown the lower beach bunker door!", Map.baricade_of_rock_Destroyed );
+	OnTrigger( "Allies have destroyed the military warehouse artillery on B-Site B!!!!", Map.military_warehouse_artillery_B_Site_B_Destroyed );
+	OnTrigger( "Allied team has destroyed the rocket launcher on B-Site A!", Map.rocket_launcher__B_Site_A_Destroyed );
+	
+	OnTrigger( "GRENADE_Baricade_Roasts Exploded.", Map.Baricade_1_Exploded );
+	OnTrigger( "GRENADE_Baricade_Rocket_Access Exploded.", Map.Baricade_2_Exploded );
+
+	BotsInLift1 = OnTriggerRegion(AABB(2542.124,2461.329,-1223.955,2766.729,2610.039,-689.923), Map.Bots_In_Lift1);
+      Elevator_one = OnTriggerRegion(AABB(2486.867,2425.782,-1262.873,2824.757,2680.881,-738.064), RegionTrigger.DisableBotPush );
+	Elevator_one = OnTriggerRegion(AABB(2015.522,3654.385,-824.874,2166.875,3901.875,-515.125), RegionTrigger.DisableBotPush );
+	Jump_on_the_crates =  OnTriggerRegion(AABB(3457.014,3512.280,-984.874,3780.547,3691.983,-588.509), RegionTrigger.DisableCombatMovement );
+	Jump_on_the_crates =  OnTriggerRegion(AABB(3457.014,3512.280,-984.874,3780.547,3691.983,-588.509), RegionTrigger.DisableBotPush  );
+	Ladder_rocket = OnTriggerRegion(AABB(3104.798,-355.933,-1056.436,3215.645,-188.084,-716.966), RegionTrigger.DisableBotPush );
+	Ladder_rocket =  OnTriggerRegion(AABB(3104.798,-355.933,-1056.436,3215.645,-188.084,-716.966), RegionTrigger.DisableCombatMovement );
+	Intrusion_Rocket_Area = OnTriggerRegion(AABB(2544.858,-1079.362,-1182.278,4701.095,1185.311,-674.056), Map.Intrusion_Rocket_Area);
+      Intrusion_Back_Door = OnTriggerRegion(AABB(1629.125,2894.823,-1016.875,3881.946,3700.556,-495.192), Map.Intrusion_Back_Door);
+	
+	// Elevator triggers
+      OnTrigger("assenseur_goto", Map.Elevator_one);
+	OnTrigger("assenseur2_goto", Map.elevator_two);
+	
+	// all but routes
+	Util.DisableGoal( ".*", true ); 
+	Util.DisableGoal( {"ROUTE_Roasts_Rocket_Access","Route_Near_Barrier"} );
+	
+	//activation ALLIES
+	SetAvailableMapGoals( TEAM.ALLIES, true, {
+	"PLANT_Center_Door","PLANT_baricade.*","PLANT_barrier.*","PLANT_defense.*",
+	"BUILD_Allied.*","BUILD_Old.*","BUILD_defensive_Allied.*",
+	"ATTACK_Back.*","ATTACK_Center.*",
+	".*CAB.South.*",
+	});
+	
+	//activation AXIS
+	SetAvailableMapGoals( TEAM.AXIS, true, {
+	"DEFEND_Center.*","DEFEND_Barrier.*","DEFEND_Baricade.*",
+	"BUILD_Axis_Command_Post*","BUILD_Axis_MG42.*","BUILD_Garrison.*",
+	"PLANTMINE_Rocket.*","PLANTMINE_Barrier.*",
+	".*CAB_north.*",
+	});
+
+	// Max users per goal
+	Util.SetMaxUsers( 1, "MOUNTMG42.*" );
+	Util.SetMaxUsers( 1, "ATTACK.*" );
+	Util.SetMaxUsers( 1, "DEFEND.*" );
+	Util.SetMaxUsers( 1, "BUILD.*" );
+	Util.SetMaxUsers( 1, "PLANT.*" );
+	Util.SetMaxUsers( 1, "GRENADE.*" );
+	Util.SetMaxUsers( 1, "REPAIRMG42.*" );
+
+	// Camp times
+	SetMapGoalProperties( "MOUNTMG42.*", {MinCampTime=40, MaxCampTime=90} );
+	SetMapGoalProperties( "ATTACK_.*", {mincamptime=30, maxcamptime=60});
+	SetMapGoalProperties( "DEFEND.*", {mincamptime=40, maxcamptime=80});
+	
+	//SetPriority
+	SetGoalPriority( "MOUNTMG42.*", 0.94, TEAM.AXIS, CLASS.SOLDIER, true );
+	SetGoalPriority( "DEFUSE_Center_Door", 0.94, TEAM.AXIS, CLASS.ENGINEER, true );
+	SetGoalPriority( "MOUNTMG42.*", 0.96, TEAM.ALLIES, CLASS.SOLDIER, true );
+	SetGoalPriority( ".*Axis_MG42_Construction_on_2nd_floor", 0.96 );
+	SetGoalPriority(".*Garrison.*", 0.96 );
+	SetGoalPriority(".*Axis_Command_Post", 0.96 );
+	SetGoalPriority( "DEFEND.*", 0.93 );
+	SetGoalPriority( "ATTACK.*", 0.93 );
+	SetGoalPriority( "PLANT.*", 0.96 );
+	SetGoalPriority( "BUILD.*", 0.96 );
+	SetGoalPriority( ".*MG42_4.*" , 0.94);
+	SetGoalPriority( "GRENADE.*" , 0.94);
+	SetGoalPriority( "PLANTMINE.*" , 0.92);
+	
+	//Offset Plant/Build Fix
+      Util.SetGoalOffset( 250, -50, -150, "PLANT_Center_Door" );
+	Util.SetGoalOffset( 0, 100, -100, "PLANT_rocket_launcher__B_Site_A" );
+	
+	//Set Roles
+	SetGoalRole("PLANT_.*Command_Post" , ROLE.INFILTRATOR);
+	SetGoalRole("ATTACK_Back_Door.*", ROLE.ATTACKER );
+      SetGoalRole("ATTACK_Center_Door.*", ROLE.ATTACKER1 );
+	SetGoalRole("DEFEND_Baricade.*", ROLE.DEFENDER );
+	SetGoalRole("DEFEND_Barrier.*", ROLE.DEFENDER1 );
+
+	
+	//Clear Roles on Start Map
+      Util.ClearRoleForTable({"DEFEND_Back_Door.*","DEFEND_Military.*","DEFEND_Rocket.*",
+	"DEFEND_Rock_Access.*","DEFEND_Center_Door.*","BUILD_barrier.*"}, {ROLE.DEFENDER, ROLE.DEFENDER1} );
+	Util.ClearRoleForTable({"ATTACK_Military.*","ATTACK_Rocket.*"}, {ROLE.ATTACKER, ROLE.ATTACKER1} );
+	
+	//Update Switch Data
+	Util.UpdateSwitchData();
+	
+	//Disable Route
+	Util.DisableGoal( {"ROUTE_Roasts_Rocket_Access","Route_Near_Barrier"} );
+	
+	Util.MapDebugPrint( "Omni-bot map script for " + GetMapName() + " executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+	// Uncomment for shootable breakables
+	bot.TargetBreakableDist = 90.0;
+	// Only set MaxViewDistance on maps with limited sight (e.g. fog)
+	//~bot.MaxViewDistance = 2400;
+};
+
+global InitializeRoutes = function()
+{
+	MapRoutes =
+	{
+		PLANT_rocket_launcher__B_Site_A = 
+		{
+			ROUTE_Allies_Spawn  = 
+			{
+				ROUTE_MG42_4  = 
+				{
+					ROUTE_Ramp_Center_Door  = 
+					{
+						ROUTE_Split_Near_Center_Door  = 
+						{
+							ROUTE_Axis_Spawn  = 
+							{
+								ROUTE_Split_Road_Rocket  = 
+								{
+									ROUTE_Near_Rocket_Launcher  = 
+									{
+									},
+								},
+							},
+						},
+					},
+				},
+				ROUTE_Near_Baricade_Rock  = 
+				{
+					ROUTE_Near_Rocket_Launcher  = 
+					{
+					},
+				},
+				ROUTE_Near_Barrier  = 
+				{
+					ROUTE_Roasts_Rocket_Access  = 
+					{
+						ROUTE_Split_Road_Rocket  = 
+						{
+							ROUTE_Near_Rocket_Launcher  = 
+							{
+							},
+						},
+					},
+				},
+				ROUTE_Near_Old_City  = 
+				{
+					ROUTE_Near_Defensive_Allied  = 
+					{
+						ROUTE_Ramp_Back_Door  = 
+						{
+							ROUTE_Near_Defense_Back_Door  = 
+							{
+								ROUTE_Near_Military_Warehouse  = 
+								{
+									ROUTE_Axis_Spawn  = 
+									{
+										ROUTE_Split_Road_Rocket  = 
+										{
+											ROUTE_Near_Rocket_Launcher  = 
+											{
+											},
+										},
+									},
+								},
+								ROUTE_Stairs_Back_Door  = 
+								{
+									ROUTE_Split_Near_Center_Door  = 
+									{
+										ROUTE_Axis_Spawn  = 
+										{
+											ROUTE_Split_Road_Rocket  = 
+											{
+												ROUTE_Near_Rocket_Launcher  = 
+												{
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		PLANT_military_warehouse_artillery_B_Site_B = 
+		{
+			ROUTE_Allies_Spawn  = 
+			{
+				ROUTE_MG42_4  = 
+				{
+					ROUTE_Ramp_Center_Door  = 
+					{
+						ROUTE_Split_Near_Center_Door  = 
+						{
+							ROUTE_Stairs_Back_Door  = 
+							{
+								ROUTE_Near_Defense_Back_Door  = 
+								{
+									ROUTE_Near_Military_Warehouse  = 
+									{
+									},
+								},
+							},
+						},
+					},
+				},
+				ROUTE_Near_Barrier  = 
+				{
+					ROUTE_Roasts_Rocket_Access  = 
+					{
+						ROUTE_Split_Road_Rocket  = 
+						{
+							ROUTE_Axis_Spawn  = 
+							{
+								ROUTE_Near_Military_Warehouse  = 
+								{
+								},
+							},
+						},
+					},
+				},
+				ROUTE_Near_Old_City  = 
+				{
+					ROUTE_Near_Defensive_Allied  = 
+					{
+						ROUTE_Ramp_Back_Door  = 
+						{
+							ROUTE_Near_Defense_Back_Door  = 
+							{
+								ROUTE_Near_Rocket_Launcher  = 
+								{
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		PLANT_Center_Door = 
+		{
+			ROUTE_Allies_Spawn  = 
+			{
+				ROUTE_Ramp_Center_Door  = 
+				{
+					ROUTE_Split_Near_Center_Door  = 
+					{
+					},
+				},
+			},
+		},
+		BUILD_Axis_MG42_Construction_on_2nd_floor =
+		{
+		},
+		PLANT_Axis_MG42_Construction_on_2nd_floor =
+		{
+		},
+		BUILD_defense_Back_Door = 
+		{
+			ROUTE_Axis_Spawn  = 
+			{
+				ROUTE_Split_Near_Center_Door  = 
+				{
+					ROUTE_Stairs_Back_Door  = 
+					{
+						ROUTE_Near_Defense_Back_Door  = 
+						{
+						},
+					},
+				},
+				ROUTE_Near_Military_Warehouse  = 
+				{
+					ROUTE_Near_Defense_Back_Door  = 
+					{
+					},
+				},
+				ROUTE_MG42_4  = 
+				{
+					ROUTE_Top_Military  = 
+					{
+						ROUTE_Near_Military_Warehouse  = 
+						{
+							ROUTE_Near_Defense_Back_Door  = 
+							{
+							},
+						},
+					},
+				},
+			},
+		},
+		PLANT_defense_Back_Door = 
+		{
+			ROUTE_Allies_Spawn  = 
+			{
+				ROUTE_Near_Old_City  = 
+				{
+					ROUTE_Near_Defensive_Allied  = 
+					{
+						ROUTE_Ramp_Back_Door  = 
+						{
+						},
+					},
+				},
+			},
+		},
+		BUILD_barrier_roasts_on_the_left =
+		{
+		},
+		PLANT_barrier_roasts_on_the_left =
+		{
+		},
+		PLANT_baricade_of_rock =
+		{
+		},
+		BUILD_defensive_Allied_MG42_Construction_on_left_spawn =
+		{
+		},
+		PLANT_defensive_Allied_MG42_Construction_on_left_spawn =
+		{
+		},
+		BUILD_Old_City_MG_Nest =
+		{
+		},
+		PLANT_Old_City_MG_Nest =
+		{
+		},
+		BUILD_Allied_Command_Post =
+		{
+		},
+		PLANT_Allied_Command_Post =
+		{
+		},
+		BUILD_Axis_Command_Post =
+		{
+		},
+		PLANT_Axis_Command_Post =
+		{
+		},
+		BUILD_Garrison_MG_Nest =
+		{
+		},
+		PLANT_Garrison_MG_Nest =
+		{
+		},
+            };
+		MapRoutes["DEFEND_Military.*"] =
+		{
+			ROUTE_Axis_Spawn  = 
+			{     
+				ROUTE_MG42_4  = 
+				{
+				     ROUTE_Top_Military 
+				},
+			},
+		};
+
+	MapRoutes["ATTACK_Military.*"] = MapRoutes.PLANT_military_warehouse_artillery_B_Site_B;
+	MapRoutes["ATTACK_Rocket.*"] = MapRoutes.PLANT_rocket_launcher__B_Site_A;
+	Util.Routes(MapRoutes);
+};

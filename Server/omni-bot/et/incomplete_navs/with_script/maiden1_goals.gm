@@ -1,0 +1,250 @@
+global _MG = 
+{
+	AMMOCAB_456 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(2620.000, -236.000, 116.000),
+		Range = 1250,
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	AMMOCAB_t10006 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(48.000, 396.000, 759.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	AMMOCAB_t2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "AMMOCAB",
+		Position = Vec3(3876.000, -4055.000, 658.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	BUILD_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(3081.000, -3987.000, 548.000),
+		TeamAvailability = 4,
+	},
+	BUILD_MG_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(4021.000, -3209.000, 641.000),
+		TagName = "MG",
+		TeamAvailability = 4,
+	},
+	BUILD_MG_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(2689.000, 629.000, 545.000),
+		TagName = "MG",
+		TeamAvailability = 2,
+	},
+	CAPPOINT_Truck = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(254.723, -3833.334, 519.125),
+	},
+	CHECKPOINT_flag_flag = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "CHECKPOINT",
+		Position = Vec3(256.000, 336.000, 776.000),
+	},
+	FLAG_Maiden = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(1432.000, -949.000, 321.125),
+		TeamAvailability = 4,
+	},
+	HEALTHCAB_653 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(1168.000, -48.000, 148.000),
+		Range = 1250,
+		TagName = "",
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_t1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(3709.000, -4055.000, 658.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	HEALTHCAB_t10005 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "HEALTHCAB",
+		Position = Vec3(48.000, 451.000, 759.000),
+		Range = 1250,
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(3006.000, -3830.000, 587.000),
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_MG_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(3924.000, -3075.000, 680.000),
+		TagName = "MG",
+		TeamAvailability = 6,
+	},
+	MOUNTMG42_MG_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOUNTMG42",
+		MaxCampTime = 30,
+		MinCampTime = 15,
+		Position = Vec3(2605.000, 512.000, 581.000),
+		TagName = "MG",
+		TeamAvailability = 6,
+	},
+	MOVER_const_tower = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3155.000, -3992.000, 552.000),
+		TeamAvailability = 6,
+	},
+	MOVER_const_tower2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(4016.794, -3217.333, 634.000),
+		TeamAvailability = 4,
+	},
+	MOVER_const_tower2_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(4056.000, -3252.000, 644.000),
+		TagName = "const_tower2",
+		TeamAvailability = 6,
+	},
+	MOVER_const_tower3 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(2697.794, 583.668, 538.000),
+		TeamAvailability = 4,
+	},
+	MOVER_const_tower3_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(2732.000, 647.000, 546.000),
+		TagName = "const_tower3",
+		TeamAvailability = 6,
+	},
+	MOVER_const_tower_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3078.793, -4006.832, 541.000),
+		TagName = "const_tower",
+		TeamAvailability = 4,
+	},
+	MOVER_maiden_brush = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1422.000, -994.500, 348.000),
+		TeamAvailability = 6,
+	},
+	MOVER_mg42_bridge_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3897.785, -3047.784, 626.000),
+		TeamAvailability = 6,
+	},
+	MOVER_mg42_bridge_clip_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3005.000, -3816.000, 533.000),
+		TagName = "mg42_bridge_clip",
+		TeamAvailability = 6,
+	},
+	PLANT_MG = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(3007.686, -3804.408, 532.000),
+		TeamAvailability = 2,
+	},
+	PLANT_MG_1 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(3896.961, -3045.523, 625.000),
+		TagName = "MG",
+		TeamAvailability = 2,
+	},
+	PLANT_MG_2 = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(2605.694, 522.130, 529.000),
+		TagName = "MG",
+		TeamAvailability = 4,
+	},
+	PLANT_Prison_Wall = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1408.000, -1004.000, 512.000),
+		TagName = "Prison Wall",
+		TeamAvailability = 4,
+	},
+	REPAIRMG42_MG = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(3006.000, -3830.000, 587.000),
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_MG_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(3924.000, -3075.000, 680.000),
+		TagName = "MG",
+		TeamAvailability = 6,
+	},
+	REPAIRMG42_MG_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "REPAIRMG42",
+		Position = Vec3(2605.000, 512.000, 581.000),
+		TagName = "MG",
+		TeamAvailability = 6,
+	},
+	Version = 1,
+};

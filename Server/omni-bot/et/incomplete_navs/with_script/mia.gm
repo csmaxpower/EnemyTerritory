@@ -1,0 +1,367 @@
+//==========================================================================================
+//
+//  Missing in Action v1 - mia.gm
+//
+//  Who         When            What
+//------------------------------------------------------------------------------------------
+//  Mateos      06/12/2013      Initial Script
+//
+//==========================================================================================
+
+/****************************************************
+Waypoint mapping and script by Mateos
+Correspondant WAY file size: -
+Last Update: 28th Jan 2015
+****************************************************/
+
+/*
+ * TODO :
+ * - Finish waypoint mapping for bots; Test for stuckage
+ * - Goal management based on map author wishes
+ * - Don't forget to set Debug at 0 before sending this to Assembla repo /!\
+ */
+
+global Map =
+{
+    Debug = 0,  // Please set to zero before distributing your script
+    ShowMovers = false,
+
+    Allied_CP_Dyno = 0,
+    Axis_CP_Dyno = 0,
+    maingate_Dyno = 0,
+
+    // Keep these movers
+	Movers =
+	{
+        "MOVER_huey",
+    },
+
+    // Paththrough Navigation
+    Navigation =
+	{
+        // The USE button must be pressed to take the MIA's
+		mia =
+		{
+			navigate = function(_this)
+			{
+                // Adding the spot to the wpTable
+				wpTable = {};
+				Wp.GetWaypointByName( "MIA",  wpTable );
+
+                // Limit to Allies
+                _this.LimitToTeam( TEAM.ALLIES );
+
+                // Required action to take the MIA's... Well, it works.
+                if ( _this.Goto( wpTable.position ) == EVENT.PATH_SUCCESS )
+				{
+					_this.AddAimRequest( Priority.High, "facing", wpTable.facing );
+
+                    sleep(1);
+
+                    _this.Bot.HoldButton( BTN.USE, 0.5 );
+                    _this.Bot.HoldButton( BTN.STRAFE_L, 0.1 );
+
+                    sleep(0.5);
+
+                    _this.Bot.HoldButton( BTN.USE, 0.5 );
+                }
+
+				yield();
+			},
+		},
+
+        mia_1 =
+		{
+			navigate = function(_this)
+			{
+                // Adding the spot to the wpTable
+				wpTable = {};
+                Wp.GetWaypointByName( "MIA1", wpTable );
+
+                // Limit to Allies
+                _this.LimitToTeam( TEAM.ALLIES );
+
+                // Required action to take the MIA's... Well, it works.
+                if ( _this.Goto( wpTable.position ) == EVENT.PATH_SUCCESS )
+				{
+					_this.AddAimRequest( Priority.High, "facing", wpTable.facing );
+
+                    sleep(1);
+
+                    _this.Bot.HoldButton( BTN.USE, 0.5 );
+                    _this.Bot.HoldButton( BTN.STRAFE_L, 0.05 );
+                    sleep(0.5);
+                    _this.Bot.HoldButton( BTN.USE, 0.5 );
+                }
+
+				yield();
+			},
+		},
+
+        mia_2 =
+		{
+			navigate = function(_this)
+			{
+                // Adding the spot to the wpTable
+				wpTable = {};
+                Wp.GetWaypointByName( "MIA2", wpTable );
+
+                // Limit to Allies
+                _this.LimitToTeam( TEAM.ALLIES );
+
+                // Required action to take the MIA's... Well, it works.
+                if ( _this.Goto( wpTable.position ) == EVENT.PATH_SUCCESS )
+				{
+					_this.AddAimRequest( Priority.High, "facing", wpTable.facing );
+
+                    sleep(1);
+
+                    _this.Bot.HoldButton( BTN.USE, 0.5 );
+                    _this.Bot.HoldButton( BTN.STRAFE_L, 0.1 );
+
+                    sleep(0.5);
+
+                    _this.Bot.HoldButton( BTN.USE, 0.5 );
+                }
+
+				yield();
+			},
+		},
+	},
+
+    Allied_CP_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Allied_CP_Built" );
+    },
+
+    Axis_CP_Built = function( trigger )
+    {
+        Util.MapDebugPrint( "Axis_CP_Built" );
+    },
+
+    Allied_CP_Planted = function( trigger )
+    {
+        Map.Allied_CP_Dyno += 1;
+
+        Util.MapDebugPrint( "Allied_CP_Planted" );
+    },
+
+    Axis_CP_Planted = function( trigger )
+    {
+        Map.Axis_CP_Dyno += 1;
+
+        Util.MapDebugPrint( "Axis_CP_Planted" );
+    },
+
+    maingate_Planted = function( trigger )
+    {
+        Map.maingate_Dyno += 1;
+
+        Util.MapDebugPrint( "maingate_Planted" );
+    },
+
+    Allied_CP_Defused = function( trigger )
+    {
+        Map.Allied_CP_Dyno -= 1;
+
+        Util.MapDebugPrint( "Allied_CP_Defused" );
+    },
+
+    Axis_CP_Defused = function( trigger )
+    {
+        Map.Axis_CP_Dyno -= 1;
+
+        Util.MapDebugPrint( "Axis_CP_Defused" );
+    },
+
+    maingate_Defused = function( trigger )
+    {
+        Map.maingate_Dyno -= 1;
+
+        Util.MapDebugPrint( "maingate_Defused" );
+    },
+
+    Allied_CP_Destroyed = function( trigger )
+    {
+        Map.Allied_CP_Dyno = 0;
+
+        Util.MapDebugPrint( "Allied_CP_Destroyed" );
+    },
+
+    Axis_CP_Destroyed = function( trigger )
+    {
+        Map.Axis_CP_Dyno = 0;
+
+        Util.MapDebugPrint( "Axis_CP_Destroyed" );
+    },
+
+    maingate_Destroyed = function( trigger )
+    {
+        Map.maingate_Dyno = 0;
+
+        // To avoid FLAG.* path failed
+        sleep(0.5);
+
+        // *** ALLIED GOALS ***
+        SetAvailableMapGoals( TEAM.ALLIES, true, {
+        	"FLAG_.*",
+        	"PLANT_Axis_CP",
+        	"CAPPOINT_Dropoff",
+        });
+
+        Util.MapDebugPrint( "maingate_Destroyed" );
+    },
+
+    mia_Taken = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_Taken" );
+    },
+
+    mia_1_Taken = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_1_Taken" );
+    },
+
+    mia_2_Taken = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_2_Taken" );
+    },
+
+    mia_Returned = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_Returned" );
+    },
+
+    mia_1_Returned = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_1_Returned" );
+    },
+
+    mia_2_Returned = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_2_Returned" );
+    },
+
+    mia_Secured = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_Secured" );
+    },
+
+    mia_1_Secured = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_1_Secured" );
+    },
+
+    mia_2_Secured = function( trigger )
+    {
+        Util.MapDebugPrint( "mia_2_Secured" );
+    },
+};
+
+global OnMapLoad = function()
+{
+    // *** TRIGGERS ***
+    OnTrigger( "Allied Command Post constructed. Charge speed increased!", Map.Allied_CP_Built );
+    OnTrigger( "Axis Command Post constructed. Charge speed increased!", Map.Axis_CP_Built );
+    OnTrigger( "Planted at the Allied CP.", Map.Allied_CP_Planted );
+    OnTrigger( "Planted at the Axis CP.", Map.Axis_CP_Planted );
+    OnTrigger( "Planted at The maingate.", Map.maingate_Planted );
+    OnTrigger( "Defused at the Allied CP.", Map.Allied_CP_Defused );
+    OnTrigger( "Defused at the Axis CP.", Map.Axis_CP_Defused );
+    OnTrigger( "Defused at The maingate.", Map.maingate_Defused );
+    OnTrigger( "Axis team has destroyed the Allied Command Post!", Map.Allied_CP_Destroyed );
+    OnTrigger( "Allied team has destroyed the Axis Command Post!", Map.Axis_CP_Destroyed );
+    OnTrigger( "The Allies have destroyed the maingate!", Map.maingate_Destroyed );
+
+    OnTrigger( "Allied have rescued the first soldier", Map.mia_Taken );
+    OnTrigger( "Allied have rescued the second soldier", Map.mia_1_Taken );
+    OnTrigger( "Allied have rescued the third soldier", Map.mia_2_Taken );
+    // OnTrigger( "Flag stolen mia!", Map.mia_Taken );
+    // OnTrigger( "Flag stolen mia_1!", Map.mia_1_Taken );
+    // OnTrigger( "Flag stolen mia_2!", Map.mia_2_Taken );
+
+    OnTrigger( "Charlie have brought m.i.a. one back to cage", Map.mia_Returned );
+    OnTrigger( "Charlie have brought m.i.a. two back to cage", Map.mia_1_Returned );
+    OnTrigger( "Charlie have brought third m.i.a. back to cage", Map.mia_2_Returned );
+    OnTrigger( "Allied team has brought the first m.i.a to safety!", Map.mia_Secured );
+    OnTrigger( "Allied team has brought the second m.i.a to safety!", Map.mia_1_Secured );
+    OnTrigger( "Allied team has brought the last m.i.a to safety!", Map.mia_2_Secured );
+
+    // *** CLEAR ALL GOALS FOR BOTH TEAMS ***
+    Util.DisableGoal( ".*" );
+
+    Util.EnableGoal("AMMOCAB_.*");
+    Util.EnableGoal("HEALTHCAB_.*");
+    Util.EnableGoal("MOUNTMG42_Outter_MG");
+
+    // *** AXIS GOALS ***
+    SetAvailableMapGoals( TEAM.AXIS, true, {
+        "ARTILLERY_S_Chopper_Landing_Area",
+        "BUILD_Axis_CP",
+        "CALLARTILLERY_Axis_Position",
+        "DEFEND_Alpha.*",
+        "MOUNTMG42_Axis_Camp_MG",
+        "SNIPE_Alpha_Axis",
+    });
+
+    // *** ALLIED GOALS ***
+    SetAvailableMapGoals( TEAM.ALLIES, true, {
+        "ARTILLERY_S_Axis_Camp_MG",
+        "ATTACK_Alpha.*",
+        "BUILD_Allied_CP",
+        "CALLARTILLERY_Allied_Position",
+        "MOUNTMG42_Allied_Camp_MG",
+        "PLANT_maingate",
+        "SNIPE_Alpha_Allies",
+    });
+
+    // *** GOAL PROPERTIES ***
+    Util.SetMaxUsers( 1, "ATTACK_.*" );
+    Util.SetMaxUsers( 1, "DEFEND_.*" );
+    Util.SetMaxUsers( 1, "MOUNTMG42_.*" );
+    Util.LimitToClass( "MOUNTMG42.*", TEAM.AXIS, CLASS.SOLDIER );
+    Util.LimitToClass( "MOUNTMG42.*", TEAM.ALLIES, CLASS.SOLDIER );
+    SetMapGoalProperties( "MOUNTMG42_.*", {MinCampTime = 15, MaxCampTime = 90} );
+
+    Util.MapDebugPrint( "Omni-bot 0.84+ map script for Missing in Action v1 executed." );
+};
+
+global OnBotJoin = function( bot )
+{
+    // Visible distance for bots
+    bot.MaxViewDistance = 2048;
+    bot.IgnoreTarget( GetGoal("MOVER_huey").GetEntity(), 9999 );
+};
+
+global InitializeRoutes = function()
+{
+    MapRoutes =
+    {
+        BUILD_Allied_CP =
+        {
+        },
+        BUILD_Axis_CP =
+        {
+        },
+        PLANT_Axis_CP =
+        {
+        },
+        PLANT_maingate =
+        {
+        },
+        PLANT_Allied_CP =
+        {
+        },
+        FLAG_mia_1 =
+        {
+        },
+        FLAG_mia_2 =
+        {
+        },
+        FLAG_mia =
+        {
+        },
+    };
+
+    Util.Routes(MapRoutes);
+};

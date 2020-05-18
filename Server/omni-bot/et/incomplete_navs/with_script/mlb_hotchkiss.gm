@@ -1,0 +1,343 @@
+// cs: this needs to be in the new format and tested.
+// d00d: converted to new format. needs a lot of work.
+// Mapname: mlb_hotchkiss
+// Omni Bot waypoint and script file by: Quantum Blade
+// Comments? Questions? Bugs? Find me at www.eptexasgaming.com
+// or www.quantumblade.com/ET
+// Version: Alpha 1
+
+global Map =
+{
+	Debug = false,
+	entranceGatesBlown = 0,
+	factoryWallBlown = false,
+	numExplosivesTaken = 0,
+	numExplosivesSecured = 0,
+	frontDoor = "closed",
+
+	Switches =
+	{
+		explosive_switch =
+		{
+			Enabled = true,
+			Priority = 1.0,
+			LimitBots = 2,
+			WaypointName = "explosive_switch",
+			LimitTeam = 0, // disabled initially.
+			LimitClass = Util.AllClasses,
+			// Debug = true,
+			// LimitDistance = 1000,
+		},
+	},
+
+	xploswitch_moving = function( trigger )
+	{
+		vel = ToVector(trigger.Action);
+		if ( vel.z > 0 && !Map.factoryWallBlown && Map.numExplosivesSecured == 2 )
+		{
+			Map.Switches.explosive_switch.LimitTeam = (1<<TEAM.ALLIES);
+			Util.MapDebugPrint("switch up!");
+		}
+		else if ( vel.z < 0 && !Map.factoryWallBlown && Map.numExplosivesSecured == 2 )
+		{
+			Map.Switches.explosive_switch.LimitTeam = (1<<TEAM.AXIS);
+			Util.MapDebugPrint("switch down!");
+		}
+	},
+
+	OnScaffoldBuilt = function(trigger)
+	{
+		Util.MapDebugPrint("in OnScaffoldBuilt");
+		SetAvailableMapGoals(TEAM.AXIS, true, "ROUTE_scaffold");
+	},
+
+	OnScaffoldDestroyed = function(trigger)
+	{
+		Util.MapDebugPrint("in OnScaffoldDestroyed");
+		SetAvailableMapGoals(TEAM.AXIS, false, "ROUTE_scaffold");
+	},
+
+	OnFirstExplosivePlaced = function(trigger)
+	{
+		Util.MapDebugPrint("One left to go!");
+	},
+
+	OnSecondExplosivePlaced = function(trigger)
+	{
+		Util.MapDebugPrint("Haha! Ready to countdown!");
+		Map.numExplosivesSecured = 2;
+		Map.Switches.explosive_switch.LimitTeam = (1<<TEAM.AXIS);
+	},
+
+	OnFactoryWallBreached = function(trigger)
+	{
+		Util.MapDebugPrint("Wall gone, turning off switch");
+		Map.Switches.explosive_switch.LimitTeam = 0;
+		Map.Switches.explosive_switch.Enabled = false;
+		Map.factoryWallBlown = true;
+
+		//This is a major map event. Basically the entire first half of the map now becomes
+		//useless as the axis gets a forward spawn, so we need to do a lot of enabling and
+		//disabling of map goals.
+		SetAvailableMapGoals(TEAM.ALLIES, false, {
+			"BUILD_Barricade",
+			"BUILD_Command_Post",
+			"DEFEND_206",
+			"MOUNTMG42_factory_mg_nest",
+			"MOUNTMG42_mg_allies_track",
+			"PLANT_protection_net",
+			"REPAIRMG42_mg_allies_track",
+		});
+		SetAvailableMapGoals(TEAM.ALLIES, true, {
+			"BUILD_generator",
+			"MOUNTMG42_631",
+			"MOUNTMG42_632",
+			"MOUNTMG42_mg_allies_track",
+			"MOUNTMG42_t382",
+			"PLANT_factory_mg_nest",
+			"PLANT_missile",
+		});
+
+		SetAvailableMapGoals(TEAM.AXIS, false, {
+			"BUILD_Command_Post",
+			"BUILD_protection_net",
+			"BUILD_scaffolding",
+			"CAPPOINT_310",
+			"CAPPOINT_explosive_timer",
+			"FLAG_gold",
+			"MOUNTMG42_factory_mg_nest",
+			"MOUNTMG42_mg_allies_track",
+			"PLANT_factory_entrance_gates",
+			"REPAIRMG42_631",
+			"REPAIRMG42_factory_mg_nest",
+		});
+		SetAvailableMapGoals(TEAM.AXIS, true, {
+			"BUILD_factory_mg_nest",
+			"MOUNTMG42_631",
+			"MOUNTMG42_632",
+			"PLANT_factory_main_gate",
+			"PLANT_factory_mg_nest",
+			"PLANT_generator",
+			"PLANT_missile",
+		});
+
+		SetGoalPriority("PLANT_factory_mg_nest", 0.5);
+
+		Util.MapDebugPrint("updated available goals!");
+
+		foreach(bot in BotTable)
+		{
+			if(bot.GetTeam() == TEAM.ALLIES)
+			{
+				bot.ExecCommand("kill");
+			}
+		}
+		// print("killed allies");
+	},
+
+	OnFrontDoor = function(trigger)
+	{
+		if(frontDoor == "closed")
+		{
+			frontDoor = "open";
+			//add code to make axis want to come close it
+		}
+		else
+		{
+			frontDoor = "closed";
+			//add code to make allies want to come open it
+		}
+	},
+
+	OnPlantEntranceGates = function(trigger)
+	{
+	},
+
+};
+global OnMapLoad = function()
+{
+	Util.MapDebugPrint("In script file!!!");
+	OnTrigger("^6The first explosive charge has been placed!!!!", Map.OnFirstExplosivePlaced);
+	//OnTrigger("^6The second explosive charge has been placed!!!!", Map.OnSecondExplosivePlaced);
+	OnTrigger("^6The charges is ready to be armed!!!!", Map.OnSecondExplosivePlaced);
+	OnTrigger("^6The factory main wall has been breached !!!", Map.OnFactoryWallBreached);
+	OnTrigger("^6The scaffolding has been built", Map.OnScaffoldBuilt);
+	OnTrigger("^6The scaffolding has been destroyed", Map.OnScaffoldDestroyed);
+	OnTrigger("frontdoor_lever1_goto", Map.OnFrontDoor);
+	OnTrigger("^6Planted at the factory entrance gates.", Map.OnPlantEntranceGates);
+	OnTrigger("base_lever2_goto", Map.xploswitch_moving);
+	Util.MapDebugPrint("Trigger callbacks registered");
+
+	SetAvailableMapGoals(TEAM.ALLIES, false, {
+		"AMMO.*",
+		"BUILD_generator",
+		"HEALTH.*",
+		"MOUNTMG42_631",
+		"MOUNTMG42_632",
+		"MOUNTMG42_factory_mg_nest",
+		"MOUNTMG42_mg_allies_track",
+		"MOUNTMG42_t382",
+		"PLANT_factory_main_gate",
+		"PLANT_factory_mg_nest",
+		"PLANT_generator",
+		"PLANT_missile",
+	});
+
+	SetAvailableMapGoals(TEAM.AXIS, false, {
+		"AMMO.*",
+		"BUILD_Command_Post",
+		"BUILD_factory_mg_nest",
+		"BUILD_generator",
+		"BUILD_protection_net",
+		"HEALTH.*",
+		"MOUNTMG42_631",
+		"MOUNTMG42_632",
+		"MOUNTMG42_mg_allies_track",
+		"MOUNTMG42_t382",
+		"PLANT_factory_main_gate",
+		"PLANT_factory_mg_nest",
+		"PLANT_generator",
+		"PLANT_missile",
+		"ROUTE_scaffold",
+	});
+
+	Util.MapDebugPrint("Available Goals set!");
+
+	SetGoalPriority("PLANTMINE_.*", 0.0);
+	SetGoalPriority("HEALTHCAB_north_healthcabinet", 0.0);
+	SetGoalPriority("AMMOCAB_north_ammocabinet", 0.0);
+	// SetGoalPriority("BUILD_Barricade", 5.0);
+
+	Maproutes =
+	{
+		PLANT_factory_entrance_gates =
+		{
+			ROUTE_axis_spawn1 =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+			ROUTE_axis_spawn1b =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+		},
+		FLAG_gold =
+		{
+			ROUTE_axis_spawn1 =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+			ROUTE_axis_spawn1b =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+		},
+		BUILD_Command_Post =
+		{
+			ROUTE_axis_spawn1 =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+			ROUTE_axis_spawn1b =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+		},
+		MOUNTMG42_mg_allies_track =
+		{
+			ROUTE_axis_spawn1 =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+			ROUTE_axis_spawn1b =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+		},
+		PLANT_Command_Post =
+		{
+			ROUTE_axis_spawn1 =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+			ROUTE_axis_spawn1b =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+		},
+		PLANT_Barricade =
+		{
+			ROUTE_axis_spawn1 =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+			ROUTE_axis_spawn1b =
+			{
+				ROUTE_scaffold = {},
+				ROUTE_axis_spawn1_left_exit =
+				{
+					ROUTE_jumpdown_window = {},
+				},
+			},
+		},
+	};
+	Util.Routes(Maproutes);
+	Util.SetGoalOffset(-22,0,0,"PLANT_factory_entrance_gates");
+	Util.SetGoalOffset(-30,0,0,"PLANT_factory_main_gate");
+	Util.SetGoalOffset(-18,-51,-19,"BUILD_scaffolding");
+	Util.SetGoalPosition( 3934, 3233, 524, "PLANT_missile" );
+	// Util.SetGoalOffset(-100,0,0,"MAP_DYNAMITE_TARGET_td"); //td is the scaffold
+	// Util.SetGoalOffset(-100,0,0,"PLANT_Barricade"); //te is the barrier near cp
+	// Util.ResetGoals();
+	Util.UpdateSwitchData();
+	Util.MapDebugPrint("End OnMapLoad");
+};
+
+global OnBotJoin = function(bot)
+{
+	bot.MaxViewDistance = 2500;
+};

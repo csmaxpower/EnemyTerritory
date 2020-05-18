@@ -1,0 +1,299 @@
+global _MG = 
+{
+	BUILD_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(3225.000, 5375.400, 388.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	BUILD_Foot_Bridge = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "BUILD",
+		Position = Vec3(3790.000, 3738.000, 198.000),
+		Stance = "stand",
+		TagName = "Foot Bridge",
+		TeamAvailability = 4,
+	},
+	CAPPOINT_dino1 = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(-910.905, 6305.717, 225.125),
+	},
+	CAPPOINT_dino2 = 
+	{
+		GoalType = "CapPoint",
+		MinRadius = 32,
+		Position = Vec3(1214.845, 7242.139, 265.159),
+	},
+	DEFEND_gate = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.223, 0.975, -0.021),
+			[1] = Vec3(0.644, 0.765, 0.009),
+			[2] = Vec3(0.993, -0.109, -0.040),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(1176.346, 2771.910, 171.751),
+		Radius = 32,
+	},
+	DEFEND_gate_1 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.403, 0.915, -0.002),
+			[1] = Vec3(0.217, 0.976, -0.015),
+			[2] = Vec3(0.993, 0.119, -0.021),
+			[3] = Vec3(-0.517, 0.855, -0.023),
+			[4] = Vec3(-0.323, 0.946, -0.021),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(1579.562, 2430.011, 177.125),
+		Radius = 32,
+		TagName = "gate",
+	},
+	DEFEND_gate_2 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(-0.287, 0.958, 0.003),
+			[1] = Vec3(-0.153, 0.988, 0.002),
+			[2] = Vec3(0.750, 0.661, 0.014),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(1407.118, 2483.305, 169.321),
+		Radius = 32,
+		TagName = "gate",
+	},
+	DEFEND_gate_3 = 
+	{
+		AimVectors = 
+		{
+			[0] = Vec3(0.008, 1.000, -0.002),
+			[1] = Vec3(0.124, 0.992, 0.008),
+			[2] = Vec3(0.256, 0.966, 0.017),
+			[3] = Vec3(0.741, 0.671, 0.017),
+			[4] = Vec3(0.948, 0.317, 0.003),
+		},
+		GoalType = "Defend",
+		MaxCampTime = 20,
+		MinCampTime = 10,
+		MinRadius = 32,
+		Position = Vec3(1234.419, 2405.322, 169.233),
+		Radius = 32,
+		TagName = "gate",
+	},
+	FLAG_dyno = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(920.000, 3600.000, 179.583),
+		TeamAvailability = 4,
+	},
+	FLAG_dyno2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(1128.000, 3576.000, 163.948),
+		TeamAvailability = 4,
+	},
+	FLAG_dyno2_dropped = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(45.177, 3943.253, 63.817),
+		TeamAvailability = 4,
+	},
+	FLAG_dyno_dropped = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "Flag",
+		Position = Vec3(563.830, 3861.045, 59.479),
+		TeamAvailability = 4,
+	},
+	MOVER_allied_cp_damaged = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3207.052, 5377.252, 388.000),
+		TeamAvailability = 6,
+	},
+	MOVER_axis_cp_damaged = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3207.052, 5377.252, 388.000),
+		TeamAvailability = 6,
+	},
+	MOVER_box_obj1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1336.000, 3888.000, 792.000),
+		TeamAvailability = 6,
+	},
+	MOVER_box_obj2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1336.000, 3896.000, 792.000),
+		TeamAvailability = 6,
+	},
+	MOVER_bridge = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-320.000, 4108.000, 200.000),
+		TeamAvailability = 6,
+	},
+	MOVER_bridge_broken = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-320.000, 4108.000, 200.000),
+		TeamAvailability = 6,
+	},
+	MOVER_broken_castle = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1888.000, 7280.000, 184.000),
+		TeamAvailability = 6,
+	},
+	MOVER_clip_push_1 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-912.000, 6064.000, 296.000),
+		TeamAvailability = 6,
+	},
+	MOVER_clip_push_2 = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1216.000, 6988.000, 312.000),
+		TeamAvailability = 6,
+	},
+	MOVER_east_gun_body = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1252.117, 7147.675, 481.000),
+		TeamAvailability = 6,
+	},
+	MOVER_east_gun_gun = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1367.683, 6859.809, 636.584),
+		TeamAvailability = 6,
+	},
+	MOVER_mainbroken = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1280.000, 3240.000, 325.500),
+		TeamAvailability = 6,
+	},
+	MOVER_neutral_cp_clip = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3183.406, 5417.135, 388.000),
+		TeamAvailability = 6,
+	},
+	MOVER_neutral_cp_closed = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(3200.000, 5413.500, 388.000),
+		TeamAvailability = 6,
+	},
+	MOVER_polestand = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(800.000, 1504.000, 180.000),
+		TeamAvailability = 6,
+	},
+	MOVER_unbroken_castle = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(1888.000, 7280.000, 188.000),
+		TeamAvailability = 6,
+	},
+	MOVER_west_gun_body = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-870.570, 6263.401, 465.000),
+		TeamAvailability = 6,
+	},
+	MOVER_west_gun_gun = 
+	{
+		CreateOnLoad = 0,
+		GoalType = "MOVER",
+		Position = Vec3(-764.799, 6042.612, 633.234),
+		TeamAvailability = 6,
+	},
+	PLANT_Broken_Wall = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1816.000, 7024.000, 160.000),
+		TagName = "Broken Wall",
+		TeamAvailability = 4,
+	},
+	PLANT_Cave_Entrance = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(3048.000, 2576.000, 224.000),
+		TagName = "Cave Entrance",
+		TeamAvailability = 4,
+	},
+	PLANT_Command_Post = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(3192.000, 5421.000, 388.000),
+		TagName = "Command Post",
+		TeamAvailability = 6,
+	},
+	PLANT_Foot_Bridge = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 3,
+		GoalType = "PLANT",
+		Position = Vec3(3943.500, 4025.000, 107.500),
+		TagName = "Foot Bridge",
+		TeamAvailability = 2,
+	},
+	PLANT_Main_Entrance = 
+	{
+		CreateOnLoad = 0,
+		ExplosiveType = 1,
+		GoalType = "PLANT",
+		Position = Vec3(1280.000, 3242.000, 328.000),
+		TagName = "Main Entrance",
+		TeamAvailability = 4,
+	},
+	Version = 1,
+};
