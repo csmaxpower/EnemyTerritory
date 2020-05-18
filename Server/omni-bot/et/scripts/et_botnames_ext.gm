@@ -78,7 +78,7 @@ AxisBots["^1))))^3Lis^7|^3a"] = t;
 
 // Covert Ops
 t = { class=CLASS.COVERTOPS, weapon=0, profile="" };
-AlliedBots["^jN^delso^jN"] = t;
+AlliedBots["^7bully|^4N^3e^dl^?s^3o^lN"] = t;
 //AlliedBots["Tarnok"] = t;
 //AlliedBots["Wens"] = t;
 //AlliedBots["Brohn"] = t;
@@ -108,7 +108,7 @@ t = { class=CLASS.FIELDOPS, weapon=0, profile="" };
 
 // Medics
 t = { class=CLASS.MEDIC, weapon=0, profile="" };
-AlliedBots["^hA^@p^hu"] = t;
+AlliedBots["^0|^hA^@p^hu^0|"] = t;
 //AlliedBots["Tarnen"] = t;
 //AlliedBots["Royen"] = t;
 //AlliedBots["Kaolin"] = t;
@@ -118,7 +118,7 @@ AlliedBots["^hA^@p^hu"] = t;
 
 // Soldiers
 t = { class=CLASS.SOLDIER, weapon=0, profile="" };
-AlliedBots["^bMr^j.^bB^7urn^bs"] = t;
+AlliedBots["^bMr^j.^bB^7urn^9$"] = t;
 //AlliedBots["Chan"] = t;
 //AlliedBots["Amadi"] = t;
 //AlliedBots["Zarna"] = t;
@@ -130,8 +130,8 @@ AlliedBots["^bMr^j.^bB^7urn^bs"] = t;
 // Overflow bots - used if no bots left for team / class desired
 global ExtraBots =
 {
-	"^1M^eilhou^1s^de",
-	"^jBa^drn^3e^ly",
+	"^1M^3i^flhou^3s^1:^de",
+	"^jBa^drn^3e^ly^7[^@DUFF^7]",
 	//"Icexo",
 	//"Tahlkora",
 	//"Bolund",
