@@ -39,7 +39,7 @@ t = { class=CLASS.ENGINEER, weapon=0, profile="" };
 //AxisBots["Anton"] = t;
 //AxisBots["Monty"] = t;
 //AxisBots["Bean"] = t;
-//AxisBots["^d))))^3Magg^1!^3e^d*"] = t;
+AxisBots["^d))))^3Magg^1!^3e^d*"] = t;
 //AxisBots["Backfire"] = t;
 //AxisBots["Halfwit"] = t;
 
