@@ -1,0 +1,506 @@
+	#include "ui/menudef.h"
+
+	#define DEFAULT_TEXT_SCALE 0.25
+
+	#define ORIGIN_QUICKMESSAGE		10 10
+
+	#define QM_MENU_GRADIENT_START_OFFSET
+
+	#define QM_MENU_START( WINDOWNAME )																			\
+																												\
+menuDef {																										\
+	name		WINDOWNAME																						\
+	visible		0																								\
+	fullscreen	0																								\
+	rect		0 100 680 380																					\
+	onOpen		{ setCvar cl_bypassMouseInput "1" }																\
+	onClose		{ setCvar cl_bypassMouseInput "0" }																\
+	onEsc		{ closeAll }																					\
+																												\
+	itemDef {																									\
+		name		"window"																					\
+		rect		0 19 204 136																				\
+		origin		ORIGIN_QUICKMESSAGE																			\
+		style		WINDOW_STYLE_FILLED																			\
+		backcolor	0 0 0 .75																					\
+		border		WINDOW_BORDER_FULL																			\
+		bordercolor	.5 .5 .5 .5																					\
+		visible		1																							\
+		decoration																								\
+	}																											\
+																												\
+	itemDef {																									\
+		name		"windowtitle"																				\
+		rect		$evalfloat((0)+2) $evalfloat((19)+2) $evalfloat((204)-4) 12									\
+		origin		ORIGIN_QUICKMESSAGE																			\
+		text		"^3www.^2clan-cs^3.net"																					\
+		textfont	UI_FONT_ARIBLK_16																			\
+		textscale	.19																							\
+		textalignx	3																							\
+		textaligny	10																							\
+		style		WINDOW_STYLE_FILLED																			\
+		backcolor	.16 .2 .17 .8																				\
+		forecolor	.6 .6 .6 1																					\
+		visible		1																							\
+		decoration																								\
+	}
+
+	#define QM_MENU_END }
+
+	#define QM_MENU_ITEM( WINDOWTEXT, ACTION, KEY, POS )				\
+    itemDef {															\
+		name			"menuitem"##WINDOWTEXT							\
+		rect			6 $evalfloat( 35 + ( 12 * POS )) 128 10			\
+		origin			ORIGIN_QUICKMESSAGE								\
+		type			ITEM_TYPE_TEXT									\
+		text			WINDOWTEXT										\
+		textfont		UI_FONT_COURBD_21								\
+		textstyle		ITEM_TEXTSTYLE_SHADOWED							\
+		textscale		.2												\
+		textaligny		8												\
+		forecolor		.6 .6 .6 1										\
+		visible			1												\
+		decoration														\
+    }																	\
+    execKey KEY { ACTION }
+
+	#define QM_MENU_ITEM_TEAM( WINDOWTEXT, ACTION, KEY, POS )			\
+    itemDef {															\
+		name			"menuitem"##WINDOWTEXT							\
+		rect			6 $evalfloat( 35 + ( 12 * POS )) 128 10			\
+		origin			ORIGIN_QUICKMESSAGE								\
+		type			ITEM_TYPE_TEXT									\
+		text			WINDOWTEXT										\
+		textfont		UI_FONT_COURBD_21								\
+		textstyle		ITEM_TEXTSTYLE_SHADOWED							\
+		textscale		.2												\
+		textaligny		8												\
+		forecolor		.6 .6 .6 1										\
+		visible			1												\
+		decoration														\
+    }																	\
+	execKey KEY { ACTION }
+
+QM_MENU_START( "wm_quickmessageAlt" )
+
+	QM_MENU_ITEM_TEAM( 	"1. Statements", 	close wm_quickmessageAlt; 	open wm_quickstatements_alt, 	"1", 0 )
+	QM_MENU_ITEM_TEAM( 	"2. Requests", 		close wm_quickmessageAlt; 	open wm_quickrequests_alt, 		"2", 1 )
+	QM_MENU_ITEM_TEAM( 	"3. Commands", 		close wm_quickmessageAlt; 	open wm_quickcommand_alt, 		"3", 2 )
+	QM_MENU_ITEM_TEAM( 	"4. Talk",		 	close wm_quickmessageAlt; 	open wm_quickmisc_alt, 			"4", 3 )
+	QM_MENU_ITEM( 		"5. Global",	 	close wm_quickmessageAlt; 	open wm_quickglobal_alt, 		"5", 4 )
+	QM_MENU_ITEM_TEAM( 	"6. Function", 		exec "wm_sayPlayerClass"; 	close wm_quickmessageAlt,		"6", 5 )
+	QM_MENU_ITEM_TEAM( 	"7. Objectives", 	close wm_quickmessageAlt; 	open wm_quickobjectives_alt, 	"7", 6 )
+	QM_MENU_ITEM(		"8. ^2{^3*CS^3*^2} ^4Soundpack",	close wm_quickmessageAlt ;	open wm_quicktas_alt, "8", 7 )
+	QM_MENU_ITEM(		"9. ^2{^3*CS^3*^2} Soundpack2", close wm_quickmessageALT ;	open wm_quickcs_alt, "9", 8 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickstatements_alt" )
+
+	QM_MENU_ITEM_TEAM( "1. Path Cleared.", 		exec "VoiceTeamChat PathCleared"; 		close wm_quickstatements_alt,	"1", 0 )
+	QM_MENU_ITEM_TEAM( "2. Enemy Weak!", 		exec "VoiceTeamChat EnemyWeak"; 		close wm_quickstatements_alt, 	"2", 1 )
+	QM_MENU_ITEM_TEAM( "3. All Clear", 			exec "VoiceTeamChat AllClear"; 			close wm_quickstatements_alt,	"3", 2 )
+	QM_MENU_ITEM_TEAM( "4. Incoming", 			exec "VoiceTeamChat Incoming"; 			close wm_quickstatements_alt,	"4", 3 )
+	QM_MENU_ITEM_TEAM( "5. Fire In The Hole!", 	exec "VoiceTeamChat FireInTheHole"; 	close wm_quickstatements_alt,	"5", 4 )
+	QM_MENU_ITEM_TEAM( "6. I'm Defending.", 	exec "VoiceTeamChat OnDefense"; 		close wm_quickstatements_alt,	"6", 5 )
+	QM_MENU_ITEM_TEAM( "7. I'm Attacking.", 	exec "VoiceTeamChat OnOffense"; 		close wm_quickstatements_alt,	"7", 6 )
+	QM_MENU_ITEM_TEAM( "8. Taking Fire!", 		exec "VoiceTeamChat TakingFire"; 		close wm_quickstatements_alt,	"8", 7 )
+	QM_MENU_ITEM_TEAM( "9. Mines Cleared", 		exec "VoiceTeamChat MinesCleared"; 		close wm_quickstatements_alt,	"9", 8 )
+	QM_MENU_ITEM_TEAM( "0. Enemy Disguised", 	exec "VoiceTeamChat EnemyDisguised";	close wm_quickstatements_alt,	"0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickrequests_alt" )
+
+	QM_MENU_ITEM_TEAM( "1. Need Medic!", 		exec "VoiceTeamChat Medic"; 		close wm_quickrequests_alt,	"1", 0 )
+	QM_MENU_ITEM_TEAM( "2. Need Ammo!", 		exec "VoiceTeamChat NeedAmmo"; 		close wm_quickrequests_alt,	"2", 1 )
+	QM_MENU_ITEM_TEAM( "3. Need Backup!", 		exec "VoiceTeamChat NeedBackup"; 	close wm_quickrequests_alt,	"3", 2 )
+	QM_MENU_ITEM_TEAM( "4. Need Engineer!", 	exec "VoiceTeamChat NeedEngineer"; 	close wm_quickrequests_alt,	"4", 3 )
+	QM_MENU_ITEM_TEAM( "5. Cover Me!", 			exec "VoiceTeamChat CoverMe"; 		close wm_quickrequests_alt,	"5", 4 )
+	QM_MENU_ITEM_TEAM( "6. Hold Fire!",			exec "VoiceTeamChat HoldFire";	 	close wm_quickrequests_alt, "6", 5 )
+	QM_MENU_ITEM_TEAM( "7. Where To?", 			exec "VoiceTeamChat WhereTo"; 		close wm_quickrequests_alt,	"7", 6 )
+	QM_MENU_ITEM_TEAM( "8. Need Covert Ops!", 	exec "VoiceTeamChat NeedOps"; 		close wm_quickrequests_alt,	"8", 7 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickcommand_alt" )
+
+	QM_MENU_ITEM_TEAM( "1. Follow Me!", 		exec "VoiceTeamChat FollowMe"; 			close wm_quickcommand_alt, 	"1", 0 )
+	QM_MENU_ITEM_TEAM( "2. Let's Go!", 			exec "VoiceTeamChat LetsGo"; 			close wm_quickcommand_alt, 	"2", 1 )
+	QM_MENU_ITEM_TEAM( "3. Move!", 				exec "VoiceTeamChat Move"; 				close wm_quickcommand_alt, 	"3", 2 )
+	QM_MENU_ITEM_TEAM( "4. Clear The Path!", 	exec "VoiceTeamChat ClearPath"; 		close wm_quickcommand_alt, 	"4", 3 )
+	QM_MENU_ITEM_TEAM( "5. Defend Objective!", 	exec "VoiceTeamChat DefendObjective"; 	close wm_quickcommand_alt, 	"5", 4 )
+	QM_MENU_ITEM_TEAM( "6. Disarm Dynamite!", 	exec "VoiceTeamChat DisarmDynamite"; 	close wm_quickcommand_alt, 	"6", 5 )
+	QM_MENU_ITEM_TEAM( "7. Clear Mines!", 		exec "VoiceTeamChat ClearMines"; 		close wm_quickcommand_alt, 	"7", 6 )
+	QM_MENU_ITEM_TEAM( "8. Reinforce Offense", 	exec "VoiceTeamChat ReinforceOffense"; 	close wm_quickcommand_alt,	"8", 7 )
+	QM_MENU_ITEM_TEAM( "9. Reinforce Defense", 	exec "VoiceTeamChat ReinforceDefense"; 	close wm_quickcommand_alt,	"9", 8 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickmisc_alt" )
+
+	QM_MENU_ITEM_TEAM( "1. Yes",			exec "VoiceTeamChat Affirmative"; 	close wm_quickmisc_alt, "1", 0 )
+	QM_MENU_ITEM_TEAM( "2. No",				exec "VoiceTeamChat Negative"; 		close wm_quickmisc_alt, "2", 1 )
+	QM_MENU_ITEM_TEAM( "3. Thanks",			exec "VoiceTeamChat Thanks"; 		close wm_quickmisc_alt, "3", 2 )
+	QM_MENU_ITEM_TEAM( "4. Welcome",		exec "VoiceTeamChat Welcome"; 		close wm_quickmisc_alt, "4", 3 )
+	QM_MENU_ITEM_TEAM( "5. Sorry",			exec "VoiceTeamChat Sorry"; 		close wm_quickmisc_alt, "5", 4 )
+	QM_MENU_ITEM_TEAM( "6. Oops", 			exec "VoiceTeamChat Oops"; 			close wm_quickmisc_alt, "6", 5 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickglobal_alt" )
+
+	QM_MENU_ITEM( "1. Yes",				exec "VoiceChat Affirmative"; 	close wm_quickglobal_alt, 	"1", 0 )
+	QM_MENU_ITEM( "2. No",				exec "VoiceChat Negative"; 		close wm_quickglobal_alt, 	"2", 1 )
+	QM_MENU_ITEM( "3. Enemy Weak",		exec "VoiceChat EnemyWeak";		close wm_quickglobal_alt, 	"3", 2 )
+	QM_MENU_ITEM( "4. Hi",				exec "VoiceChat Hi"; 			close wm_quickglobal_alt, 	"4", 3 )
+	QM_MENU_ITEM( "5. Bye",				exec "VoiceChat Bye"; 			close wm_quickglobal_alt, 	"5", 4 )
+	QM_MENU_ITEM( "6. Great Shot",		exec "VoiceChat GreatShot"; 	close wm_quickglobal_alt, 	"6", 5 )
+	QM_MENU_ITEM( "7. Cheer",			exec "VoiceChat Cheer"; 		close wm_quickglobal_alt, 	"7", 6 )
+	QM_MENU_ITEM( "8. More Globals",	close wm_quickglobal_alt;		open wm_quickglobal2_alt, 	"8", 7 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickglobal2_alt" )
+
+	QM_MENU_ITEM( "1. Thanks",		exec "VoiceChat Thanks";	close wm_quickglobal2_alt, 	"1", 0 )
+	QM_MENU_ITEM( "2. Welcome",		exec "VoiceChat Welcome"; 	close wm_quickglobal2_alt, 	"2", 1 )
+	QM_MENU_ITEM( "3. Oops",		exec "VoiceChat Oops"; 		close wm_quickglobal2_alt, 	"3", 2 )
+	QM_MENU_ITEM( "4. Sorry",		exec "VoiceChat Sorry"; 	close wm_quickglobal2_alt, 	"4", 3 )
+	QM_MENU_ITEM( "5. Hold Fire!",	exec "VoiceChat HoldFire";	close wm_quickglobal2_alt, 	"5", 4 )
+	QM_MENU_ITEM( "6. Good Game",	exec "VoiceChat GoodGame";	      close wm_quickglobal2_alt, 	"6", 5 )
+
+QM_MENU_END
+
+QM_MENU_START( "wm_quickobjectives_alt" )
+
+	QM_MENU_ITEM_TEAM( "1. Command Acknowledged",		      exec "VoiceTeamChat CommandAcknowledged"; 		close wm_quickobjectives_alt, "1", 0 )
+	QM_MENU_ITEM_TEAM( "2. Command Declined",			      exec "VoiceTeamChat CommandDeclined";			close wm_quickobjectives_alt, "2", 1 )
+	QM_MENU_ITEM_TEAM( "3. Command Completed",			exec "VoiceTeamChat CommandCompleted";			close wm_quickobjectives_alt, "3", 2 )
+	QM_MENU_ITEM_TEAM( "4. Destroy Primary Objective",	      exec "VoiceTeamChat DestroyPrimary"; 			close wm_quickobjectives_alt,	"4", 3 )
+	QM_MENU_ITEM_TEAM( "5. Destroy Secondary Objective",	      exec "VoiceTeamChat DestroySecondary";		      close wm_quickobjectives_alt,	"5", 4 )
+	QM_MENU_ITEM_TEAM( "6. Destroy Construction",		      exec "VoiceTeamChat DestroyConstruction";		      close wm_quickobjectives_alt,	"6", 5 )
+	QM_MENU_ITEM_TEAM( "7. Commencing Construction",	      exec "VoiceTeamChat ConstructionCommencing";	      close wm_quickobjectives_alt, "7", 6 )
+	QM_MENU_ITEM_TEAM( "8. Repair Vehicle",				exec "VoiceTeamChat RepairVehicle";				close wm_quickobjectives_alt,	"8", 7 )
+	QM_MENU_ITEM_TEAM( "9. Disable Vehicle",			      exec "VoiceTeamChat DestroyVehicle";			close wm_quickobjectives_alt,	"9", 8 )
+	QM_MENU_ITEM_TEAM( "0. Escort Vehicle",				exec "VoiceTeamChat EscortVehicle";				close wm_quickobjectives_alt,	"0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quicktas_alt" )
+
+	QM_MENU_ITEM( "1. Monty Python",	close wm_quicktas_alt ;				open wm_quickmontypython_alt,	"1", 0 )
+	QM_MENU_ITEM( "2. Duke Nukem",		close wm_quicktas_alt ;				open wm_quickduke_alt, 		"2", 1 )
+	QM_MENU_ITEM( "3. Full Metal",		close wm_quicktas_alt ;	 			open wm_quickfunny_alt,		"3", 2 )
+	QM_MENU_ITEM( "4. Family Guy",		close wm_quicktas_alt ;	 			open wm_quickfamilymain_alt, 	"4", 3 )
+	QM_MENU_ITEM( "5. Beavis & Butthead",	close wm_quicktas_alt ;	 		      	open wm_quickbeavismain_alt, 	"5", 4 )
+	QM_MENU_ITEM( "6. Random",	        close wm_quicktas_alt ;		 		open wm_quickrandommain_alt, 	"6", 5 )
+	QM_MENU_ITEM( "7. Red vs Blue",		close wm_quicktas_alt ;				open wm_quickrvb_alt, 		"7", 6 )
+	QM_MENU_ITEM( "8. FPS Doug",		close wm_quicktas_alt ;				open wm_quickfps_alt, 		"8", 7 )
+	QM_MENU_ITEM( "9. Special",		close wm_quicktas_alt ;				open wm_quickspecial_alt,	"9", 8 )
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickrandommain_alt" )
+
+	QM_MENU_ITEM( "1. Random Quotes 1",	close wm_quickrandommain_alt ;	 	open wm_quickrandom1_alt,       "1", 0 )
+	QM_MENU_ITEM( "2. Random Quotes 2",	close wm_quickrandommain_alt ;	 	open wm_quickrandom2_alt,       "2", 1 )
+
+
+QM_MENU_END
+
+
+QM_MENU_START ( "wm_quickmontypython_alt" )
+
+	QM_MENU_ITEM( "1. Fart ... General Direction",	      exec "VoiceChat mp_fart";			close wm_quickmontypython_alt,	"1", 0 )	
+	QM_MENU_ITEM( "2. Hamster ... Elderberries",	      exec "VoiceChat mp_hamster";		close wm_quickmontypython_alt,	"2", 1 )	
+	QM_MENU_ITEM( "3. Stop That!  It's Silly!",	      exec "VoiceChat mp_silly";		close wm_quickmontypython_alt,	"3", 2 )	
+	QM_MENU_ITEM( "4. Spam! Spam! Spam! Spam!",	      exec "VoiceChat mp_spam";			close wm_quickmontypython_alt,	"4", 3 )	
+	QM_MENU_ITEM( "5. Taunt A Second Time",		      exec "VoiceChat mp_taunt";		close wm_quickmontypython_alt,	"5", 4 )	
+        QM_MENU_ITEM( "6. It's just a flesh wound",	      exec "VoiceChat mp_flesh_wound";  	close wm_quickmontypython_alt, 	"6", 5 )
+        QM_MENU_ITEM( "7. I'm Invincible",		      exec "VoiceChat mp_Invincible"; 		close wm_quickmontypython_alt, 	"7", 6 )
+        QM_MENU_ITEM( "8. Knights who say Ni!",		      exec "VoiceChat mp_Knights_who_say_Ni"; 	close wm_quickmontypython_alt, 	"8", 7 )
+        QM_MENU_ITEM( "9. Bless my grenade",		      exec "VoiceChat mp_bless_grenade"; 	close wm_quickmontypython_alt, 	"9", 8 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickrandom1_alt" )
+
+	QM_MENU_ITEM( "1. Kickin' Own Ass", 		exec "VoiceChat random_asskicked";		close wm_quickrandom1_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Balls Are Showing", 		exec "VoiceChat random_balls";			close wm_quickrandom1_alt, "2", 1 )
+	QM_MENU_ITEM( "3. Kill me.. Kiss me.. Blow", 	exec "VoiceChat random_blow";			close wm_quickrandom1_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Box of Porn", 		exec "VoiceChat random_boxofporn";		close wm_quickrandom1_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Cat Poop", 			exec "VoiceChat random_catpoop";		close wm_quickrandom1_alt, "5", 4 )
+	QM_MENU_ITEM( "6. 20 Seconds", 		      	exec "VoiceChat random_20secs";	      		close wm_quickrandom1_alt, "6", 5 )      
+	QM_MENU_ITEM( "7. Fat B*tch", 			exec "VoiceChat random_fatbitch";	      	close wm_quickrandom1_alt, "7", 6 )
+	QM_MENU_ITEM( "8. Hahahahaha", 			exec "VoiceChat random_haha";		      	close wm_quickrandom1_alt, "8", 7 )  
+        QM_MENU_ITEM( "9. Porn on the internet",        exec "VoiceChat random_www";		        close wm_quickrandom1_alt, "9", 8 )
+	QM_MENU_ITEM( "0. Who you callin' jerk?",       exec "VoiceChat random_biker";			close wm_quickrandom1_alt, "0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickrandom2_alt" )
+
+	QM_MENU_ITEM( "1. I Suck", 			exec "VoiceChat random_isuck";		close wm_quickrandom2_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Jack Left Town", 		exec "VoiceChat random_jack";		close wm_quickrandom2_alt, "2", 1 )
+	QM_MENU_ITEM( "3. Kick The Noob!", 		exec "VoiceChat random_kick";		close wm_quickrandom2_alt, "3", 2 )
+        QM_MENU_ITEM( "4. That Is Nasty", 		exec "VoiceChat random_nasty";		close wm_quickrandom2_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Angry",	 		exec "VoiceChat random_angry";		close wm_quickrandom2_alt, "5", 4 )
+	QM_MENU_ITEM( "6. WahWah", 			exec "VoiceChat random_wahwah";		close wm_quickrandom2_alt, "6", 5 )
+        QM_MENU_ITEM( "7. Ooo the Germans",		exec "VoiceChat random_germans";	close wm_quickrandom2_alt, "7", 6 )
+	QM_MENU_ITEM( "8. Nazis",			exec "VoiceChat random_nazi";		close wm_quickrandom2_alt, "8", 7 )
+	QM_MENU_ITEM( "9. Boomstick",			exec "VoiceChat random_boomstick";	close wm_quickrandom2_alt, "9", 8 )
+	QM_MENU_ITEM( "0. Mwuahaha",			exec "VoiceChat random_evillaugh";	close wm_quickrandom2_alt, "0", 9 )
+
+QM_MENU_END
+
+
+QM_MENU_START ( "wm_quickfunny_alt" )
+
+	QM_MENU_ITEM( "1. 3 Seconds",			exec "VoiceChat fm_seconds";	      		close wm_quickfunny_alt, "1", 0 )	
+	QM_MENU_ITEM( "2. Best part of you",		exec "VoiceChat fm_crack";			close wm_quickfunny_alt, "2", 1 )	
+	QM_MENU_ITEM( "3. Tiffany Cufflinks",		exec "VoiceChat fm_cufflinks";	      		close wm_quickfunny_alt, "3", 2 )		
+	QM_MENU_ITEM( "4. I Like you!",			exec "VoiceChat fm_sister";		      	close wm_quickfunny_alt, "4", 3 )	
+	QM_MENU_ITEM( "5. Rip em off!",			exec "VoiceChat fm_balls";	      		close wm_quickfunny_alt, "5", 4 )	
+	QM_MENU_ITEM( "6. You suck!",			exec "VoiceChat fm_sucker";			close wm_quickfunny_alt, "6", 5 )	
+	QM_MENU_ITEM( "7. Unf%$! Yourself",		exec "VoiceChat fm_unfuck";			close wm_quickfunny_alt, "7", 6 )	
+	QM_MENU_ITEM( "8. WTF",				exec "VoiceChat fm_wtf";		      	close wm_quickfunny_alt, "8", 7 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickduke_alt" )
+
+	QM_MENU_ITEM( "1. Birth Control",		exec "VoiceChat duke_birthcontrol";		close wm_quickduke_alt,	"1", 0 )	
+	QM_MENU_ITEM( "2. That's Gotta Hurt!",		exec "VoiceChat duke_gottahurt";	      	close wm_quickduke_alt,	"2", 1 )	
+	QM_MENU_ITEM( "3. Hail To The King",		exec "VoiceChat duke_hail";		      	close wm_quickduke_alt,	"3", 2 )	
+	QM_MENU_ITEM( "4. What A Mess!",		exec "VoiceChat duke_mess";			close wm_quickduke_alt,	"4", 3 )	
+	QM_MENU_ITEM( "5. Kick Ass And Chew Gum",  	exec "VoiceChat duke_outofgum";			close wm_quickduke_alt,	"5", 4 )	
+	QM_MENU_ITEM( "6. Payback Time!",		exec "VoiceChat duke_payback";			close wm_quickduke_alt,	"6", 5 )	
+	QM_MENU_ITEM( "7. This Pisses Me Off!",		exec "VoiceChat duke_pissed";		      	close wm_quickduke_alt,	"7", 6 )	
+	QM_MENU_ITEM( "8. Play WIth Myself",		exec "VoiceChat duke_play";		      	close wm_quickduke_alt,	"8", 7 )	
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickbeavismain_alt" )
+
+	QM_MENU_ITEM( "1. Beavis and Butthead 1",	close wm_quickbeavismain_alt ;			open wm_quickbeavisbutthead_alt, 	"1", 0 )
+	QM_MENU_ITEM( "2. Beavis and Butthead 2",	close wm_quickbeavismain_alt ;			open wm_quickbeavisbutthead2_alt,	"2", 1 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickbeavisbutthead_alt" )
+
+        QM_MENU_ITEM( "1. I'll be damned", 		exec "VoiceChat bb_beavis_bedamned"; 		close wm_quickbeavisbutthead_alt,	"1", 0 )
+        QM_MENU_ITEM( "2. Peekaboo", 			exec "VoiceChat bb_peekaboo"; 			close wm_quickbeavisbutthead_alt,	"2", 1 )
+        QM_MENU_ITEM( "3. Kick him in the nads", 	exec "VoiceChat bb_kick_him_in_the_nads"; 	close wm_quickbeavisbutthead_alt,	"3", 2 )
+        QM_MENU_ITEM( "4. Plenty more", 		exec "VoiceChat bb_plentymore"; 		close wm_quickbeavisbutthead_alt,	"4", 3 )
+        QM_MENU_ITEM( "5. Did I just score?", 		exec "VoiceChat bb_Did_I_just_score"; 		close wm_quickbeavisbutthead_alt,	"5", 4 )
+        QM_MENU_ITEM( "6. Fatal Mistake, Candyass!", 	exec "VoiceChat bb_fatal_mistake"; 	        close wm_quickbeavisbutthead_alt,	"6", 5 )
+        QM_MENU_ITEM( "7. You must bowdown ", 		exec "VoiceChat bb_bowdown"; 	        	close wm_quickbeavisbutthead_alt,	"7", 6 )
+        QM_MENU_ITEM( "8. I Do the ass kicking", 	exec "VoiceChat bb_buzz_asskicking"; 		close wm_quickbeavisbutthead_alt,	"8", 7 )
+        QM_MENU_ITEM( "9. Are you stupid?",		exec "VoiceChat bb_ustupid";			close wm_quickbeavisbutthead_alt,	"9", 8 )
+        QM_MENU_ITEM( "0. This Sucks Butthead",		exec "VoiceChat bb_this_sucks";			close wm_quickbeavisbutthead_alt, 	"0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickbeavisbutthead2_alt" )
+
+	QM_MENU_ITEM( "1. One Adam Five",		exec "VoiceChat bb_1adam5";			close wm_quickbeavisbutthead2_alt,	"1", 0 )
+	QM_MENU_ITEM( "2. Come Quick!",			exec "VoiceChat bb_bareass";			close wm_quickbeavisbutthead2_alt,      "2", 1 )
+	QM_MENU_ITEM( "3. Cornholio",			exec "VoiceChat bb_cornholio";			close wm_quickbeavisbutthead2_alt,      "3", 2 )
+	QM_MENU_ITEM( "4. Itches",			exec "VoiceChat bb_itches";			close wm_quickbeavisbutthead2_alt,	"4", 3 )
+	QM_MENU_ITEM( "5. Need Backup",			exec "VoiceChat bb_tensixniner";		close wm_quickbeavisbutthead2_alt,      "5", 4 )
+	QM_MENU_ITEM( "6. Boobs",			exec "VoiceChat bb_smallboobs";			close wm_quickbeavisbutthead2_alt,	"6", 5 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfamilymain_alt" )
+
+	QM_MENU_ITEM( "1. Family Guy 1",	close wm_quickfamilymain_alt ;	 	open wm_quickfamily1_alt,       "1", 0 )
+	QM_MENU_ITEM( "2. Family Guy 2",	close wm_quickfamilymain_alt ;	 	open wm_quickfamily2_alt,       "2", 1 )
+
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfamily1_alt" )
+
+        QM_MENU_ITEM( "1. Shut the hell up", 		exec "VoiceChat fg_brian"; 	      	close wm_quickfamily1_alt, "1", 0 )
+        QM_MENU_ITEM( "2. Smoke a Doobie", 		exec "VoiceChat fg_doobie"; 	      	close wm_quickfamily1_alt, "2", 1 )
+        QM_MENU_ITEM( "3. This is my rifle!", 		exec "VoiceChat fg_fullmetal";      	close wm_quickfamily1_alt, "3", 2 )
+        QM_MENU_ITEM( "4. Gonna kick your ass!", 	exec "VoiceChat fg_kickass"; 	      	close wm_quickfamily1_alt, "4", 3 )
+        QM_MENU_ITEM( "5. Lock and Load", 		exec "VoiceChat fg_lock"; 	      	close wm_quickfamily1_alt, "5", 4 )
+        QM_MENU_ITEM( "6. Time to be Bad", 		exec "VoiceChat fg_time"; 		close wm_quickfamily1_alt, "6", 5 )
+        QM_MENU_ITEM( "7. Victory is Mine", 		exec "VoiceChat fg_victory"; 	      	close wm_quickfamily1_alt, "7", 6 )
+        QM_MENU_ITEM( "8. Heavens!", 			exec "VoiceChat fg_weewee"; 	      	close wm_quickfamily1_alt, "8", 7 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfamily2_alt" )
+
+        QM_MENU_ITEM( "1. Taste my meat log?", 		exec "VoiceChat fg_meatlog"; 	      	close wm_quickfamily2_alt, "1", 0 )
+        QM_MENU_ITEM( "2. You're my bitch!!", 		exec "VoiceChat fg_mybitch"; 	      	close wm_quickfamily2_alt, "2", 1 )
+        QM_MENU_ITEM( "3. Alright!!", 		      exec "VoiceChat fg_quagmire"; 		close wm_quickfamily2_alt, "3", 2 )
+        QM_MENU_ITEM( "4. Giggety Giggety", 	      exec "VoiceChat fg_giggety";        	close wm_quickfamily2_alt, "4", 3 )
+       
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickrvb_alt" )
+
+	QM_MENU_ITEM( "1. Rent in Hell",		exec "VoiceChat rvb_rent";		close wm_quickrvb_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Ring, Ring!",			exec "VoiceChat rvb_ring";		close wm_quickrvb_alt, "2", 1 )
+	QM_MENU_ITEM( "3. Sarged",			exec "VoiceChat rvb_sarged";		close wm_quickrvb_alt, "3", 2 )
+	QM_MENU_ITEM( "4. It's a Good Thing!",		exec "VoiceChat rvb_corpse"; 		close wm_quickrvb_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Look them in the eyes!",	exec "VoiceChat rvb_cqb";		close wm_quickrvb_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Lead Sandwich",		exec "VoiceChat rvb_sandwich";		close wm_quickrvb_alt, "6", 5 )
+	QM_MENU_ITEM( "7. My Favorite Part",		exec "VoiceChat rvb_favorite";		close wm_quickrvb_alt, "7", 6 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfps_alt" )
+
+	QM_MENU_ITEM( "1. Joy of FPS", 			exec "VoiceChat fps_joy";		close wm_quickfps_alt,	"1", 0 )
+	QM_MENU_ITEM( "2. Dance all day",		exec "VoiceChat fps_dance";		close wm_quickfps_alt,  "2", 1 )
+	QM_MENU_ITEM( "3. Bust In",			exec "VoiceChat fps_bust";		close wm_quickfps_alt,  "3", 2 )
+	QM_MENU_ITEM( "4. Frags", 			exec "VoiceChat fps_frags";		close wm_quickfps_alt,  "4", 3 )
+	QM_MENU_ITEM( "5. Laggin POS",			exec "VoiceChat fps_laggin";		close wm_quickfps_alt,  "5", 4 )
+	QM_MENU_ITEM( "6. Run Faster",			exec "VoiceChat fps_run";		close wm_quickfps_alt,  "6", 5 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickspecial_alt" )
+
+	QM_MENU_ITEM( "1. Beverly Hills",		exec "VoiceChat music_axel";		close wm_quickspecial_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Hamsters",			exec "VoiceChat music_dodo";		close wm_quickspecial_alt, "2", 1 )
+	QM_MENU_ITEM( "3. Queen",			exec "VoiceChat music_queen";		close wm_quickspecial_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Peanut Butter Jelly",		exec "VoiceChat music_pbj";		close wm_quickspecial_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Gummiente",			exec "VoiceChat music_ducky";		close wm_quickspecial_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Bork Bork",			exec "VoiceChat music_bork";		close wm_quickspecial_alt, "6", 5 )
+	QM_MENU_ITEM( "7. Paris Hilton",		exec "VoiceChat music_bj";		close wm_quickspecial_alt, "7", 6 )
+
+QM_MENU_END
+
+
+///////////////////
+//CS Soundpack 2//
+/////////////////
+
+QM_MENU_START ( "wm_quickcs_alt" )
+
+	QM_MENU_ITEM( "1. Big Lebowski", 		close wm_quickcs_alt ;			open wm_quicklebowski_alt, "1", 0 )
+	QM_MENU_ITEM( "2. The Simpsons",		close wm_quickcs_alt ;			open wm_quicksimp_alt,	   "2", 1 )
+	QM_MENU_ITEM( "3. South Park",			close wm_quickcs_alt ;			open wm_quicksouth_alt,	   "3", 2 )
+	QM_MENU_ITEM( "4. More Random",			close wm_quickcs_alt ;			open wm_quickrandmain_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Futurama",			close wm_quickcs_alt ;			open wm_quickfuturmain_alt,    "5", 4 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quicklebowski_alt" )
+
+	QM_MENU_ITEM( "1. Who is this guy?",		exec "VoiceChat leb_who";		close wm_quicklebowski_alt, "1", 0 )
+	QM_MENU_ITEM( "2. There are rules...",		exec "VoiceChat leb_rules";		close wm_quicklebowski_alt, "2", 1 )
+	QM_MENU_ITEM( "3. Over the line!",		exec "VoiceChat leb_papers";		close wm_quicklebowski_alt, "3", 2 )
+	QM_MENU_ITEM( "4. World of Pain",		exec "VoiceChat leb_pain";		close wm_quicklebowski_alt, "4", 3 )
+	QM_MENU_ITEM( "5. You are a moron",		exec "VoiceChat leb_moron";		close wm_quicklebowski_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Miserable POS",		exec "VoiceChat leb_miserable";		close wm_quicklebowski_alt, "6", 5 )
+	QM_MENU_ITEM( "7. Let's go bowling",		exec "VoiceChat leb_bowling";		close wm_quicklebowski_alt, "7", 6 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quicksimp_alt" )
+
+	QM_MENU_ITEM( "1. Company Policy",		exec "VoiceChat simp_policy" ;		close wm_quicksimp_alt,	"1", 0 )
+	QM_MENU_ITEM( "2. Police Training",		exec "VoiceChat simp_training" ;	close wm_quicksimp_alt, "2", 1 )
+	QM_MENU_ITEM( "3. French Lessons",		exec "VoiceChat simp_french" ;		close wm_quicksimp_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Call 911",			exec "VoiceChat simp_911" ;		close wm_quicksimp_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Invincible!",			exec "VoiceChat simp_invincible";	close wm_quicksimp_alt, "5", 4 )
+	QM_MENU_ITEM( "6. We're Done for!",		exec "VoiceChat simp_donefor";		close wm_quicksimp_alt, "6", 5 )
+	QM_MENU_ITEM( "7. I Salute You!",		exec "VoiceChat simp_salute";		close wm_quicksimp_alt, "7", 6 )
+	QM_MENU_ITEM( "8. On Ice",			exec "VoiceChat simp_ice";		close wm_quicksimp_alt, "8", 7 )
+	QM_MENU_ITEM( "9. Death Lurks...",		exec "VoiceChat simp_death";		close wm_quicksimp_alt, "9", 8 )
+	QM_MENU_ITEM( "0. Access Denied",		exec "VoiceChat simp_denied";		close wm_quicksimp_alt, "0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quicksouth_alt" )
+
+	QM_MENU_ITEM( "1. Hitler",			exec "VoiceChat sp_hitler" ; 		close wm_quicksouth_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Screw you!",			exec "VoiceChat sp_screw" ;		close wm_quicksouth_alt, "2", 1 )
+	QM_MENU_ITEM( "3. What you Got?",		exec "VoiceChat sp_biatch";		close wm_quicksouth_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Take the Fort!",		exec "VoiceChat sp_fort" ;		close wm_quicksouth_alt, "4", 3 )
+	QM_MENU_ITEM( "5. Dont Shoot",			exec "VoiceChat sp_shoot" ; 		close wm_quicksouth_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Asshole",			exec "VoiceChat sp_asshole" ; 		close wm_quicksouth_alt, "6", 5 )
+	
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickrandmain_alt" )
+
+	QM_MENU_ITEM( "1. Random 1",			close wm_quickrandmain_alt;		open wm_quickranda_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Random 2",			close wm_quickrandmain_alt;		open wm_quickrandb_alt, "2", 1 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickranda_alt" )
+
+	QM_MENU_ITEM( "1. Dirty Tramp",			exec "VoiceChat random_tramp";		close wm_quickranda_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Odin's Raven!",		exec "VoiceChat random_raven";		close wm_quickranda_alt, "2", 1 )
+	QM_MENU_ITEM( "3. On Your toes",		exec "VoiceChat random_midget";		close wm_quickranda_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Leeroy Jenkins!",		exec "VoiceChat random_leeroy";		close wm_quickranda_alt, "4", 3 )
+	QM_MENU_ITEM( "5. You're Despicable",		exec "VoiceChat random_despicable";	close wm_quickranda_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Poke someone's eye out",	exec "VoiceChat random_eyeout";		close wm_quickranda_alt, "6", 5 )
+	QM_MENU_ITEM( "7. The Memo",			exec "VoiceChat random_memo";		close wm_quickranda_alt, "7", 6 )
+	QM_MENU_ITEM( "8. Cowardly Eyes",		exec "VoiceChat random_eyes";		close wm_quickranda_alt, "8", 7 )
+	QM_MENU_ITEM( "9. You Hit Like a Bitch",	exec "VoiceChat random_bitch";		close wm_quickranda_alt, "9", 8 )
+	QM_MENU_ITEM( "0. You Hit Like Shit",		exec "VoiceChat random_hitshit";	close wm_quickranda_alt, "0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickrandb_alt" )
+
+	QM_MENU_ITEM( "1. Surprise!",			exec "VoiceChat random_gomer";		close wm_quickrandb_alt, "1", 0 )
+	QM_MENU_ITEM( "2. No More!",			exec "VoiceChat random_abba";		close wm_quickrandb_alt, "2", 1 )
+	QM_MENU_ITEM( "3. Gang Bang",			exec "VoiceChat random_gangbang";	close wm_quickrandb_alt, "3", 2 )
+	QM_MENU_ITEM( "4. CHicKeN",			exec "VoiceChat random_sanders";	close wm_quickrandb_alt, "4", 3 )
+	QM_MENU_ITEM( "5. I'm Sorry",			exec "VoiceChat random_concentration";	close wm_quickrandb_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Who's Ready?",		exec "VoiceChat random_beatass";	close wm_quickrandb_alt, "6", 5 )
+	QM_MENU_ITEM( "7. Righteous Dude",		exec "VoiceChat random_dude";		close wm_quickrandb_alt, "7", 6 )
+	QM_MENU_ITEM( "8. Bring it on Woman!", 		exec "VoiceChat random_woman";		close wm_quickrandb_alt, "8", 7 )
+	QM_MENU_ITEM( "9. Don't call me Shirley",	exec "VoiceChat random_shirley";	close wm_quickrandb_alt, "9", 8 )
+	QM_MENU_ITEM( "0. Jive",			exec "VoiceChat random_jive";		close wm_quickrandb_alt, "0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfuturmain_alt" )
+
+	QM_MENU_ITEM( "1. Futurama 1",			close wm_quickfuturmain_alt;		open wm_quickfutur_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Futurama 2",			close wm_quickfuturmain_alt;		open wm_quickfutur2_alt, "2", 1)
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfutur_alt" )
+
+	QM_MENU_ITEM( "1. Oooo Frozen Dirt",		exec "VoiceChat futur_dirt";		close wm_quickfutur_alt, "1", 0 )
+	QM_MENU_ITEM( "2. Your Mother!",		exec "VoiceChat futur_mother";		close wm_quickfutur_alt, "2", 1 )
+	QM_MENU_ITEM( "3. The Worst Part",		exec "VoiceChat futur_worstpart";	close wm_quickfutur_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Jumping Around",		exec "VoiceChat futur_stroke";		close wm_quickfutur_alt, "4", 3 )
+	QM_MENU_ITEM( "5. History Lesson",		exec "VoiceChat futur_owngrandpa";	close wm_quickfutur_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Meatball of War",		exec "VoiceChat futur_meatball";	close wm_quickfutur_alt, "6", 5 )
+	QM_MENU_ITEM( "7. Abuse",			exec "VoiceChat futur_abuse";		close wm_quickfutur_alt, "7", 6 )
+	QM_MENU_ITEM( "8. Awesome!",			exec "VoiceChat futur_awesome";		close wm_quickfutur_alt, "8", 7 )
+	QM_MENU_ITEM( "9. Element of Surprise",		exec "VoiceChat futur_surprise";	close wm_quickfutur_alt, "9", 8 )
+	QM_MENU_ITEM( "0. Hard Liquor",			exec "VoiceChat futur_hardliquor";	close wm_quickfutur_alt, "0", 9 )
+
+QM_MENU_END
+
+QM_MENU_START ( "wm_quickfutur2_alt" )
+
+	QM_MENU_ITEM( "1. Killing Machine",		exec "VoiceChat futur_killmachine";	close wm_quickfutur2_alt, "1", 0 )
+	QM_MENU_ITEM( "2. You've Killed Me!",		exec "VoiceChat futur_killedme";	close wm_quickfutur2_alt, "2", 1 )
+	QM_MENU_ITEM( "3. You're Killing Me!",		exec "VoiceChat futur_killingme";	close wm_quickfutur2_alt, "3", 2 )
+	QM_MENU_ITEM( "4. Military Budget",		exec "VoiceChat futur_budget";		close wm_quickfutur2_alt, "4", 3 )
+	QM_MENU_ITEM( "5. An Epic Battle",		exec "VoiceChat futur_jesus";		close wm_quickfutur2_alt, "5", 4 )
+	QM_MENU_ITEM( "6. Man with no name",		exec "VoiceChat futur_noname";		close wm_quickfutur2_alt, "6", 5 )
+	QM_MENU_ITEM( "7. Sticky",			exec "VoiceChat futur_sticky";		close wm_quickfutur2_alt, "7", 6 )
+	QM_MENU_ITEM( "8. Neutral Alert",		exec "VoiceChat futur_neutral";		close wm_quickfutur2_alt, "8", 7 )
+	QM_MENU_ITEM( "9. Let's Rock!",			exec "VoiceChat futur_saturdaynight";	close wm_quickfutur2_alt, "9", 8 )
+
+QM_MENU_END  
+

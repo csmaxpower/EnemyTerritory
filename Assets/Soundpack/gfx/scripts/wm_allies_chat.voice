@@ -1,0 +1,1380 @@
+////////////////////////////////////////
+// quickchat script for allied player //
+/// last edited by Normandy 05/29/07 ///
+////////////////////////////////////////
+
+male
+
+
+////////////////////////
+// wm_quickstatements //
+////////////////////////
+
+PathCleared
+{
+	sound/chat/allies/11a.wav	"Path cleared."
+	sound/chat/allies/11b.wav	"Path cleared."
+}
+
+EnemyWeak
+{
+	sound/chat/allies/12a.wav	"The enemy is weakened."
+	sound/chat/allies/12b.wav	"The enemy is weakened."
+}
+
+AllClear
+{
+	sound/chat/allies/13a.wav	"All clear."
+	sound/chat/allies/13b.wav	"All clear."
+}
+
+Incoming
+{
+	sound/chat/allies/14a.wav	"Incoming!"
+	sound/chat/allies/14b.wav	"Incoming!"
+}
+
+FireInTheHole
+{
+	sound/chat/allies/15a.wav	"Fire in the hole!"
+	sound/chat/allies/15b.wav	"Fire in the hole!"
+}
+
+OnDefense
+{
+	sound/chat/allies/16a.wav	"I'm on defense."
+	sound/chat/allies/16b.wav	"I'm on defense."
+}
+
+OnOffense
+{
+	sound/chat/allies/17a.wav	"I'm on offense."
+	sound/chat/allies/17b.wav	"I'm on offense."
+}
+
+TakingFire
+{
+	sound/chat/allies/18a.wav	"Taking fire!"
+	sound/chat/allies/18b.wav	"Taking fire!"
+}
+
+MinesCleared
+{
+	sound/chat/allies/19a.wav	"Mines cleared."
+	sound/chat/allies/19b.wav	"Mines cleared."
+}
+
+EnemyDisguised
+{
+	sound/chat/allies/10a.wav	"Enemy in disguise."
+	sound/chat/allies/10b.wav	"Enemy in disguise."
+}
+
+
+//////////////////////
+// wm_quickrequests //
+//////////////////////
+
+Medic
+{
+	sound/chat/allies/21a.wav	"Need a Medic!"		sprites/voiceMedic
+	sound/chat/allies/21b.wav	"I need a Medic!"	sprites/voiceMedic
+}
+
+NeedAmmo
+{
+	sound/chat/allies/22a.wav	"I need ammo!"		sprites/voiceAmmo
+}
+
+NeedBackup
+{
+	sound/chat/allies/23a.wav	"I need backup!"
+	sound/chat/allies/23b.wav	"I need backup!"
+}
+
+NeedEngineer
+{
+	sound/chat/allies/24a.wav	"We need an engineer!"
+	sound/chat/allies/24b.wav	"We need an engineer!"
+}
+
+CoverMe
+{
+	sound/chat/allies/25a.wav	"Covering fire!"
+	sound/chat/allies/25b.wav	"Covering fire!"
+	sound/chat/allies/25c.wav	"Cover me!"
+	sound/chat/allies/25d.wav	"Cover me!"
+}
+
+HoldFire
+{
+	sound/chat/allies/26a.wav	"Hold your fire!"
+	sound/chat/allies/26b.wav	"Hold your fire!"
+}
+
+WhereTo
+{
+	sound/chat/allies/27a.wav	"Where to?"
+	sound/chat/allies/27b.wav	"Where to?"
+}
+
+NeedOps
+{
+	sound/chat/allies/28a.wav	"We need Covert Ops!"
+	sound/chat/allies/28b.wav	"We need Covert Ops!"
+}
+
+
+//////////////////////
+// wm_quickcommands //
+//////////////////////
+
+FollowMe
+{
+	sound/chat/allies/31a.wav	"Follow me!"
+	sound/chat/allies/31b.wav	"Follow me!"
+}
+
+LetsGo
+{
+	sound/chat/allies/32a.wav	"Let's go!"
+	sound/chat/allies/32b.wav	"Let's go!"
+}
+
+Move
+{
+	sound/chat/allies/33a.wav	"Move!"
+	sound/chat/allies/33b.wav	"Move!"
+}
+
+ClearPath
+{
+	sound/chat/allies/34a.wav	"Clear the path!"
+	sound/chat/allies/34b.wav	"Clear the path!"
+}
+
+DefendObjective
+{
+	sound/chat/allies/35a.wav	"Defend our objective!"
+	sound/chat/allies/35b.wav	"Defend our objective!"
+}
+
+DisarmDynamite
+{
+	sound/chat/allies/36a.wav	"Disarm the dynamite!"
+	sound/chat/allies/36b.wav	"Disarm the dynamite!"
+}
+
+ClearMines
+{
+	sound/chat/allies/37a.wav	"Clear the mines!"
+	sound/chat/allies/37b.wav	"Clear the mines!"
+}
+
+ReinforceDefense
+{
+	sound/chat/allies/38a.wav	"Reinforce the defense!"
+	sound/chat/allies/38b.wav	"Reinforce the defense!"
+}
+
+ReinforceOffense
+{
+	sound/chat/allies/39a.wav	"Reinforce the offense!"
+	sound/chat/allies/39b.wav	"Reinforce the offense!"
+}
+
+
+//////////////////
+// wm_quickmisc //
+//////////////////
+
+Affirmative
+{
+	sound/chat/allies/41a.wav	"Affirmative!"
+	sound/chat/allies/41b.wav	"Yes!"
+	sound/chat/allies/41c.wav	"Yes!"
+}
+
+Negative
+{
+	sound/chat/allies/42a.wav	"No!"
+	sound/chat/allies/42b.wav	"No!"
+	sound/chat/allies/42c.wav	"Negative!"
+	sound/chat/allies/42d.wav	"Negative!"
+}
+
+Thanks
+{
+	sound/chat/allies/43a.wav	"Thanks!"
+	sound/chat/allies/43b.wav	"Thanks!"
+	sound/chat/allies/43c.wav	"Thank you!"
+	sound/chat/allies/43d.wav	"Thank you!"
+}
+
+Welcome
+{
+	sound/chat/allies/44a.wav	"You're welcome."
+	sound/chat/allies/44b.wav	"You're welcome."
+	sound/chat/allies/44c.wav	"No problem."
+	sound/chat/allies/44d.wav	"No problem."
+}
+
+Sorry
+{
+	sound/chat/allies/45a.wav	"Sorry!"
+	sound/chat/allies/45b.wav	"Sorry!"
+	sound/chat/allies/45c.wav	"Sorry!"
+}
+
+Oops
+{
+	sound/chat/allies/46a.wav	"Oops!"
+	sound/chat/allies/46b.wav	"Oops!"
+	sound/chat/allies/46c.wav	"Oops!"
+}
+
+
+////////////////////
+// wm_quickglobal //
+////////////////////
+
+Hi
+{
+	sound/chat/allies/54a.wav	"Hi!"
+	sound/chat/allies/54b.wav	"Hi!"
+	sound/chat/allies/54c.wav	"Hi!"
+	sound/chat/allies/54d.wav	"Hello!"
+	sound/chat/allies/54e.wav	"Hello!"
+	sound/misc/random2/heymotha.wav "Hey hey hey motha F^$%er"
+	sound/misc/random/wazzup1.wav	"Wazzup!"
+	sound/misc/random/wazzup2.wav	"Wazzup!"
+	sound/misc/random/fancy.wav	"Hello Mr. Fancypants!"
+	
+}
+
+Bye
+{
+	sound/chat/allies/55a.wav	"Bye."
+	sound/chat/allies/55b.wav	"Bye."
+	sound/chat/allies/55c.wav	"Bye."
+	sound/chat/allies/55d.wav	"Good bye."
+	sound/chat/allies/55e.wav	"Good bye."
+}
+
+GreatShot
+{
+	sound/chat/allies/56a.wav	"Great shot!"
+	sound/chat/allies/56b.wav	"Great shot!"
+
+}
+
+Cheer
+{
+	sound/chat/allies/57a.wav	"Hahaa!"
+	sound/chat/allies/57b.wav	"Alright!"
+	sound/chat/allies/57c.wav	"Yes!"
+	sound/chat/allies/57d.wav	"Yes!"
+	sound/chat/allies/57e.wav	"'Atta way, baby!"
+	sound/chat/allies/57f.wav	"You got it, man!"
+	sound/chat/allies/57g.wav	"Yeehaa!"
+	sound/chat/allies/57h.wav	"Yoohoo!"
+	sound/chat/allies/57i.wav	"Yeah!"
+	sound/chat/allies/57j.wav	"Yeah!"
+	sound/chat/allies/57k.wav	"Yeah!"
+	sound/chat/allies/57l.wav	"Woo!"
+}
+
+/////////////////////
+// wm_quickglobal2 //
+/////////////////////
+
+GoodGame
+{
+	sound/chat/allies/586a.wav	"Good game!"
+	sound/chat/allies/586b.wav	"Good game!"
+	sound/chat/allies/586c.wav	"Good game!"
+}
+
+
+///////////////////////
+// wm_sayplayerclass //
+///////////////////////
+
+IamSoldier
+{
+	sound/chat/allies/61a.wav	"I'm a soldier."
+	sound/chat/allies/61b.wav	"I'm a soldier."
+}
+
+IamMedic
+{
+	sound/chat/allies/62a.wav	"I'm a medic."
+	sound/chat/allies/62b.wav	"I'm a medic."
+}
+
+IamEngineer
+{
+	sound/chat/allies/63a.wav	"I'm an engineer."
+	sound/chat/allies/63b.wav	"I'm an engineer."
+}
+
+IamFieldOps
+{
+	sound/chat/allies/64a.wav	"I'm a field ops."
+}
+
+IamCovertOps
+{
+	sound/chat/allies/65a.wav	"I'm a covert ops."
+}
+
+
+////////////////////
+// wm_quickattack //
+////////////////////
+
+DestroyPrimary
+{
+	sound/chat/allies/71a.wav	"Destroy primary objective!"
+	sound/chat/allies/71b.wav	"Destroy primary objective!"
+}
+
+DestroySecondary
+{
+	sound/chat/allies/72a.wav	"Destroy secondary objective!"
+	sound/chat/allies/72b.wav	"Destroy secondary objective!"
+}
+
+DestroyConstruction
+{
+	sound/chat/allies/73a.wav	"Destroy construction!"
+	sound/chat/allies/73b.wav	"Destroy construction!"
+}
+
+RepairVehicle
+{
+	sound/chat/allies/75a.wav	"Repair the vehicle!"
+	sound/chat/allies/75b.wav	"Repair the vehicle!"
+}
+
+DestroyVehicle
+{
+	sound/chat/allies/76a.wav	"Disable the vehicle!"
+	sound/chat/allies/76b.wav	"Disable the vehicle!"
+}
+
+EscortVehicle
+{
+	sound/chat/allies/77a.wav	"Escort the vehicle!"
+	sound/chat/allies/77b.wav	"Escort the vehicle!"
+}
+
+
+////////////////////////
+// wm_quickobjectives //
+////////////////////////
+
+CommandAcknowledged
+{
+	sound/chat/allies/81a.wav	"Command acknowledged!"
+	sound/chat/allies/81b.wav	"Command acknowledged!"
+	sound/chat/allies/81c.wav	"Right away!"
+	sound/chat/allies/81d.wav	"Right away!"
+}
+
+CommandDeclined
+{
+	sound/chat/allies/82a.wav	"Command declined!"
+	sound/chat/allies/82b.wav	"Command declined!"
+	sound/chat/allies/82c.wav	"No can do!"
+	sound/chat/allies/82d.wav	"No can do!"
+}
+
+CommandCompleted
+{
+	sound/chat/allies/83a.wav	"Command completed!"
+	sound/chat/allies/83b.wav	"Command completed!"
+}
+
+ConstructionCommencing
+{
+	sound/chat/allies/84a.wav	"I'm constructing!"
+	sound/chat/allies/84b.wav	"I'm constructing!"
+}
+
+
+///////////////////////
+// wm_quickfireteams //
+///////////////////////
+
+FTAttack
+{
+	sound/chat/allies/98a.wav	"Attack!"
+	sound/chat/allies/98b.wav	"Attack!"
+}
+
+FTFallBack
+{
+	sound/chat/allies/99a.wav	"Fall back!"
+	sound/chat/allies/99b.wav	"Fall back!"
+}
+
+
+//////////////////////////////
+// wm_quickfireteamssoldier //
+//////////////////////////////
+
+FTCoverMe
+{
+	sound/chat/allies/25c.wav	"Cover me!"
+	sound/chat/allies/25d.wav	"Cover me!"
+}
+
+FTCoveringFire
+{
+	sound/chat/allies/25a.wav	"Covering fire!"
+	sound/chat/allies/25b.wav	"Covering fire!"
+}
+
+FTMortar
+{
+	sound/chat/allies/911a.wav	"Deploy mortar!"
+	sound/chat/allies/911b.wav	"Deploy mortar!"
+}
+
+
+////////////////////////////
+// wm_quickfireteamsmedic //
+////////////////////////////
+
+FTHealSquad
+{
+	sound/chat/allies/921a.wav	"Heal the squad!"
+	sound/chat/allies/921b.wav	"Heal the squad!"
+}
+
+FTHealMe
+{
+	sound/chat/allies/922a.wav	"Heal me!"			sprites/voiceMedic
+}
+
+FTReviveTeamMate
+{
+	sound/chat/allies/923a.wav	"Revive team mate!"
+	sound/chat/allies/923b.wav	"Revive team mate!"
+}
+
+FTReviveMe
+{
+	sound/chat/allies/924a.wav	"Revive me!"			sprites/voiceMedic
+	sound/chat/allies/924b.wav	"Revive me!"			sprites/voiceMedic
+}
+
+
+///////////////////////////////
+// wm_quickfireteamsengineer //
+///////////////////////////////
+
+FTDestroyObjective
+{
+	sound/chat/allies/931a.wav	"Destroy the objective!"
+	sound/chat/allies/931b.wav	"Destroy the objective!"
+}
+
+FTRepairObjective
+{
+	sound/chat/allies/932a.wav	"Repair objective!"
+	sound/chat/allies/932b.wav	"Repair objective!"
+}
+
+FTConstructObjective
+{
+	sound/chat/allies/933a.wav	"Construct objective!"
+	sound/chat/allies/933b.wav	"Construct objective!"
+}
+
+FTDisarmDynamite
+{
+	sound/chat/allies/36a.wav	"Disarm the dynamite!"
+	sound/chat/allies/36b.wav	"Disarm the dynamite!"
+}
+
+FTDeployLandmines
+{
+	sound/chat/allies/934a.wav	"Deploy landmines!"
+	sound/chat/allies/934b.wav	"Deploy landmines!"
+}
+
+FTDisarmLandmines
+{
+	sound/chat/allies/935a.wav	"Disarm landmines!"
+	sound/chat/allies/935b.wav	"Disarm landmines!"
+}
+
+
+///////////////////////////////
+// wm_quickfireteamsfieldops //
+///////////////////////////////
+
+FTCallAirStrike
+{
+	sound/chat/allies/941a.wav	"Call an airstrike!"
+	sound/chat/allies/941a.wav	"Call an airstrike!"
+}
+
+FTCallArtillery
+{
+	sound/chat/allies/942a.wav	"Call in artillery!"
+	sound/chat/allies/942b.wav	"Call in artillery!"
+}
+ 
+FTResupplySquad
+{
+	sound/chat/allies/944a.wav	"Resupply the squad!"
+	sound/chat/allies/944b.wav	"Resupply the squad!"
+}
+
+FTResupplyMe
+{
+	sound/chat/allies/945a.wav	"Resupply me!"			sprites/voiceAmmo
+	sound/chat/allies/945b.wav	"Resupply me!"			sprites/voiceAmmo
+}
+
+
+////////////////////////////////
+// wm_quickfireteamscovertops //
+////////////////////////////////
+
+FTExploreArea
+{
+	sound/chat/allies/951a.wav	"Explore the area!"
+	sound/chat/allies/951b.wav	"Explore the area!"
+}
+
+FTCheckLandmines
+{
+	sound/chat/allies/952a.wav	"Check for landmines!"
+}
+
+FTSatchelObjective
+{
+	sound/chat/allies/931a.wav	"Destroy the objective!"
+	sound/chat/allies/931b.wav	"Destroy the objective!"
+}
+
+FTInfiltrate
+{
+	sound/chat/allies/953a.wav	"Infiltrate!"
+	sound/chat/allies/953b.wav	"Infiltrate!"
+}
+
+FTGoUndercover
+{
+	sound/chat/allies/954a.wav	"Go undercover!"
+}
+
+FTProvideSniperCover
+{
+	sound/chat/allies/955a.wav	"Provide sniper cover!"
+}
+
+
+
+
+mp_fart
+{
+	sound/misc/monty_python/fart.wav	"I fart in your general direction!"
+}
+
+mp_hamster
+{
+	sound/misc/monty_python/hamster.wav	"Your mother was a hamster, and your father smelt of elderberries!"
+}
+
+mp_silly
+{
+	sound/misc/monty_python/silly.wav	"Stop that!  It's silly!"
+}
+
+mp_spam
+{
+	sound/misc/monty_python/spam.wav	"Spam! Spam! Spam! Spam! Spam! Spam!"
+}
+
+mp_taunt
+{
+	sound/misc/monty_python/taunt.wav	"Now go away or I shall taunt you a second time!"
+}
+
+mp_flesh_wound
+{
+        sound/misc/monty_python/mp4.wav 	"It's just a flesh wound."
+}
+
+mp_Invincible
+{
+        sound/misc/monty_python/mp5.wav		"I'm invincible!"
+}
+
+mp_Knights_who_say_Ni
+{
+        sound/misc/monty_python/mp10.wav	"We are the knights who say NI!"
+}
+
+mp_bless_grenade
+{
+        sound/misc/monty_python/mp13.wav        "Bless my hand grenade."
+}
+
+random_asskicked
+{
+	sound/misc/random/asskicked.wav		"I'm kickin' my own ass."
+}
+
+random_balls
+{
+	sound/misc/random/balls.wav		"Your balls are showing!"
+}
+
+random_blow
+{
+	sound/misc/random/blow.wav		"First you wanna kill me.. now you wanna kiss me.. BLOW"
+}
+
+random_boxofporn
+{
+	sound/misc/random/boxofporn.wav		"Got a big box of porn for ya!"
+}
+
+random_bullet
+{
+	sound/misc/random/bullet.wav		"A bullet bit me directly in the buttocks."
+}
+
+random_catpoop
+{
+	sound/misc/random/catpoop.wav		"I will not eat cat poop!"
+}
+
+random_fatbitch
+{
+	sound/misc/random/fatbitch.wav		"Come back you fat bearded b*tch!"
+}
+
+random_haha
+{
+	sound/misc/random/haha.wav		"Hahhahahaha"
+}
+
+random_isuck
+{
+	sound/misc/random/isuck.wav		"I suck!"
+}
+
+random_jack
+{
+	sound/misc/random/jack.wav		"...and Jack left town."
+}
+
+random_kick
+{
+	sound/misc/random/kick.wav		"Yeah! Kick the noob!"
+}
+
+random_nasty
+{
+	sound/misc/random/nasty.wav		"Ugh... that is Nasty!"
+}
+
+random_wazzup1
+{
+	sound/misc/random/wazzup1.wav		"Waazzzzuuuppp!"
+}
+
+random_wazzup2
+{
+	sound/misc/random/wazzup2.wav		"Waazzzzuuuppp!"
+}
+
+random_20secs
+{
+	sound/misc/random/20Secs.wav		"You have 20 seconds to put down your weapons!"
+}
+
+random_www
+{
+	sound/misc/random/www.wav		"Hey now man, I tell you what..."
+}
+
+random_biker
+{
+	sound/misc/random/biker.wav		"Who you calling jerk?" 
+}
+
+random_germans
+{
+	sound/misc/random/germansRHere.wav	"Ooo the Germans!"
+}
+
+random_nazi
+{
+	sound/misc/random/imAnazi.wav		"I'm a Nazi Zeig Heil!"
+}
+
+random_boomstick
+{
+	sound/misc/random/boomstick.wav		"This is my BOOMSTICK!"
+}
+
+random_evillaugh
+{
+	sound/misc/random/evil_laugh.wav 	"Mwuahahahaha"
+}
+
+random_angry
+{
+	sound/misc/random/angry.wav		"That makes me angry..."
+}
+
+random_wahwah
+{
+	sound/misc/random/wahwah.wav		"Wah Wah Wahhhhh"
+}
+
+fm_seconds
+{
+	sound/misc/fullmetal/3Seconds.wav "You have exactly 3 sec!"
+}
+
+fm_crack
+{
+	sound/misc/fullmetal/crackOass.wav "Best part of you"
+}
+
+fm_cufflinks
+{
+	sound/misc/fullmetal/cufflinks.wav "Tiffany Cufflinks"
+}
+
+fm_sister
+{
+	sound/misc/fullmetal/fuckmysister.wav "I Like You! You can come over and $%@! my sister!"
+}
+
+fm_balls
+{
+	sound/misc/fullmetal/ripballs.wav "I'm gonna rip your balls off!"
+}
+
+fm_sucker
+{
+	sound/misc/fullmetal/suckDicks.wav "Do you suck $%@!?"
+}
+
+fm_unfuck
+{
+	sound/misc/fullmetal/unfuck.wav "You had best un$%@! yourself"
+}
+
+fm_wtf
+{
+	sound/misc/fullmetal/wtfIsThis.wav "What the $%@! is this!"
+}
+
+duke_birthcontrol
+{
+	sound/misc/duke_nukem/birthcontrol.wav		"You're an inspiration for birth control!"
+}
+
+duke_gottahurt
+{
+	sound/misc/duke_nukem/gottahurt.wav		"OHHH thats gotta hurt!"
+}
+
+duke_hail
+{
+	sound/misc/duke_nukem/hail.wav		"Hail to the king baby!"
+}
+
+duke_mess
+{
+	sound/misc/duke_nukem/mess.wav		"What a mess!"
+}
+
+duke_outofgum
+{
+	sound/misc/duke_nukem/outofgum.wav		"I came here to kick ass and chew gum.."
+}
+
+duke_payback
+{
+	sound/misc/duke_nukem/payback.wav		"It's Payback Time!"
+}
+
+duke_pissed
+{
+	sound/misc/duke_nukem/pissed.wav		"This pisses me off!"
+}
+
+duke_play
+{
+	sound/misc/duke_nukem/play.wav		"Don't have time to play with myself."
+}
+
+bb_beavis_bedamned
+{
+	sound/misc/b_b/beavis_bedamned.wav	"I'll be Damned!"
+}
+
+bb_peekaboo
+{
+	sound/misc/b_b/beavis_peekaboo.wav "Peekaboo"
+}
+
+bb_kick_him_in_the_nads
+{
+	sound/misc/b_b/bhead_nads.wav	"Kick him in the nads!"
+}
+
+bb_plentymore
+{
+	sound/misc/b_b/bhead_plentymore.wav	"Plenty more where that came from."
+}
+
+bb_Did_I_just_score
+{
+	sound/misc/b_b/bhead_score.wav	"Did I just score?"
+}
+
+bb_bowdown
+{
+	sound/misc/b_b/bowdown.wav	"You must bow down to the almighty Bunghole."
+}
+
+bb_buzz_asskicking
+{
+	sound/misc/b_b/buzzcut_asskicking.wav	"I do the asskicking around here."
+}
+
+bb_fatal_mistake
+{
+	sound/misc/b_b/buzzcut_candyass.wav	"You made a fatal mistake candyass."
+}
+
+bb_ustupid
+{
+	sound/misc/b_b/ustupid.wav		"Are you stupid?"
+}
+
+bb_this_sucks
+{
+	sound/misc/b_b/sucks.wav	"This sucks butthead!"
+}
+
+bb_1adam5
+{
+	sound/misc/b_b/b&b-1adam5.wav 		"One Adam Five, One Adam Five!"
+}
+
+bb_bareass
+{
+	sound/misc/b_b/b&b-quick.wav		"Come quick! Bare ass on TV!"
+}
+
+bb_cornholio
+{
+	sound/misc/b_b/cornholio_ineedtp1.wav	"I need TP for my bunghole!"
+	sound/misc/b_b/cornholio_gr8crnhl.wav	"I am the great Cornholio!"
+}
+
+bb_itches
+{
+	sound/misc/b_b/b&b-itches.wav		"My weiner still itches!"
+}
+
+bb_tensixniner
+{
+	sound/misc/b_b/b&b-10six9er.wav		"We've got whores in the city, we need backup now!"
+}
+
+bb_smallboobs
+{
+	sound/misc/b_b/smlboobs.wav		"That chick has small boobs!"
+}
+
+fg_brian					
+{
+	sound/misc/familyguy/brian.wav	"...little more Shut the Hell Up!"
+}
+
+fg_doobie					
+{
+	sound/misc/familyguy/doobie.wav	"Smoke a doobie and watch some porn!"
+}
+
+fg_fullmetal					
+{
+	sound/misc/familyguy/fgfullmetal.wav	"This is my rifle, This is my gun"
+}
+
+fg_kickass					
+{
+	sound/misc/familyguy/kickyourass.wav	"I'm going to kick your ass!"
+}
+
+
+fg_lock					
+{
+	sound/misc/familyguy/lockandload.wav	"Lock and Load. Bring on the PAIN!"
+}
+
+fg_meatlog					
+{
+	sound/misc/familyguy/meatlog.wav	"Wanna taste my smoked meat log?"
+}
+
+fg_mybitch					
+{
+	sound/misc/familyguy/mybitch.wav	"You're my bitch!"
+}
+
+fg_quagmire					
+{
+	sound/misc/familyguy/quagmire.wav	"Alright!"
+}
+
+fg_giggety					
+{
+	sound/misc/familyguy/quagmire2.wav	"Giggety Giggety Giggety Giggety"
+}
+
+fg_time					
+{
+	sound/misc/familyguy/timetobebad.wav	"Time to be BAD!!"
+}
+
+fg_hell					
+{
+	sound/misc/familyguy/tohell.wav	"Ah, Damn it to Hell!"
+}
+
+fg_weewee					
+{
+	sound/misc/familyguy/weewee.wav	"Heavens..."
+}
+
+fg_victory
+{
+	sound/misc/familyguy/victory.wav 	"Victory is Mine!"
+}
+
+rvb_rent
+{
+	sound/misc/rvb/RentinHell.wav		"I hope you've got your wallet!"
+}
+
+rvb_ring
+{
+	sound/misc/rvb/RingRing.wav		"Ring, ring your dead"
+}
+
+rvb_sarged
+{
+	sound/misc/rvb/Sarged.wav		"You just got sarged"
+}
+
+rvb_corpse
+{
+	sound/misc/rvb/ItsAGoodThing.wav	"It's a good thing!"
+}
+
+rvb_cqb
+{
+	sound/misc/rvb/BeatHimtoDeath.wav	"You're the one who beat him to death!"
+}
+
+rvb_sandwich
+{
+	sound/misc/rvb/LeadSandwich.wav		"How about a tasy lead sandwich!"
+}
+
+rvb_favorite
+{
+	sound/misc/rvb/MyFavoritePart.wav	"My favorite part was when you died, ENCORE"
+}
+
+fps_joy
+{
+	sound/misc/fps/fps.wav 			"The Joy of FPS"
+}
+
+fps_dance
+{	
+	sound/misc/fps/danceallday.wav 		"Dance all day!"
+}
+
+fps_bust
+{
+	sound/misc/fps/bustin.wav 		"Bust In!"
+}
+
+fps_frags
+{
+	sound/misc/fps/frags.wav 		"I've got frags!"
+}
+
+fps_laggin
+{
+	sound/misc/fps/lagginPOS.wav 		"Laggin #%@! POS"
+}
+
+fps_run
+{
+	sound/misc/fps/runfaster.wav 		"Run faster!"
+}
+
+music_axel
+{
+	sound/misc/music/axelf.wav 		"Axel Foley"
+}
+
+music_dodo
+{
+	sound/misc/music/dodo.wav		"Hamster Dance"
+}
+
+music_queen
+{
+	sound/misc/music/like.wav		"Another one bites the dust!"
+}
+
+music_pbj
+{
+	sound/misc/music/pb&j.wav		"Peanut Butter Jelly Time"
+}
+
+music_ducky
+{
+	sound/misc/music/rubberducky.wav	"Ich mag Gummiente"
+}
+
+music_bork
+{
+	sound/misc/music/bork.wav		"Bork Bork Bork"
+}
+
+music_bj
+{
+	sound/misc/music/donald.wav		"Oooooh ya...."
+}
+
+simp_policy
+{
+	sound/misc/simpsons/policy.wav		"Company policy dictates that you be given the Plague"
+}
+
+simp_training
+{
+	sound/misc/simpsons/simpTraining.wav 	"You don't get your gun until you tell me your name!"
+}
+
+simp_french
+{
+	sound/misc/simpsons/simpFrench.wav     	"Bonjour, you cheese-eating surrender monkeys!"
+}
+
+simp_911
+{
+	sound/misc/simpsons/simp911.wav		"Just dial 911, oh unless it's an emergency!"
+}
+
+simp_invincible
+{
+	sound/misc/simpsons/Simpinvincible.wav 	"I am invincible! INVINCIBLE! OWWWW"
+}
+
+simp_donefor
+{
+	sound/misc/simpsons/flanders__donefor.wav "We're done diddily done for!"
+}
+
+simp_salute
+{
+	sound/misc/simpsons/magbastd.wav	"I salute you, you magnificent b4stard!"
+}
+
+simp_ice
+{
+	sound/misc/simpsons/apubitc1.wav	"We're putting that b1tch on ice!"
+}
+
+simp_death
+{
+	sound/misc/simpsons/abedeath.wav	"Death stalks you at every turn... AHRGHH, DEATH!!"
+}
+
+simp_denied
+{
+	sound/misc/simpsons/SimpDenied.wav	"Access Denied!"
+}
+
+sp_hitler
+{
+	sound/misc/southpark/SPbadass.wav	"Dressing like Hitler is NOT bad ass!"
+}
+
+sp_screw
+{
+	sound/misc/southpark/v55cart.wav	"Screw you guys... I'm going home!"
+}
+
+sp_biatch
+{
+	sound/misc/southpark/SP_whatyougot.wav	"Mmmrm What you got Biatch!?"
+}
+
+sp_fort
+{
+	sound/misc/southpark/SP_forttotake.wav	"I hate to break up the partay but I believe we have a fort to take"
+}
+
+sp_shoot
+{
+	sound/misc/southpark/dontshootme.wav	"Don't shoot me Damnit!"
+}
+
+sp_asshole
+{
+	sound/misc/southpark/SPasshole.wav      "This is mostly your fault!"
+}
+
+leb_who
+{
+	sound/misc/lebowski/who_is_he.wav	"Who the #$%@ is he???"
+}
+
+leb_rules
+{
+	sound/misc/lebowski/rules.wav		"This isn't Nam it's bowling"
+}
+
+leb_papers
+{
+	sound/misc/lebowski/papers.wav		"OVER THE LINE!"
+}
+
+leb_pain
+{
+	sound/misc/lebowski/pain.wav		"You're about to enter a world of pain"
+}
+
+leb_moron
+{
+	sound/misc/lebowski/moron.wav		"I love you but you are a moron!"
+}
+
+leb_miserable
+{
+	sound/misc/lebowski/life.wav		"Life doesn't stop at your conveince you miserable POS"
+}
+
+leb_bowling
+{
+	sound/misc/lebowski/bowling.wav		"Ah #%@# it dude... let's go bowling"
+}
+
+random_tramp
+{
+	sound/misc/random2/tramp.wav		"All I heard was blah blah blah I'm a dirty tramp"
+}
+
+random_raven
+{
+	sound/misc/random2/odinsraven.wav	"Ohh! Great Odins Raven!"
+}
+
+random_midget
+{
+	sound/misc/random2/midget.wav		"Like a midget at a urinal, I'd have to be on my toes"
+}
+
+random_leeroy
+{
+	sound/misc/random2/leeroyjenkins.wav	"LEEEEROY JEENNNKINS!"
+}
+
+random_despicable
+{
+	sound/misc/random2/youredespicable.wav	"You're despicable..."
+}
+
+random_eyeout
+{
+	sound/misc/random2/v56eyeo.wav		"You could put somebody's eye out with that thing"
+}
+
+random_memo
+{
+	sound/misc/random2/memo1.wav		"Did you see the memo about this..?"
+}
+
+random_eyes
+{
+	sound/misc/random2/cowardlyeyes.wav	"I see your cowardly yellow eyes..."
+}
+
+random_bitch
+{
+	sound/misc/random2/hitlikea.wav		"Your still hit like a B*!ch [k]"
+}
+
+random_hitshit
+{
+	sound/misc/random2/hitlike.wav		"You hit like $h!% [k]"
+}
+
+random_gomer
+{
+	sound/misc/random2/gomer_surprise.wav 	"Surprise! Surprise! Surprise!"
+}
+
+random_abba
+{
+	sound/misc/random2/noabba2.wav		"For the last time... no more F%#!ng Abba"
+}
+
+random_gangbang
+{
+	sound/misc/random2/gangbang.wav		"I'm here for the gang bang"
+}
+
+random_sanders
+{
+	sound/misc/random2/colchick.wav		"What's the matter Colonel Sanders... CHICKEN!"
+}
+
+random_concentration
+{
+	sound/misc/random2/concentr.wav		"I'm sorry did I break your concentration!?"
+}
+
+random_beatass
+{
+	sound/misc/random2/beatass.wav		"Now who's ready to beat some ass!?"
+}
+
+random_dude
+{
+	sound/misc/random2/dude.wav		"They all think he's a righteous dude!"
+}
+
+random_woman
+{
+	sound/misc/random2/bringiton.wav	"Bring it on, WOMAN"
+}
+
+random_shirley
+{
+	sound/misc/random2/surely.wav		"I am serious... and don't call me Shirley"
+}
+
+random_jive
+{
+	sound/misc/random2/smackemyackem.wav	"Lay em down and smack em yack em!"
+}
+
+futur_dirt
+{
+	sound/misc/futurama/frozendirt.wav	"If it's wrong I don't want to be right"
+}
+
+futur_mother
+{
+	sound/misc/futurama/yourmother.wav      "Enough about your promiscuous mother!"
+}
+
+futur_worstpart
+{
+	sound/misc/futurama/theworstpart.wav	"The Worst part is the calm before the battle"
+}
+
+futur_stroke
+{
+	sound/misc/futurama/strokeoff.wav	"Did things just jump around or did my brain stroke off a bit?"
+}
+
+futur_owngrandpa
+{
+	sound/misc/futurama/owngrandpa.wav 	"Oo a lesson in not changing history from Mr I'm my own grandpa"
+}
+
+futur_meatball
+{
+	sound/misc/futurama/meatballofwar.wav 	"The meatball of war has ruined our white pants of peace!"
+}
+
+futur_abuse
+{
+	sound/misc/futurama/abuse.wav		"Bees talk by dancing. Like my parents, wait no that was hiting"
+}
+
+futur_awesome
+{
+	sound/misc/futurama/awesome.wav		"This is awesome! We are gonna be like POW POW POW!"
+}
+
+futur_surprise
+{
+	sound/misc/futurama/elementofsurprise.wav "The element of surprise is vital... SURPRISE!"
+}
+
+futur_hardliquor
+{
+	sound/misc/futurama/hardliquor.wav	"The suns are setting, I can switch to hard liquor!"
+}
+
+futur_budget
+{
+	sound/misc/futurama/militarybudget.wav 	"Let's show them run a bloated military budget can do!"
+}
+
+futur_killedme
+{
+	sound/misc/futurama/killedme.wav	"You've killed me! You've Killed me!"
+}
+
+futur_killmachine
+{
+	sound/misc/futurama/killingmachine.wav	"It's not his fault he's an unstoppable killing machine!"
+}
+
+futur_killingme
+{
+	sound/misc/futurama/killingme.wav	"Ohhh God you're killing me..OWHH God You're really killing me!"
+}
+
+futur_jesus
+{
+	sound/misc/futurama/mauledbyjesus.wav 	"I feel like I've been mauled by Jesus"
+}
+
+futur_neutral
+{
+	sound/misc/futurama/neutralalert.wav	"If I don't survive tell me wife, Hello"
+}
+
+futur_noname
+{
+	sound/misc/futurama/noname.wav		"I am the man with no name..."
+}
+
+futur_saturdaynight
+{
+	sound/misc/futurama/saturdaynight.wav 	"Let's rock!!"
+}
+
+futur_sticky
+{
+	sound/misc/futurama/sticky.wav		"Why am I sticky and naked... did I miss something fun?"
+}
+
