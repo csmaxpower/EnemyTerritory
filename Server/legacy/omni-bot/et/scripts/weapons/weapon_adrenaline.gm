@@ -1,5 +1,0 @@
-this.Name = "Adrenaline";
-this.WeaponId = WEAPON.ADRENALINE;
-
-this.PrimaryFire.WeaponType = "item";
-this.PrimaryFire.WaterProof = true;
