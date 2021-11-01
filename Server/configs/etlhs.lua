@@ -95,11 +95,10 @@ function et_RunFrame( levelTime )
          end
       end
    end
+end
 
 function et_ClientBegin( clientNum )
    et.trap_SendServerCommand(clientNum, "cp \"^wHide ^1& ^wSeek\"\n" )
-end
-
 end
 
 function et_ClientCommand(client, command)
