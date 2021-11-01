@@ -1,14 +1,14 @@
---Version = "1.0"
---Author  = "^eMoe's Tavern"
---Description = "^7Hide^1&^7Seek for ETLegacy"
---Homepage = "https://discord.moestavern.pub"
+local Version = "1.0"
+local Author  = "^eMoe's Tavern"
+local Description = "^7Hide^1&^7Seek for ETLegacy"
+local Homepage = "https://discord.moestavern.pub"
 
 
 et.NUM_OF_WEAPONS = 56
 samplerate = 200
 
 
-weapons = {
+local weapons = {
 	false,  --et.WP_NONE	0	No weapon
 	false,  --et.WP_KNIFE	1	Axis Dagger Knife
 	false,  --et.WP_LUGER	2	Luger
@@ -69,8 +69,13 @@ weapons = {
 
 function et_InitGame(levelTime,randomSeed,restart)
 	maxclients = tonumber( et.trap_Cvar_Get( "sv_maxClients" ) )   --gets the maxclients
-	et.G_Print("[HS] Version:"..Version.." Loaded\n")
-   	et.RegisterModname("Hide & Seek by Moe's")
+	et.G_Print("Hide & Seek Version:"..Version.." Loaded\n")
+   	et.RegisterModname("ETL Hide & Seek by Moe's")
+	et.trap_SendServerCommand(-1, "b 8 \""..Description.." ^1[^7LUA^1] ^7powered by "..Author.." ^0^7Visit "..Homepage.." \n\"" )
+		count = {}
+			for i = 0, maxclients - 1 do
+			count[i] = 0
+	end
 end
 
 
