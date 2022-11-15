@@ -1,0 +1,629 @@
+       0 logfile opened on Wed Jan 05 12:24:52 2022
+       0 execing legacy.cfg
+       0 execing mapvotecycle.cfg
+       0 g_gametype will be changed upon restarting. New value: '6'
+       0 ----- Server Initialization ----
+       0 Server: supply
+       0 Hunk_Clear: reset the hunk ok
+
+================
+MAIN log
+================
+687072 MAIN memory in 130 blocks
+681872 MAIN memory overhead
+
+================
+SMALL log
+================
+44184 SMALL memory in 675 blocks
+17184 SMALL memory overhead
+       0 Current working directory:
+       0     /
+       0 Current search path:
+       0     ^2D ^*/root/et/legacy
+       0     ^2D ^*/root/et/etmain
+       0     ^1P ^*/root/et/legacy/legacy_v2.79.0-7-gb5ad814.pk3 (1381 files)
+       0     ^1P ^*/root/et/etmain/venice_ne4.pk3 (325 files)
+       0     ^1P ^*/root/et/etmain/te_valhalla.pk3 (56 files)
+       0     ^1P ^*/root/et/etmain/te_escape2_fixed.pk3 (295 files)
+       0     ^1P ^*/root/et/etmain/te_escape2.pk3 (271 files)
+       0     ^1P ^*/root/et/etmain/tc_base.pk3 (63 files)
+       0     ^1P ^*/root/et/etmain/sw_oasis_b3.pk3 (45 files)
+       0     ^1P ^*/root/et/etmain/sw_goldrush_te.pk3 (48 files)
+       0     ^1P ^*/root/et/etmain/sw_battery.pk3 (32 files)
+       0     ^1P ^*/root/et/etmain/supply.pk3 (44 files)
+       0     ^1P ^*/root/et/etmain/sp_delivery_te.pk3 (51 files)
+       0     ^1P ^*/root/et/etmain/sos_secret_weapon.pk3 (207 files)
+       0     ^1P ^*/root/et/etmain/rifletennis_te2.pk3 (15 files)
+       0     ^1P ^*/root/et/etmain/rifletennis_te.pk3 (13 files)
+       0     ^1P ^*/root/et/etmain/reactor_final.pk3 (115 files)
+       0     ^1P ^*/root/et/etmain/pak2.pk3 (22 files)
+       0     ^1P ^*/root/et/etmain/pak1.pk3 (10 files)
+       0     ^1P ^*/root/et/etmain/pak0.pk3 (3725 files)
+       0     ^1P ^*/root/et/etmain/osiris_final.pk3 (31 files)
+       0     ^1P ^*/root/et/etmain/mp_sillyctf.pk3 (38 files)
+       0     ^1P ^*/root/et/etmain/mp_bin.pk3 (6 files)
+       0     ^1P ^*/root/et/etmain/missile_b3.pk3 (86 files)
+       0     ^1P ^*/root/et/etmain/karsiah_te2.pk3 (41 files)
+       0     ^1P ^*/root/et/etmain/frostbite.pk3 (99 files)
+       0     ^1P ^*/root/et/etmain/et_ufo_final.pk3 (45 files)
+       0     ^1P ^*/root/et/etmain/et_ice.pk3 (61 files)
+       0     ^1P ^*/root/et/etmain/et_headshot2_b2.pk3 (46 files)
+       0     ^1P ^*/root/et/etmain/et_headshot.pk3 (41 files)
+       0     ^1P ^*/root/et/etmain/et_beach.pk3 (177 files)
+       0     ^1P ^*/root/et/etmain/etl_supply_v6.pk3 (165 files)
+       0     ^1P ^*/root/et/etmain/etl_ice_v8.pk3 (168 files)
+       0     ^1P ^*/root/et/etmain/etl_frostbite_v15.pk3 (194 files)
+       0     ^1P ^*/root/et/etmain/etl_adlernest_v2.pk3 (245 files)
+       0     ^1P ^*/root/et/etmain/erdenberg_t1.pk3 (77 files)
+       0     ^1P ^*/root/et/etmain/element_b4_1.pk3 (28 files)
+       0     ^1P ^*/root/et/etmain/decay_b7.pk3 (78 files)
+       0     ^1P ^*/root/et/etmain/ctf_multi.pk3 (20 files)
+       0     ^1P ^*/root/et/etmain/crevasse_b3.pk3 (82 files)
+       0     ^1P ^*/root/et/etmain/bremen_b3.pk3 (86 files)
+       0     ^1P ^*/root/et/etmain/braundorf_b4.pk3 (51 files)
+       0     ^1P ^*/root/et/etmain/badplace4_rc.pk3 (119 files)
+       0     ^1P ^*/root/et/etmain/adlernest.pk3 (113 files)
+       0 
+       0 handle 1: sv_protect.log
+       0 handle 2: etconsole.log
+       0 8815 files in pk3 files
+       0 --------------------------------
+       0 Sys_LoadDll(/root/et/legacy/qagame.mp.x86_64.so)... succeeded
+       0 Sys_LoadDll(legacy/qagame) found vmMain function at 0x7f5add3f26b0
+       0 ^9Initializing legacy game ^2v2.79.0-7-gb5ad814
+       0 ------- Game Initialization -------
+       0 gamename: legacy
+       0 gamedate: Jan  4 2022
+       0 206 cvars in use
+       0 Not logging to disk
+       0 map: supply
+       0 gametype: Map Voting
+       0 gametime: Wed Jan 05 12:24:52 2022
+       0 Gametype changed, clearing session data.
+       0 Will try to load config: "configs/defaultpublic.config"
+       0 set g_medicChargeTime 45000
+       0 set g_engineerChargeTime 30000
+       0 set g_fieldopsChargeTime 40000
+       0 set g_soldierChargeTime 20000
+       0 set g_covertopsChargeTime 30000
+       0 set g_landminetimeout 1
+       0 set g_friendlyFire 1
+       0 set g_altStopwatchMode 0
+       0 set g_userTimeLimit 0
+       0 set g_userAlliedRespawnTime 0
+       0 set g_userAxisRespawnTime 0
+       0 set g_speed 320
+       0 set g_gravity 800
+       0 set g_knockback 1000
+       0 set g_fastres 0
+       0 set match_mutespecs 0
+       0 set match_readypercent 100
+       0 set match_timeoutcount 3
+       0 set match_timeoutlength 180
+       0 Config name is: ^1Legacy ^*Public
+       0 set g_altStopwatchMode 0
+       0 set g_complaintlimit 6
+       0 set g_ipcomplaintlimit 3
+       0 set g_doWarmup 0
+       0 set g_maxlives 0
+       0 set g_teamforcebalance 1
+       0 set g_noTeamSwitching 0
+       0 set g_lms_teamForceBalance 1
+       0 set g_voicechatsallowed 5
+       0 set g_warmup 30
+       0 set match_latejoin 1
+       0 set match_timeoutcount 0
+       0 set match_warmupDamage 0
+       0 set team_maxplayers 0
+       0 set team_nocontrols 1
+       0 set sv_allowDownload 1
+       0 set sv_floodProtect 0
+       0 set sv_fps 40
+       0 set vote_limit 5
+       0 set team_riflegrenades 1
+       0 set g_pronedelay 0
+       0 set g_shove 60
+       0 set g_antiwarp 1
+       0 set g_fixedphysics 1
+       0 set g_fixedphysicsfps 125
+       0 set g_userTimeLimit 0
+       0 set g_useralliedrespawntime 0
+       0 set g_useraxisrespawntime 0
+       0 set g_moverScale 1.0
+       0 broadcast: print "Server: g_warmup changed to 30\n"
+       0 >> Public settings loaded!
+       0 Lua 5.4 API: ^$file 'luascripts/wolfadmin/main.lua' loaded into Lua VM
+       0 Lua 5.4 API: ^$file 'luascripts/announcehp.lua' loaded into Lua VM
+       0 Lua 5.4 API: ^$file 'luascripts/banners.lua' loaded into Lua VM
+       0 Lua 5.4 API: ^$file 'luascripts/dynamite.lua' loaded into Lua VM
+       0 Lua 5.4 API: ^$file 'luascripts/killing-spree.lua' loaded into Lua VM
+       0 Lua 5.4 API: ^$file 'luascripts/medic-syringe-heal.lua' loaded into Lua VM
+       0 Lua 5.4 API: ^$file 'luascripts/spawn-invul-fair.lua' loaded into Lua VM
+       0 Enable spawning!
+       0 Disable spawning!
+       0 0 teams with 0 entities
+       0 -----------------------------------
+       0 Setting MOTD...
+       0 GeoIP is enabled. Database memory size: 2100.66 kb
+       0 [WolfAdmin] Module 1.2.1 (14 April 2020) loaded successfully. Created by Timo 'Timothy' Smit.
+       0 [WolfAdmin] WolfAdmin running in standalone mode on unix.
+       0 [WolfAdmin] commands.load(): 61 entries loaded in 14 ms
+       0 [WolfAdmin] WolfAdmin running in standalone mode on unix.
+       0 ^3banners.lua: Warning! Invalid location '', forcing to 'top'; valid locations: 'top', 'left', 'chat', 'center'.
+       0 ^3banners.lua: Warning! No banners were set.
+       0 Vetinari's dynamite.lua version 1.42 activated...
+       0 Game Initialization completed in 0.12 seconds
+       0 Omni-bot: ^2Looking for /root/et/legacy/omni-bot/omnibot_et.x86_64.so, found.
+       0 Omni-bot: ^2Found Omni-bot: /root/et/legacy/omni-bot/omnibot_et.x86_64.so, Attempting to Initialize
+       0 ^2ET autoexec script executed. 
+       0 ^2Loaded Waypoints.
+       0 ^2Omni-bot 0.87.1 initialized in 0.09 seconds.
+       0 Omni-bot: ^2Omni-bot Loaded Successfully
+       0 ^2Omni-Bot Initialization completed in 0.09 seconds
+     100 broadcast: print "Server: g_balancedteams changed to 1\n"
+     200 Setting Axis autospawn to Forward Bunker Spawn
+     200 Setting Allied autospawn to Allied Start
+     500 ^2211 Goals Loaded, 13 Goals Deferred, 0 Goals could not load. elapsed time: 0.09 seconds
+     700 ---------------------------------
+     700 ^2Omni-Bot : Mar  6 2021 18:56:48
+     700 ^2Version : 0.87.1
+     700 ^2Interface # : 17
+     825 Resolving etmaster.idsoftware.com (IPv4)
+     825 etmaster.idsoftware.com resolved to 198.20.216.55:27950
+     825 Sending heartbeat to etmaster.idsoftware.com
+     825 Resolving master.etlegacy.com (IPv4)
+     825 master.etlegacy.com resolved to 167.71.60.7:27950
+     825 Sending heartbeat to master.etlegacy.com
+     825 Hitch warning: 528 msec frame time
+    4600 ClientConnect: 4
+    4600 Userinfo: \name\^d))))^3Magg^1!^3e^d*\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0400000000000000000000000
+    4600 ClientUserinfoChanged: 4 n\^d))))^3Magg^1!^3e^d*\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    4600 Userinfo: \name\^d))))^3Magg^1!^3e^d*\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0400000000000000000000000
+    4600 ClientUserinfoChanged: 4 n\^d))))^3Magg^1!^3e^d*\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\34\sw\0\lsw\2\mu\0\ref\0\sc\0\u\0
+    4600 Userinfo: \name\^d))))^3Magg^1!^3e^d*\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0400000000000000000000000
+    4600 ClientUserinfoChanged: 4 n\^d))))^3Magg^1!^3e^d*\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\34\lw\34\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    4600 broadcast: print "^7^d))))^3Magg^1!^3e^d*^7 entered the game\n"
+    4600 ClientBegin: 4
+    4625 Userinfo: \name\^d))))^3Magg^1!^3e^d*\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0400000000000000000000000\v_dynatimer\1
+    4625 ClientUserinfoChanged: 4 n\^d))))^3Magg^1!^3e^d*\t\1\c\2\lc\2\r\7\p\0\m\0000000\s\0000000\dn\-1\w\23\lw\23\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    5100 ClientConnect: 5
+    5100 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000
+    5100 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\3\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    5100 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000
+    5100 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\6\sw\0\lsw\7\mu\0\ref\0\sc\0\u\0
+    5100 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000
+    5100 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\6\lw\6\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    5100 broadcast: print "^7^2||^@=^3Flanders^@=^2||^7 entered the game\n"
+    5100 ClientBegin: 5
+    5125 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000\v_dynatimer\1
+    5125 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\2\c\2\lc\2\r\6\p\0\m\0000000\s\0000000\dn\-1\w\24\lw\24\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    5600 ClientConnect: 6
+    5600 Userinfo: \name\^1M^3i^flhou^3s^1:^de\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0600000000000000000000000
+    5600 ClientUserinfoChanged: 6 n\^1M^3i^flhou^3s^1:^de\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    5600 Userinfo: \name\^1M^3i^flhou^3s^1:^de\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0600000000000000000000000
+    5600 ClientUserinfoChanged: 6 n\^1M^3i^flhou^3s^1:^de\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\6\sw\0\lsw\2\mu\0\ref\0\sc\0\u\0
+    5600 Userinfo: \name\^1M^3i^flhou^3s^1:^de\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0600000000000000000000000
+    5600 ClientUserinfoChanged: 6 n\^1M^3i^flhou^3s^1:^de\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\6\lw\6\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    5600 broadcast: print "^7^1M^3i^flhou^3s^1:^de^7 entered the game\n"
+    5600 ClientBegin: 6
+    5625 Userinfo: \name\^1M^3i^flhou^3s^1:^de\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0600000000000000000000000\v_dynatimer\1
+    5625 ClientUserinfoChanged: 6 n\^1M^3i^flhou^3s^1:^de\t\1\c\2\lc\2\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    6100 ClientConnect: 7
+    6100 Userinfo: \name\^jBa^drn^3e^ly^7[^@DUFF^7]\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0700000000000000000000000
+    6100 ClientUserinfoChanged: 7 n\^jBa^drn^3e^ly^7[^@DUFF^7]\t\3\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    6100 Userinfo: \name\^jBa^drn^3e^ly^7[^@DUFF^7]\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0700000000000000000000000
+    6100 ClientUserinfoChanged: 7 n\^jBa^drn^3e^ly^7[^@DUFF^7]\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\6\sw\0\lsw\7\mu\0\ref\0\sc\0\u\0
+    6100 Userinfo: \name\^jBa^drn^3e^ly^7[^@DUFF^7]\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0700000000000000000000000
+    6100 ClientUserinfoChanged: 7 n\^jBa^drn^3e^ly^7[^@DUFF^7]\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\6\lw\6\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    6100 broadcast: print "^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 entered the game\n"
+    6100 ClientBegin: 7
+    6125 Userinfo: \name\^jBa^drn^3e^ly^7[^@DUFF^7]\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0700000000000000000000000\v_dynatimer\1
+    6125 ClientUserinfoChanged: 7 n\^jBa^drn^3e^ly^7[^@DUFF^7]\t\2\c\2\lc\2\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    6600 ClientConnect: 8
+    6600 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000
+    6600 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    6600 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000
+    6600 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\34\sw\0\lsw\2\mu\0\ref\0\sc\0\u\0
+    6600 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000
+    6600 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\34\lw\34\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    6600 broadcast: print "^7^2)))^3Marg^1:^3e^4::::::^7 entered the game\n"
+    6600 ClientBegin: 8
+    6625 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000\v_dynatimer\1
+    6625 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\1\c\1\lc\1\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    7100 ClientConnect: 9
+    7100 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000
+    7100 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\3\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    7100 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000
+    7100 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\8\sw\0\lsw\7\mu\0\ref\0\sc\0\u\0
+    7100 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000
+    7100 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    7100 broadcast: print "^7^0|^hA^@p^hu^0|^7 entered the game\n"
+    7100 ClientBegin: 9
+    7125 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000\v_dynatimer\1
+    7125 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\2\c\1\lc\1\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    7600 ClientConnect: 10
+    7600 Userinfo: \name\^emayor^3.^7Quimby\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1000000000000000000000000
+    7600 ClientUserinfoChanged: 10 n\^emayor^3.^7Quimby\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    7600 Userinfo: \name\^emayor^3.^7Quimby\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1000000000000000000000000
+    7600 ClientUserinfoChanged: 10 n\^emayor^3.^7Quimby\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\3\sw\0\lsw\2\mu\0\ref\0\sc\0\u\0
+    7600 Userinfo: \name\^emayor^3.^7Quimby\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1000000000000000000000000
+    7600 ClientUserinfoChanged: 10 n\^emayor^3.^7Quimby\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    7600 broadcast: print "^7^emayor^3.^7Quimby^7 entered the game\n"
+    7600 ClientBegin: 10
+    7625 Userinfo: \name\^emayor^3.^7Quimby\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1000000000000000000000000\v_dynatimer\1
+    7625 ClientUserinfoChanged: 10 n\^emayor^3.^7Quimby\t\1\c\1\lc\1\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    8100 ClientConnect: 11
+    8100 Userinfo: \name\^?SiDeShOw^<|^3BOB\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1100000000000000000000000
+    8100 ClientUserinfoChanged: 11 n\^?SiDeShOw^<|^3BOB\t\3\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    8100 Userinfo: \name\^?SiDeShOw^<|^3BOB\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1100000000000000000000000
+    8100 ClientUserinfoChanged: 11 n\^?SiDeShOw^<|^3BOB\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\30\sw\0\lsw\7\mu\0\ref\0\sc\0\u\0
+    8100 Userinfo: \name\^?SiDeShOw^<|^3BOB\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1100000000000000000000000
+    8100 ClientUserinfoChanged: 11 n\^?SiDeShOw^<|^3BOB\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\30\lw\30\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    8100 broadcast: print "^7^?SiDeShOw^<|^3BOB^7 entered the game\n"
+    8100 ClientBegin: 11
+    8125 Userinfo: \name\^?SiDeShOw^<|^3BOB\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1100000000000000000000000\v_dynatimer\1
+    8125 ClientUserinfoChanged: 11 n\^?SiDeShOw^<|^3BOB\t\2\c\1\lc\1\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    8600 ClientConnect: 12
+    8600 Userinfo: \name\^4#^7[^3Homer^7]^4#\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1200000000000000000000000
+    8600 ClientUserinfoChanged: 12 n\^4#^7[^3Homer^7]^4#\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    8600 Userinfo: \name\^4#^7[^3Homer^7]^4#\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1200000000000000000000000
+    8600 ClientUserinfoChanged: 12 n\^4#^7[^3Homer^7]^4#\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\30\sw\0\lsw\2\mu\0\ref\0\sc\0\u\0
+    8600 Userinfo: \name\^4#^7[^3Homer^7]^4#\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1200000000000000000000000
+    8600 ClientUserinfoChanged: 12 n\^4#^7[^3Homer^7]^4#\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\30\lw\30\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    8600 broadcast: print "^7^4#^7[^3Homer^7]^4#^7 entered the game\n"
+    8600 ClientBegin: 12
+    8625 Userinfo: \name\^4#^7[^3Homer^7]^4#\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1200000000000000000000000\v_dynatimer\1
+    8625 ClientUserinfoChanged: 12 n\^4#^7[^3Homer^7]^4#\t\1\c\3\lc\3\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+    9100 ClientConnect: 13
+    9100 Userinfo: \name\^b.::^e||^gKrusty^e||^b::.\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000
+    9100 ClientUserinfoChanged: 13 n\^b.::^e||^gKrusty^e||^b::.\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+    9100 Userinfo: \name\^b.::^e||^gKrusty^e||^b::.\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000
+    9100 ClientUserinfoChanged: 13 n\^b.::^e||^gKrusty^e||^b::.\t\2\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\34\sw\0\lsw\7\mu\0\ref\0\sc\0\u\0
+    9100 Userinfo: \name\^b.::^e||^gKrusty^e||^b::.\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000
+    9100 ClientUserinfoChanged: 13 n\^b.::^e||^gKrusty^e||^b::.\t\2\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\34\lw\34\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+    9100 broadcast: print "^7^b.::^e||^gKrusty^e||^b::.^7 entered the game\n"
+    9100 ClientBegin: 13
+    9125 Userinfo: \name\^b.::^e||^gKrusty^e||^b::.\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000\v_dynatimer\1
+    9125 ClientUserinfoChanged: 13 n\^b.::^e||^gKrusty^e||^b::.\t\2\c\3\lc\3\r\7\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   11425 Userinfo: \name\^d))))^3Magg^1!^3e^d*\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0400000000000000000000000\v_dynatimer\1
+   11425 ClientUserinfoChanged: 4 n\^d))))^3Magg^1!^3e^d*\t\1\c\3\lc\3\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   11925 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000\v_dynatimer\1
+   11925 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\2\c\3\lc\3\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   13425 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000\v_dynatimer\1
+   13425 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\5\lw\5\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   26825 Client 0 connecting with 100 challenge ping
+   26825 ClientConnect: 14
+   26825 Userinfo: \g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+   26825 ClientUserinfoChanged: 14 n\^0mAx^e.\t\3\c\0\lc\0\r\0\p\0\m\0000000\s\0000200\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\225
+   31025 Shutting down: banners
+   31025 Lua 5.4 API: ^$Lua module [luascripts/wolfadmin/main.lua] [CE878D564C9FC227B01ADB0D0F71789F7B0F26A6] unloaded.
+   31025 Lua 5.4 API: ^$Lua module [luascripts/announcehp.lua] [554583F3EC20EBDF4E9AD64805C1CACA5B78EBB1] unloaded.
+   31025 Lua 5.4 API: ^$Lua module [luascripts/banners.lua] [722ECCCB3D586A388C796DA02D80EB9894370F6C] unloaded.
+   31025 Lua 5.4 API: ^$Lua module [luascripts/dynamite.lua] [40D330462A05A4A39839BFDFF6D919C6C9A0D1A8] unloaded.
+   31025 Lua 5.4 API: ^$Lua module [luascripts/killing-spree.lua] [1075D1A79941386692E32523534913D07201FC82] unloaded.
+   31025 Lua 5.4 API: ^$Lua module [luascripts/medic-syringe-heal.lua] [C19EA850E87E2FC54C2F5FD24201486BE9F9136D] unloaded.
+   31025 Lua 5.4 API: ^$Lua module [luascripts/spawn-invul-fair.lua] [3A73F65ACEE3CEE7AB40C6AD781B76BB6419E882] unloaded.
+   31025 ==== ShutdownGame (1 - supply) ====
+   31025 gametime: Wed Jan 05 12:25:22 2022
+   31025 ^2<EndGame>
+   31025 ^2-- Script System Info --
+   31025 ^2Current Memory Usage 3.97435 MB
+   31025 ^2Soft Memory Usage 4.09654 MB
+   31025 ^2Hard Memory Limit 4.55171 MB
+   31025 ^2System Memory Usage 2.67743 MB
+   31025 ^2Full Collects 3
+   31025 ^2Inc Collects 2
+   31025 ^2GC Warnings 0
+   31025 ^2Threads: 0, 0 Running, 0 Blocked, 0 Sleeping
+   31025 ^2ShutdownOmniBot
+   31025 Sys_LoadDll(/root/et/legacy/qagame.mp.x86_64.so)... succeeded
+   31025 Sys_LoadDll(legacy/qagame) found vmMain function at 0x7f5add3f26b0
+   31025 ^9Initializing legacy game ^2v2.79.0-7-gb5ad814
+   31025 ------- Game Initialization -------
+   31025 gamename: legacy
+   31025 gamedate: Jan  4 2022
+   31025 206 cvars in use
+   31025 Not logging to disk
+   31025 map: supply
+   31025 gametype: Map Voting
+   31025 gametime: Wed Jan 05 12:25:22 2022
+   31025 Will try to load config: "configs/defaultpublic.config"
+   31025 set g_medicChargeTime 45000
+   31025 set g_engineerChargeTime 30000
+   31025 set g_fieldopsChargeTime 40000
+   31025 set g_soldierChargeTime 20000
+   31025 set g_covertopsChargeTime 30000
+   31025 set g_landminetimeout 1
+   31025 set g_friendlyFire 1
+   31025 set g_altStopwatchMode 0
+   31025 set g_userTimeLimit 0
+   31025 set g_userAlliedRespawnTime 0
+   31025 set g_userAxisRespawnTime 0
+   31025 set g_speed 320
+   31025 set g_gravity 800
+   31025 set g_knockback 1000
+   31025 set g_fastres 0
+   31025 set match_mutespecs 0
+   31025 set match_readypercent 100
+   31025 set match_timeoutcount 3
+   31025 set match_timeoutlength 180
+   31025 Config name is: ^1Legacy ^*Public
+   31025 set g_altStopwatchMode 0
+   31025 set g_complaintlimit 6
+   31025 set g_ipcomplaintlimit 3
+   31025 set g_doWarmup 0
+   31025 set g_maxlives 0
+   31025 set g_teamforcebalance 1
+   31025 set g_noTeamSwitching 0
+   31025 set g_lms_teamForceBalance 1
+   31025 set g_voicechatsallowed 5
+   31025 set g_warmup 30
+   31025 set match_latejoin 1
+   31025 set match_timeoutcount 0
+   31025 set match_warmupDamage 0
+   31025 set team_maxplayers 0
+   31025 set team_nocontrols 1
+   31025 set sv_allowDownload 1
+   31025 set sv_floodProtect 0
+   31025 set sv_fps 40
+   31025 set vote_limit 5
+   31025 set team_riflegrenades 1
+   31025 set g_pronedelay 0
+   31025 set g_shove 60
+   31025 set g_antiwarp 1
+   31025 set g_fixedphysics 1
+   31025 set g_fixedphysicsfps 125
+   31025 set g_userTimeLimit 0
+   31025 set g_useralliedrespawntime 0
+   31025 set g_useraxisrespawntime 0
+   31025 set g_moverScale 1.0
+   31025 >> Public settings loaded!
+   31025 Lua 5.4 API: ^$file 'luascripts/wolfadmin/main.lua' loaded into Lua VM
+   31025 Lua 5.4 API: ^$file 'luascripts/announcehp.lua' loaded into Lua VM
+   31025 Lua 5.4 API: ^$file 'luascripts/banners.lua' loaded into Lua VM
+   31025 Lua 5.4 API: ^$file 'luascripts/dynamite.lua' loaded into Lua VM
+   31025 Lua 5.4 API: ^$file 'luascripts/killing-spree.lua' loaded into Lua VM
+   31025 Lua 5.4 API: ^$file 'luascripts/medic-syringe-heal.lua' loaded into Lua VM
+   31025 Lua 5.4 API: ^$file 'luascripts/spawn-invul-fair.lua' loaded into Lua VM
+   31025 Enable spawning!
+   31025 Disable spawning!
+   31025 0 teams with 0 entities
+   31025 -----------------------------------
+   31025 Setting MOTD...
+   31025 GeoIP is enabled. Database memory size: 2100.66 kb
+   31025 [WolfAdmin] Module 1.2.1 (14 April 2020) loaded successfully. Created by Timo 'Timothy' Smit.
+   31025 [WolfAdmin] WolfAdmin running in standalone mode on unix.
+   31025 [WolfAdmin] commands.load(): 61 entries loaded in 11 ms
+   31025 [WolfAdmin] WolfAdmin running in standalone mode on unix.
+   31025 ^3banners.lua: Warning! Invalid location '', forcing to 'top'; valid locations: 'center', 'left', 'top', 'chat'.
+   31025 ^3banners.lua: Warning! No banners were set.
+   31025 Vetinari's dynamite.lua version 1.42 activated...
+   31025 Game Initialization completed in 0.10 seconds
+   31025 Omni-bot: ^2Looking for /root/et/legacy/omni-bot/omnibot_et.x86_64.so, found.
+   31025 Omni-bot: ^2Found Omni-bot: /root/et/legacy/omni-bot/omnibot_et.x86_64.so, Attempting to Initialize
+   31025 ^2ET autoexec script executed. 
+   31025 ^2Loaded Waypoints.
+   31025 ^2Omni-bot 0.87.1 initialized in 0.09 seconds.
+   31025 Omni-bot: ^2Omni-bot Loaded Successfully
+   31025 ^2Omni-Bot Initialization completed in 0.09 seconds
+   31225 Setting Axis autospawn to Forward Bunker Spawn
+   31225 Setting Allied autospawn to Allied Start
+   31525 ^2211 Goals Loaded, 13 Goals Deferred, 0 Goals could not load. elapsed time: 0.09 seconds
+   31625 ClientConnect: 4
+   31625 Userinfo: \name\^d))))^3Magg^1!^3e^d*\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0400000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 4 n\^d))))^3Magg^1!^3e^d*\t\1\c\3\lc\3\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^d))))^3Magg^1!^3e^d*^7 entered the game\n"
+   31625 ClientBegin: 4
+   31625 ClientConnect: 5
+   31625 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\2\c\3\lc\3\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^2||^@=^3Flanders^@=^2||^7 entered the game\n"
+   31625 ClientBegin: 5
+   31625 ClientConnect: 6
+   31625 Userinfo: \name\^1M^3i^flhou^3s^1:^de\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0600000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 6 n\^1M^3i^flhou^3s^1:^de\t\1\c\2\lc\2\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^1M^3i^flhou^3s^1:^de^7 entered the game\n"
+   31625 ClientBegin: 6
+   31625 ClientConnect: 7
+   31625 Userinfo: \name\^jBa^drn^3e^ly^7[^@DUFF^7]\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0700000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 7 n\^jBa^drn^3e^ly^7[^@DUFF^7]\t\2\c\2\lc\2\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 entered the game\n"
+   31625 ClientBegin: 7
+   31625 ClientConnect: 8
+   31625 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\1\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\5\lw\5\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^2)))^3Marg^1:^3e^4::::::^7 entered the game\n"
+   31625 ClientBegin: 8
+   31625 ClientConnect: 9
+   31625 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\2\c\1\lc\1\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^0|^hA^@p^hu^0|^7 entered the game\n"
+   31625 ClientBegin: 9
+   31625 ClientConnect: 10
+   31625 Userinfo: \name\^emayor^3.^7Quimby\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1000000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 10 n\^emayor^3.^7Quimby\t\1\c\1\lc\1\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^emayor^3.^7Quimby^7 entered the game\n"
+   31625 ClientBegin: 10
+   31625 ClientConnect: 11
+   31625 Userinfo: \name\^?SiDeShOw^<|^3BOB\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1100000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 11 n\^?SiDeShOw^<|^3BOB\t\2\c\1\lc\1\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^?SiDeShOw^<|^3BOB^7 entered the game\n"
+   31625 ClientBegin: 11
+   31625 ClientConnect: 12
+   31625 Userinfo: \name\^4#^7[^3Homer^7]^4#\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1200000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 12 n\^4#^7[^3Homer^7]^4#\t\1\c\3\lc\3\r\7\p\0\m\0000000\s\0000000\dn\-1\w\3\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^4#^7[^3Homer^7]^4#^7 entered the game\n"
+   31625 ClientBegin: 12
+   31625 ClientConnect: 13
+   31625 Userinfo: \name\^b.::^e||^gKrusty^e||^b::.\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000\v_dynatimer\1
+   31625 ClientUserinfoChanged: 13 n\^b.::^e||^gKrusty^e||^b::.\t\2\c\3\lc\3\r\7\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   31625 broadcast: print "^7^b.::^e||^gKrusty^e||^b::.^7 entered the game\n"
+   31625 ClientBegin: 13
+   31625 ClientConnect: 14
+   31625 Userinfo: \g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+   31625 ClientUserinfoChanged: 14 n\^0mAx^e.\t\3\c\0\lc\0\r\0\p\0\m\0000000\s\0000200\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\225
+   31625 Userinfo: \g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+   31625 ClientUserinfoChanged: 14 n\^0mAx^e.\t\3\c\0\lc\0\r\0\p\0\m\0000000\s\0000200\dn\-1\w\3\lw\3\sw\0\lsw\0\mu\0\ref\0\sc\0\u\225
+   31625 ClientBegin: 14
+   31725 ^2Omni-Bot : Mar  6 2021 18:56:48
+   31725 ^2Version : 0.87.1
+   31725 ^2Interface # : 17
+   32875 Userinfo: \cg_etVersion\ET Legacy v2.79000000 win-x86\cg_uinfo\4 0 125\g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+   32875 ClientUserinfoChanged: 14 n\^0mAx^e.\t\3\c\0\lc\0\r\0\p\0\m\0000000\s\0000200\dn\-1\w\3\lw\3\sw\0\lsw\0\mu\0\ref\0\sc\0\u\225
+   35225 Item: 9 item_health
+   35225 Item: 10 item_health
+   35325 Item: 11 item_health
+   44250 Item: 5 weapon_magicammo
+   45250 Item: 5 weapon_magicammo
+   45550 Item: 9 weapon_magicammo
+   45675 Item: 13 weapon_magicammo
+   46475 Kill: 10 7 8: ^7^emayor^3.^7Quimby^7 killed ^jBa^drn^3e^ly^7[^@DUFF^7]^7 by MOD_MP40
+   46875 Item: 12 weapon_magicammo
+   47250 Item: 13 weapon_magicammo
+   49775 Kill: 10 9 8: ^7^emayor^3.^7Quimby^7 killed ^0|^hA^@p^hu^0|^7 by MOD_MP40
+   50775 Item: 4 item_health
+   50775 Item: 4 item_health
+   52175 Kill: 4 11 8: ^7^d))))^3Magg^1!^3e^d*^7 killed ^?SiDeShOw^<|^3BOB^7 by MOD_MP40
+   54875 Kill: 13 12 9: ^7^b.::^e||^gKrusty^e||^b::.^7 killed ^4#^7[^3Homer^7]^4#^7 by MOD_THOMPSON
+   55900 Item: 10 weapon_thompson
+   55900 Userinfo: \name\^emayor^3.^7Quimby\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1000000000000000000000000\v_dynatimer\1
+   55900 ClientUserinfoChanged: 10 n\^emayor^3.^7Quimby\t\1\c\1\lc\1\r\7\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\3\sw\2\lsw\2\mu\0\ref\0\sc\0\u\0
+   58200 legacy announce: "^7The Allies have captured the forward bunker!"
+   58200 Setting Axis autospawn to Axis Depot Spawn
+   58200 Setting Allied autospawn to Forward Bunker Spawn
+   59025 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000\v_dynatimer\1
+   59025 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\2\c\0\lc\0\r\6\p\0\m\0000000\s\0000000\dn\-1\w\6\lw\6\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   61850 Item: 4 weapon_magicammo
+   63500 Item: 11 item_health
+   63725 Item: 9 weapon_magicammo
+   63925 Kill: 9 4 17: ^7^0|^hA^@p^hu^0|^7 killed ^d))))^3Magg^1!^3e^d*^7 by MOD_FLAMETHROWER
+   64575 voice: ^7^1M^3i^flhou^3s^1:^de^7 ConstructionCommencing
+   64900 Medic_Revive: 10 12
+   65625 legacy announce: "^7The Axis have captured the forward bunker!"
+   65625 Setting Axis autospawn to Forward Bunker Spawn
+   65625 Setting Allied autospawn to Allied Start
+   65725 voice: ^7^4#^7[^3Homer^7]^4#^7 Thanks
+   65725 voice: ^7^emayor^3.^7Quimby^7 Welcome
+   65875 Item: 11 weapon_magicammo
+   65875 Item: 11 weapon_magicammo
+   66325 voice: ^7^?SiDeShOw^<|^3BOB^7 HoldFire
+   66425 Kill: 9 9 17: ^7^0|^hA^@p^hu^0|^7 killed ^0|^hA^@p^hu^0|^7 by MOD_FLAMETHROWER
+   66675 legacy announce: "^7Axis Command Post constructed. Charge speed increased!"
+   67200 voice: ^7^?SiDeShOw^<|^3BOB^7 HoldFire
+   67500 Kill: 8 11 16: ^7^2)))^3Marg^1:^3e^4::::::^7 killed ^?SiDeShOw^<|^3BOB^7 by MOD_GRENADE_LAUNCHER
+   68025 Item: 5 weapon_thompson
+   68350 Item: 5 item_health
+   68450 Item: 5 item_health
+   69050 voice: ^7^2||^@=^3Flanders^@=^2||^7 Thanks
+   69250 voice: ^7^2||^@=^3Flanders^@=^2||^7 Thanks
+   70375 Kill: 10 13 9: ^7^emayor^3.^7Quimby^7 killed ^b.::^e||^gKrusty^e||^b::.^7 by MOD_THOMPSON
+   71725 Kill: 5 8 9: ^7^2||^@=^3Flanders^@=^2||^7 killed ^2)))^3Marg^1:^3e^4::::::^7 by MOD_THOMPSON
+   72225 voice: ^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 CoverMe
+   76800 legacy popup: ^7allies^7 planted "the Forward Bunker Gate"
+   76800 Dynamite_Plant: 7
+   79000 Userinfo: \cg_etVersion\ET Legacy v2.79000000 win-x86\cg_uinfo\4 0 125\g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+   79000 ClientUserinfoChanged: 14 n\^0mAx^e.\t\2\c\0\lc\2\r\0\p\0\m\0000000\s\0000200\dn\-1\w\3\lw\24\sw\0\lsw\7\mu\0\ref\0\sc\0\u\225
+   79000 Userinfo: \cg_etVersion\ET Legacy v2.79000000 win-x86\cg_uinfo\4 0 125\g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+   79000 ClientUserinfoChanged: 14 n\^0mAx^e.\t\2\c\2\lc\2\r\0\p\0\m\0000000\s\0000200\dn\-1\w\24\lw\24\sw\7\lsw\7\mu\0\ref\0\sc\0\u\225
+   79000 broadcast: print "^7^0mAx^e.^7 entered the game\n"
+   79000 ClientBegin: 14
+   79625 ^2Kicking bot from team 2 
+   79625 WeaponStats: 13 1 32 9 40 1 1 1 182 120 0 0 0 0 0 0 82.1 24 1 1 3 3 20.74 0.00 0
+   79625 ClientDisconnect: 13
+   80125 Item: 11 weapon_thompson
+   80725 Kill: 7 10 9: ^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 killed ^emayor^3.^7Quimby^7 by MOD_THOMPSON
+   81350 Item: 7 weapon_thompson
+   82500 legacy announce: "^7The Allies have captured the forward bunker!"
+   82500 Setting Axis autospawn to Axis Depot Spawn
+   82500 Setting Allied autospawn to Forward Bunker Spawn
+   83400 Kill: 10 5 8: ^7^emayor^3.^7Quimby^7 killed ^2||^@=^3Flanders^@=^2||^7 by MOD_MP40
+   83575 Item: 10 weapon_magicammo
+   83675 Item: 10 weapon_magicammo
+   83950 Item: 7 item_health
+   84050 legacy announce: "^7The Axis have captured the forward bunker!"
+   84050 Setting Axis autospawn to Forward Bunker Spawn
+   84050 Setting Allied autospawn to Allied Start
+   84900 Item: 7 item_health
+   86000 Item: 4 weapon_mp40
+   88125 legacy popup: ^7axis^7 defused "the Forward Bunker Gate"
+   89325 Kill: 8 8 17: ^7^2)))^3Marg^1:^3e^4::::::^7 killed ^2)))^3Marg^1:^3e^4::::::^7 by MOD_FLAMETHROWER
+   89725 Kill: 12 9 26: ^7^4#^7[^3Homer^7]^4#^7 killed ^0|^hA^@p^hu^0|^7 by MOD_ARTY
+   89775 Item: 7 item_health
+   89775 Item: 7 weapon_thompson
+   90700 voice: ^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 Thanks
+   93750 Kill: 11 6 9: ^7^?SiDeShOw^<|^3BOB^7 killed ^1M^3i^flhou^3s^1:^de^7 by MOD_THOMPSON
+   94100 Item: 7 weapon_thompson
+   94925 legacy announce: "^7The Allies have captured the forward bunker!"
+   94925 Setting Axis autospawn to Axis Depot Spawn
+   94925 Setting Allied autospawn to Forward Bunker Spawn
+   97325 Item: 12 weapon_magicammo
+   98325 Kill: 10 11 8: ^7^emayor^3.^7Quimby^7 killed ^?SiDeShOw^<|^3BOB^7 by MOD_MP40
+   98350 Item: 10 item_health
+   98375 Item: 10 item_health
+   99025 Userinfo: \name\^2||^@=^3Flanders^@=^2||\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0500000000000000000000000\v_dynatimer\1
+   99025 ClientUserinfoChanged: 5 n\^2||^@=^3Flanders^@=^2||\t\2\c\1\lc\1\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+   99025 Userinfo: \name\^0|^hA^@p^hu^0|\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0900000000000000000000000\v_dynatimer\1
+   99025 ClientUserinfoChanged: 9 n\^0|^hA^@p^hu^0|\t\2\c\3\lc\3\r\6\p\0\m\0000000\s\0000000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+  101475 Medic_Revive: 10 6
+  101750 Kill: 9 12 9: ^7^0|^hA^@p^hu^0|^7 killed ^4#^7[^3Homer^7]^4#^7 by MOD_THOMPSON
+  103325 Item: 6 item_health
+  104700 Item: 5 weapon_thompson
+  104950 legacy announce: "^7The Axis have captured the forward bunker!"
+  104950 Setting Axis autospawn to Forward Bunker Spawn
+  104950 Setting Allied autospawn to Allied Start
+  105650 Kill: 11 4 9: ^7^?SiDeShOw^<|^3BOB^7 killed ^d))))^3Magg^1!^3e^d*^7 by MOD_THOMPSON
+  105750 Kill: 14 6 40: ^7^0mAx^e.^7 killed ^1M^3i^flhou^3s^1:^de^7 by MOD_M7
+  105750 Item: 7 item_health
+  106075 legacy announce: "^7The Allies have captured the forward bunker!"
+  106075 Setting Axis autospawn to Axis Depot Spawn
+  106075 Setting Allied autospawn to Forward Bunker Spawn
+  107150 Kill: 14 10 37: ^7^0mAx^e.^7 killed ^emayor^3.^7Quimby^7 by MOD_CARBINE
+  111150 Item: 14 item_health
+  111650 voice: ^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 CoverMe
+  114025 Item: 11 item_health
+  116200 legacy popup: ^7allies^7 planted "the Forward Bunker Gate"
+  116200 Dynamite_Plant: 7
+  134750 Item: 11 weapon_magicammo
+  137400 Kill: 5 6 9: ^7^2||^@=^3Flanders^@=^2||^7 killed ^1M^3i^flhou^3s^1:^de^7 by MOD_THOMPSON
+  137650 Item: 4 weapon_mp40
+  141650 Medic_Revive: 10 6
+  142175 Kill: 14 10 40: ^7^0mAx^e.^7 killed ^emayor^3.^7Quimby^7 by MOD_M7
+  142600 voice: ^7^1M^3i^flhou^3s^1:^de^7 Thanks
+  144050 Userinfo: \cg_etVersion\ET Legacy v2.79000000 win-x86\cg_uinfo\4 0 125\g_password\none\cl_guid\23114BE0DD6BDEAA00A252B056B4CD22\etVersion\ET Legacy v2.79.0 win-x86 Dec 24 2021\cl_wwwDownload\1\name\^0mAx^e.\rate\45000\snaps\40\cg_allowGeoIP\1\ip\68.63.109.109:21182
+  144050 ClientUserinfoChanged: 14 n\^0mAx^e.\t\2\c\2\lc\2\r\0\p\0\m\0000000\s\1000200\dn\-1\w\24\lw\24\sw\7\lsw\7\mu\0\ref\0\sc\0\u\225
+  144425 Kill: 7 6 9: ^7^jBa^drn^3e^ly^7[^@DUFF^7]^7 killed ^1M^3i^flhou^3s^1:^de^7 by MOD_THOMPSON
+  146200 legacy announce: "^7The Allies have breached the Forward Bunker Gate!"
+  152900 Kill: 4 9 8: ^7^d))))^3Magg^1!^3e^d*^7 killed ^0|^hA^@p^hu^0|^7 by MOD_MP40
+  158200 legacy popup: ^7allies^7 planted "the Forward spawn rear exit"
+  158200 Dynamite_Plant: 7
+  158275 Medic_Revive: 5 9
+  159375 Kill: 8 14 15: ^7^2)))^3Marg^1:^3e^4::::::^7 killed ^0mAx^e.^7 by MOD_PANZERFAUST
+  159375 Kill: 8 8 15: ^7^2)))^3Marg^1:^3e^4::::::^7 killed ^2)))^3Marg^1:^3e^4::::::^7 by MOD_PANZERFAUST
+  160175 Item: 9 item_health
+  161300 Item: 9 item_health
+  161650 Kill: 9 12 9: ^7^0|^hA^@p^hu^0|^7 killed ^4#^7[^3Homer^7]^4#^7 by MOD_THOMPSON
+  166550 Kill: 1022 9 30: ^7<world>^7 killed ^0|^hA^@p^hu^0|^7 by MOD_CRUSH
+  166550 Lua 5.4 API: ^$et_Obituary error running lua script: '[string "luascripts/announcehp.lua"]:11: tried to get invalid gentity field "sess.sessionTeam"'
+  166550 Lua 5.4 API: ^$et_Obituary error running lua script: '[string "luascripts/killing-spree.lua"]:63: tried to get invalid gentity field "sess.sessionTeam"'
+  171025 Userinfo: \name\^2)))^3Marg^1:^3e^4::::::\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0800000000000000000000000\v_dynatimer\1
+  171025 ClientUserinfoChanged: 8 n\^2)))^3Marg^1:^3e^4::::::\t\1\c\4\lc\4\r\7\p\0\m\0000000\s\0000000\dn\-1\w\32\lw\32\sw\14\lsw\14\mu\0\ref\0\sc\0\u\0
+  177675 ClientDisconnect: 14
+  177725 ClientConnect: 13
+  177725 Userinfo: \name\^bMr^j.^bB^7urn^9$\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000
+  177725 ClientUserinfoChanged: 13 n\^bMr^j.^bB^7urn^9$\t\3\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\0\sw\0\lsw\0\mu\0\ref\0\sc\0\u\0
+  177725 Userinfo: \name\^bMr^j.^bB^7urn^9$\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000
+  177725 ClientUserinfoChanged: 13 n\^bMr^j.^bB^7urn^9$\t\2\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\0\lw\34\sw\0\lsw\7\mu\0\ref\0\sc\0\u\0
+  177725 Userinfo: \name\^bMr^j.^bB^7urn^9$\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT1300000000000000000000000
+  177725 ClientUserinfoChanged: 13 n\^bMr^j.^bB^7urn^9$\t\2\c\0\lc\0\r\7\p\0\m\0000000\s\0000000\dn\-1\w\34\lw\34\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+  177725 broadcast: print "^7^bMr^j.^bB^7urn^9$^7 entered the game\n"
+  177725 ClientBegin: 13
+  178400 Kill: 11 4 9: ^7^?SiDeShOw^<|^3BOB^7 killed ^d))))^3Magg^1!^3e^d*^7 by MOD_THOMPSON
+  188200 Userinfo: \name\^jBa^drn^3e^ly^7[^@DUFF^7]\rate\25000\snaps\20\ip\localhost\cl_guid\OMNIBOT0700000000000000000000000\v_dynatimer\1
+  188200 ClientUserinfoChanged: 7 n\^jBa^drn^3e^ly^7[^@DUFF^7]\t\2\c\2\lc\2\r\3\p\0\m\0000000\s\0100000\dn\-1\w\8\lw\8\sw\7\lsw\7\mu\0\ref\0\sc\0\u\0
+  188200 legacy announce: "^7The Allies have opened up the Forward spawn rear exit!"
+  188575 Medic_Revive: 10 4
+  189275 Kill: 8 11 13: ^7^2)))^3Marg^1:^3e^4::::::^7 killed ^?SiDeShOw^<|^3BOB^7 by MOD_FG42
+  190400 Item: 4 item_health
+  190400 Item: 9 weapon_magicammo
+  190475 Item: 9 weapon_magicammo
