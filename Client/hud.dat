@@ -1,6 +1,6 @@
 hudDef {
 	hud {
-				hudnumber 6 //  x  y  w  h  s  vsc	r	g	b	a
+				hudnumber 5 //  x  y  w  h  s  vsc	r	g	b	a
 				compass			44	393	84	84	0	1	0.19	1	1	1	1
 				staminabar		4	388	12	72	0	1	0.19	1	1	1	1
 				breathbar		4	388	12	72	0	1	0.19	1	1	1	1
