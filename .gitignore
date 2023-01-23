@@ -1,4 +1,5 @@
-Assets/
+Assets/audio/
+Assets/images/
 Client/private/
 Server/attacklogs.txt
 Server/configs/etlrifletennis.config
