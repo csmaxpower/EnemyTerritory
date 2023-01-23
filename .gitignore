@@ -1,4 +1,7 @@
-
+Assets/
+Client/private/
+Server/attacklogs.txt
+Server/configs/etlrifletennis.config
 ui.mp.i386.so
 pak2.pk3
 pak1.pk3
